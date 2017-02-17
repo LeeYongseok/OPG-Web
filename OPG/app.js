@@ -13,7 +13,7 @@ var users = require('./routes/users');
 var app = express();
 var mongoose=require('mongoose');
 /*mongoDB connect내용은 git commit을 하지 말것!! 가장 중요 합니다.*/
-mongoose.connect('mongodb://(id):(password)@ds163698.mlab.com:63698/reussite')
+mongoose.connect(process.env.MongoDB_reussite);
 var db=mongoose.connection;
 db.once('open',function(){
 	console.log('Mongo DB connected!');
@@ -78,10 +78,7 @@ app.post('/posts',function(req,res){
 	Post.create(req.body.post,function(err,post){
 		if(err) return res.json({success:false, message:err});
 		// res.json({success:true, data:post});
-		res.redirect('/posts',{
-			title: 'make_title',
-			main_menu: 'main_menu'
-		});
+		res.redirect('/posts');
 	});
 });//create
 app.get('/posts/:id',function(req,res){
@@ -120,10 +117,7 @@ app.delete('/posts/:id',function(req,res){
 	Post.findByIdAndRemove(req.params.id, function(err,post){
 		if(err) return res.json({success:false, message:err});
 		// res.json({success:true, message:post._id+" deleted"});
-		res.redirect('/posts',{
-			title: 'make_title',
-			main_menu: 'main_menu'
-		});
+		res.redirect('/posts');
 	});
 });//destroy
 
