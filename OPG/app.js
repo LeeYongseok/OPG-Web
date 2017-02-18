@@ -9,9 +9,12 @@ var methodOverride = require('method-override');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var photos = require('./routes/photos');
 
 var app = express();
 var mongoose=require('mongoose');
+mongoose.Promise = global.Promise;
+
 /*mongoDB connect내용은 git commit을 하지 말것!! 가장 중요 합니다.*/
 mongoose.connect(process.env.MongoDB_reussite);
 var db=mongoose.connection;
@@ -77,7 +80,7 @@ app.get('/main',function(req,res){
 	});
 });
 
-// 자유게시판 
+// 자유게시판
 app.get('/post',function(req,res){
 	// Post.find({},function(err,posts){
 	// 	if(err) return res.json({success:false, message:err});
@@ -149,7 +152,7 @@ app.delete('/post/:id',function(req,res){
 	});
 });//destroy
 
-//자유게시판 끝 
+//자유게시판 끝
 
 // 질의응답게시판
 app.get('/inquire',function(req,res){
@@ -274,7 +277,7 @@ app.delete('/study/:id',function(req,res){
 		res.redirect('/study');
 	});
 });//destroy
-//스터디 모집 게시판 끝 
+//스터디 모집 게시판 끝
 
 
 //맛집 게시판
@@ -338,6 +341,10 @@ app.delete('/food/:id',function(req,res){
 	});
 });//destroy
 //맛집 게시판 끝
+
+//Photo Gallery
+app.use('/photo\*', photos);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
