@@ -12,6 +12,8 @@ var users = require('./routes/users');
 
 var app = express();
 var mongoose=require('mongoose');
+mongoose.Promise = global.Promise;
+
 /*mongoDB connect내용은 git commit을 하지 말것!! 가장 중요 합니다.*/
 mongoose.connect(process.env.MongoDB_reussite);
 var db=mongoose.connection;
