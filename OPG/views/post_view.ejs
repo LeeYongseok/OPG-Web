@@ -17,13 +17,6 @@
              <div class="row">
                 <div class="col-xs-1"></div>
                 <div class="col-xs-6 sub_info">
-                  <blockquote>
-                    <br>Lorem ipsum dolor sit.
-                    <br>Lorem ipsum dolor sit.
-                    <br>Lorem ipsum dolor sit.
-                    <br>Lorem ipsum dolor sit.
-                    <br>Lorem ipsum dolor sit.
-                  </blockquote>
                 </div>
                 <div class="col-xs-5">
                     <div class="circle" id="circle1"></div>
@@ -47,13 +40,13 @@
                   <% } %>
                   <p class="p_body"><%= data.body %></p>
                   <div class="tools">
-                    <a href="/posts/<%= data._id %>/edit"><button class="btn">Edit</button></a>
+                    <a href="/<%=path%>/<%= data._id %>/edit"><button class="btn">Edit</button></a>
                     <!-- Delete button Here -->
-                    <form class="btn_delete" action="/posts/<%=data._id%>?_method=DELETE" method="post">
+                    <form class="btn_delete" action="/<%=path%>/<%=data._id%>?_method=DELETE" method="post">
                       <button type="submit" class="btn">Delete</button>
                     </form>
                   </div>
-                  <a href="/posts"><button class="btn">Back</button></a>
+                  <a href="/<%=path%>"><button class="btn">Back</button></a>
                 </div>
               </div>
 
