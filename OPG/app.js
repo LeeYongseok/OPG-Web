@@ -121,6 +121,12 @@ app.delete('/posts/:id',function(req,res){
 	});
 });//destroy
 
+//Photo
+app.get('/photo', function (req, res) {
+	res.render('photo');
+});
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
