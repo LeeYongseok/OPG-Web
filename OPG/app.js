@@ -123,7 +123,10 @@ app.delete('/posts/:id',function(req,res){
 
 //Photo
 app.get('/photo', function (req, res) {
-	res.render('photo');
+	res.render('photo',{
+		title: 'Photo',
+		main_menu: 'Photo Gallery'
+	});
 });
 
 
