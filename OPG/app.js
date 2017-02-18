@@ -343,7 +343,7 @@ app.delete('/food/:id',function(req,res){
 //맛집 게시판 끝
 
 //Photo Gallery
-app.use('/photo\*', photos);
+app.use('/photo', photos);
 
 
 // catch 404 and forward to error handler
