@@ -342,9 +342,8 @@ app.delete('/food/:id',function(req,res){
 });//destroy
 //맛집 게시판 끝
 
-//Photo Gallery
+//사진 게시판
 app.use('/photo', photos);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
