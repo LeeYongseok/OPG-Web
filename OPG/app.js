@@ -10,6 +10,7 @@ var methodOverride = require('method-override');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var photos = require('./routes/photos');
+var signUp = require('./routes/signUp');
 
 var app = express();
 var mongoose=require('mongoose');
@@ -67,18 +68,22 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 
-app.use('/', index);
-app.use('/users', users);
 
 //you should put "'get'function" down here!!
 
-app.get('/',index);
-app.get('/main',function(req,res){
-	res.render('main',{
-		title: 'make_title',
-		main_menu: 'main_menu'
-	});
-});
+// app.get('/',index);
+// app.get('/main',function(req,res){
+// 	res.render('main',{
+// 		title: 'make_title',
+// 		main_menu: 'main_menu'
+// 	});
+// });
+
+// 메인페이지
+app.use('/', index);
+// 회원가입 페이지
+app.use('/signUp', signUp)
+app.use('/users', users);
 
 // 자유게시판
 app.get('/post',function(req,res){
