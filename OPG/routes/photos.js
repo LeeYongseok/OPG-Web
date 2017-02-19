@@ -3,7 +3,7 @@ var router = express.Router();
 
 router.get('/Activity', function(req, res, next) {
   res.render('photo', {
-    title: 'Photo_MT_활동',
+    title: 'Photo_MT_Activity',
     main_menu: 'MT & 활동'
   });
 });
