@@ -17,13 +17,6 @@
              <div class="row">
                 <div class="col-xs-1"></div>
                 <div class="col-xs-6 sub_info">
-                  <blockquote>
-                    <br>Lorem ipsum dolor sit.
-                    <br>Lorem ipsum dolor sit.
-                    <br>Lorem ipsum dolor sit.
-                    <br>Lorem ipsum dolor sit.
-                    <br>Lorem ipsum dolor sit.
-                  </blockquote>
                 </div>
                 <div class="col-xs-5">
                     <div class="circle" id="circle1"></div>
@@ -34,7 +27,7 @@
 <!--이곳에 자기가 원하는 레이아웃을 설정해 주도록 하자.-->
               <div class="new edit">
                 <h3>New Post</h3>
-                <form class="posts_form" action="/posts" method="post">
+                <form class="posts_form" action="/<%=path%>" method="post">
                   <label for="edit_title">Title</label>
                   <input id="edit_title" type="text" name="post[title]" value="" placeholder="Title입력">
                   <label for="edit_body">Body</label>
@@ -42,7 +35,7 @@
                   <br>
                   <button type="submit" class="btn">Submit</button>
                 </form>
-                <a href="/posts"><button class="btn">Back</button></a>
+                <a href="/<%=path%>"><button class="btn">Back</button></a>
               </div>
 
 <!---이곳까지 자기가 원하는 레이아웃을 설정해 주도록 하자.-->

@@ -38,7 +38,7 @@
                             </span>
                         </div>
                     </div>
-                    <a href="/posts/new"><button class="btn btn-primary">New</button></a>
+                    <a href="/<%=path%>/new"><button class="btn btn-primary">New</button></a>
                      <table class="mainText">
                        <tr>
                            <th>번호</th>
@@ -51,7 +51,7 @@
                        <% data.forEach(function(e){ %>
                        <tr>
                            <th><%= count %></th>
-                           <th><a href="/posts/<%= e._id %>"><%= e.title %></a></th>
+                           <th><a href="/<%=path%>/<%= e._id %>"><%= e.title %></a></th>
                            <th>None</th>
                            <th><%= e.createdAt.toLocaleDateString() %></th>
                            <th>None</th>
