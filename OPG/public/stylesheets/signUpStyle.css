@@ -1,0 +1,19 @@
+body { background-color: darkslateblue;}
+
+.container {min-width: 1170px; width: 1170px;}
+
+.wrap { min-width: 1170px; width: 1170px; position: absolute;}
+
+.header {margin-top: 15px; }
+
+.header h1 {color: white; }
+
+.form-group {margin-top: 40px;}
+
+.form-group>label {color : white; font-size: 180%; line-height: 46px;}
+
+.form-group>input {font-size: 180%; padding: 5px 20px;}
+
+.form-group:last-child>input{padding: 5px 0; font-size: 150%; border-radius: 8px; margin-right: 20px;}
+
+.form-group:last-child>input:last-child{padding: 5px 15px;}
