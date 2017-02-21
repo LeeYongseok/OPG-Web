@@ -6,10 +6,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fs=require('fs');
 var methodOverride = require('method-override');
+var multer  = require('multer');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var photos = require('./routes/photos');
 
 var app = express();
 var mongoose=require('mongoose');
@@ -17,6 +17,7 @@ mongoose.Promise = global.Promise;
 
 /*mongoDB connect내용은 git commit을 하지 말것!! 가장 중요 합니다.*/
 mongoose.connect(process.env.MongoDB_reussite);
+//process.env.MongoDB_reussite
 var db=mongoose.connection;
 db.once('open',function(){
 	console.log('Mongo DB connected!');
@@ -343,7 +344,7 @@ app.delete('/food/:id',function(req,res){
 //맛집 게시판 끝
 
 //사진 게시판
-app.use('/photo', photos);
+app.use('/photo', require('./routes/photos'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
