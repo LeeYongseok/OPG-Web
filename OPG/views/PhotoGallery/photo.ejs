@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include ../partials/head.ejs %>
+    <link rel="stylesheet" href="/stylesheets/photoStyle.css">
+    <link rel="stylesheet" href="/stylesheets/text.css">
+    <%- include photofunc.ejs %>
+</head>
+<body>
+    <%- include ../partials/header+nav.ejs %>
+    <div class="page-wrap">
+        <section class="programming">
+            <div class="container">
+              <div class="row">
+                 <div class="col-xs-6">
+                     <h2><%= main_menu %></h2>
+                 </div>
+             </div>
+             <div class="row">
+                <div class="col-xs-6 sub_info">
+                  <blockquote>
+                    <br>즐거운 소모임에서
+                    <br>MT 및 여러 활동의 추억을
+                    <br>사진으로 오래 남깁시다
+                  </blockquote>
+                </div>
+                <div class="col-xs-5 offset-xs-1">
+                    <div class="circle" id="circle1"></div>
+                    <div class="circle" id="circle2"></div>
+                    <div class="circle" id="circle3"></div>
+                </div>
+            </div>
+            <div class="col-xs-12" id="imaginary_container">
+              <div class="col-xs-4">
+              <a href="/<%=path%>/new?page=<%=page%>"><button class="btn btn-primary">New</button></a>
+            </div>
+             <div class="col-xs-4"></div>
+                   <select id="sel" name="sel">
+                <option value="title">제목</option>
+                <option value="author">작성자</option>
+                </select>
+                  <div class="input-group">
+                  <input type="text" class="form-control"  placeholder="Search" >
+                      <span class="input-group-addon">
+                          <button type="submit">
+                              <span class="glyphicon glyphicon-search"></span>
+                          </button>
+                      </span>
+                  </div>
+              </div>
+              <div class="col-xs-12"></div>
+
+              <div class="row mainText">
+               <div class="cc">
+                 <ul id="blog" class="blog ibw">
+                  <% data.forEach(function(e){
+                    var imgsrc = getimgsrc(e);%>
+                    <li class="blog_item ib fs">
+                     <div class="ibw">
+                       <div class="item_image iw ib">
+                         <img src="<%= imgsrc %>" alt="">
+                       </div>
+                       <div class="item_details ib fs">
+                         <div class="item_header"><a href="/<%=path%>/<%= e._id%>?page=<%=page%>"><%=e.title%></div>
+                         <div class="item_day"><%=e.createdAt.toLocaleDateString()%></div>
+                         <div class="item_writer"><%=e.username%></div>
+                       </div>
+                     </div>
+                   </li>
+                   </a>
+                   <% })%>
+                 </ul>
+               </div>
+           </div>
+    </table>
+        <div class="row" style="text-align:center">
+              <ul class="pagination">
+                <% var offset = 2; %>
+                <% console.log(page); %>
+                <% for(i=1; i<=maxPageNum; i++){ %>
+                  <% if( i<=offset || i>maxPageNum-offset || (i>=page-(offset) && i<=page+(offset))){ %>
+                    <% if(i != page) { %>
+                      <li><a href="/photo/Activity?page=<%=i%>"> <%= i %> </a></li>
+                    <% } else { %>
+                      <li class="active"><a ref="#"><%= i %></a></li>
+                    <% } %>
+                  <% } else if(i == offset+1 || i == maxPageNum-offset){ %>
+                    <li><a>..</a></li>
+                  <% } %>
+                <% } %>
+              </ul>
+        </div>
+<%- include ../partials/footer.ejs %>

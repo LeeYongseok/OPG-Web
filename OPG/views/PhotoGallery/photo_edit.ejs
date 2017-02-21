@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ../partials/head.ejs %>
+    <link rel="stylesheet" href="/stylesheets/photoStyle.css">
+    <link rel="stylesheet" href="/stylesheets/edit.css">
+    <style>
+      #input{
+        display:block;
+        background:linear-gradient(to top, #ffffff, #f7f7f7);
+        margin: 10px auto;
+        width: 50%;
+        height: 80%;
+        font-size: 13px;
+        color: #333;
+        border: 1px solid rgba(0,0,0,0.3);
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include ../partials/header+nav.ejs %>
+    <div class="page-wrap">
+        <section class="programming">
+            <div class="container">
+              <div class="row">
+                 <div class="col-xs-12">
+                     <h2><%= main_menu %></h2>
+                 </div>
+             </div>
+             <div class="row">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-6 sub_info">
+                </div>
+                <div class="col-xs-5">
+                    <div class="circle" id="circle1"></div>
+                    <div class="circle" id="circle2"></div>
+                    <div class="circle" id="circle3"></div>
+                </div>
+              </div>
+
+              <div class="new edit">
+                <h3>New</h3>
+                <form class="posts_form" action="/<%=path%>/<%=photodata.id%>?_method=PUT&page=<%=page%>" method="post" enctype="multipart/form-data">
+                  <label for="edit_title">Title</label>
+                  <input id="edit_title" type="text" name="title" value="<%=photodata.title%>">
+                  <label for="edit_body">Body</label>
+                  <textarea id="edit_body" name="body"><%=photodata.body%></textarea>
+                  <div class="col-xs-8">
+                    <input id="input" type="file" name="photo">
+                    <input id="input" type="text" name="photoaddress" value="<%=photodata.photoaddress%>" placeholder="Image Address">
+                  </div>
+                  <div class="col-xs-4">
+                  <input id="input" type="text" name="username" value="<%=photodata.username%>">
+                </div>
+                  <br />
+                  <button type="submit" class="btn">Submit</button>
+                </form>
+                <a href="/<%=path%>/<%=photodata.id%>?page=<%=page%>"><button class="btn">Back</button></a>
+              </div>
+              <%- include ../partials/footer.ejs %>

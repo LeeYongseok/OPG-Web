@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css?family=Orbitron');
+
+#loginPage {position: absolute; visibility: hidden; z-index: 10;}
+
+#loginBg { position:relative; background-color: darkgray; opacity: 0.8; z-index: 10;}
+
+#loginContainer { position: absolute; width : 500px; height: 500px; background-color: whitesmoke; display: block; border: 1px solid gray; z-index: 10;  box-shadow:inset 0 0 10px #000000;}
+
+#loginContainer>* { position: relative; }
+
+#loginContainer>img { width: 150px; height: 150px; top:30px; left: 175px; z-index: 10; border: 1px solid black; background-color:azure; border-radius: 10px;}
+
+#loginContainer>#loginInput {margin-top: 50px;}
+
+#loginContainer>#loginInput>label {margin-left: 75px; font-style: italic; font-size:120%;}
+
+#loginContainer>#loginInput>input {width: 330px; height: 40px; margin: 15px 75px; font-size: 150%; padding: 0 8px;}
+
+#loginContainer>#loginInput>.btnSet { width: 350px; height: 50px; margin: 15px 75px;}
+
+#loginContainer>#loginInput>.btnSet>a>.btn{margin: 0 11px;}
+
+.btn { width: 105px; height: 50px; font-size: 150%; font-style: italic;}
+
+header { display: flex; height: 100px; background-color: black;
+position: relative;}
+
+header .logo{ position: absolute; width: 100px; height: 100px; }
+
+header>a>h1 {color: white; position: absolute; font-size: 250%; line-height: 100px; font-family: 'Orbitron', sans-serif;}
+
+.accent {color: greenyellow;}
+
+#head_tab { position: absolute; right: 3%; line-height: 100px;}
+
+#head_tab>* { background-color: gray; color: white;
+    border: 1px solid gray; border-radius: 5px;
+    padding: 5px 10px; margin: 5px; }
+
+#head_tab>*:hover { background-color: #262626;
+border-color: #262626;}
+
+section { display: flex; position: relative;
+background-blend-mode: screen; }
+
+section:hover { background-color: gray; transition-duration: 0.5s; }
+
+section * { visibility: hidden; opacity: 0;  transition:opacity 0.5s linear;}
+
+section:hover * {visibility: visible; opacity: 1; }
+
+section>#mid {border-left: 2px solid black;
+border-right: 2px solid black;  }
+
+section>.side>.menu_tab {border-bottom: 2px solid black;}
+
+section .menu_tab{position: relative;}
+
+section .menu{ position: absolute; width: 150px; height: 150px; }
+
+section .menu>a { position: absolute; width: 120px; height: 120px; background-color: black; color: white; opacity: 0.8; border-radius: 50%; text-align: center; line-height: 120px; font-size: 150%; }
+
+section .menu>ul { position: absolute; list-style: none; padding: 0; margin: 0; top: -20px; right: -20px; bottom: -20px; left: -20px; width: 120px; height: 120px; }
+
+section .menu li { position: absolute; width: 0; height: 100%; margin: 0 50%;
+  transform: rotate(-360deg); transition: all 0.8s ease-in-out; }
+
+section .menu li>a{
+  position: absolute; left: 50%; bottom: 100%; width: 0;
+  height: 0; line-height: 1px; margin-left: 0;
+  background: #fff; border-radius: 50%; text-align: center; font-size: 1px; overflow: hidden; cursor: pointer; box-shadow: none;
+  transition: all 0.8s ease-in-out, color 0.1s, background 0.1s;
+}
+
+section .open li>a{
+  width: 90px; height: 90px; line-height: 90px;
+  margin-left: -40px; box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+  font-size: 14px; opacity: 0.7;
+}
+
+section .open li>a:hover{opacity: 1;}
+
+section .open>.menu>a:hover{opacity: 1;}
+
+section #center{ position: absolute; background-color: black;
+text-align: center; opacity: 0.8;}
+
+section #center>img{width: 150px; height: 150px; position: relative; opacity: 0.8;}
+
+footer {height: 100px; background-color: black;
+position: relative; }
+
+footer>h1 { color: white; font-size: 250%;
+text-align: center; line-height: 100px; font-family: 'Orbitron', sans-serif;}
