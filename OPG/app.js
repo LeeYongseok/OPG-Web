@@ -15,6 +15,7 @@ var post=require('./routes/post_board');
 var inquire=require('./routes/post_inquire');
 var study=require('./routes/post_study');
 var food=require('./routes/post_food');
+var about=require('./routes/about');
 
 var app = express();
 var mongoose=require('mongoose');
@@ -67,6 +68,9 @@ app.use('/food',food);
 
 //사진 게시판
 app.use('/photo', photos);
+
+//소개
+app.use('/about', about);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
