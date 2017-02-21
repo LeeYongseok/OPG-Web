@@ -12,10 +12,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var photos = require('./routes/photos');
 var signUp = require('./routes/signUp');
-var post=require('./routes/post_board');
-var inquire=require('./routes/post_inquire');
-var study=require('./routes/post_study');
-var food=require('./routes/post_food');
+var posts=require('./routes/posts');
 
 var app = express();
 var mongoose=require('mongoose');
@@ -62,13 +59,12 @@ app.use('/', index);
 // 회원가입 페이지
 app.use('/signUp', signUp);
 app.use('/users', users);
-app.use('/post',post);
-app.use('/inquire',inquire);
-app.use('/study',study);
-app.use('/food',food);
+
+//글 게시판
+app.use('/post',posts);
 
 //사진 게시판
-app.use('/photo', require('./routes/photos'));
+app.use('/photo', photos);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
