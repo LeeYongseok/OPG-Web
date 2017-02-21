@@ -1,0 +1,34 @@
+<%
+getimgsrc = function getimgsrc(e) {
+  var imgsrc = "/uploadedimages/e.filename";
+
+  if (e.filename == undefined) {
+    if (e.photoaddress != undefined) {
+      imgsrc = e.photoaddress ;
+    } else {
+      imgsrc = "https://unsplash.it/600/450/?random" ;
+      }
+  } else if (e.filename != undefined) {
+    imgsrc = "/uploadedimages/" + e.filename;
+  }
+  return imgsrc;
+}
+
+
+viewallimg = function viewallimage(photodata){
+//  console.log(photodata.filename);
+//  console.log(photodata.photoaddress);
+  if(photodata.filename && photodata.photoaddress) {
+    return {
+      filename : ('/uploadedimages/'+ photodata.filename),
+      address : photodata.photoaddress
+    };
+  } else if(photodata.filename != undefined) {
+    return {filename : ('/uploadedimages/' + photodata.filename)};
+  } else if(photodata.photoaddress != undefined) {
+    return {address : photodata.photoaddress };
+  } else return {default : photodata.photoaddress};
+
+}
+
+%>
