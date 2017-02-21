@@ -30,7 +30,7 @@ router.get('/Board',function(req,res){
 			maxPageNum:maxPageNum
 		});
 	});
-	});	
+	});
 });//index
 router.get('/Board/new',function(req,res){
 	res.render("post_new",{
@@ -107,7 +107,7 @@ router.get('/Inquire',function(req,res){
 			maxPageNum:maxPageNum
 		});
 	});
-	});	
+	});
 });//index
 router.get('/Inquire/new',function(req,res){
 	res.render("post_new",{
@@ -183,7 +183,7 @@ router.get('/Study',function(req,res){
 			maxPageNum:maxPageNum
 		});
 	});
-	});	
+	});
 });//index
 router.get('/Study/new',function(req,res){
 	res.render("post_new",{
@@ -259,7 +259,7 @@ router.get('/Food',function(req,res){
 			maxPageNum:maxPageNum
 		});
 	});
-	});	
+	});
 });//index
 router.get('/Food/new',function(req,res){
 	res.render("post_new",{
