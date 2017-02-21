@@ -33,7 +33,7 @@ router.get('/', function(req, res, next) {
 
 //<-- Photo_MT_Activity ---
 router.get('/Activity',function(req,res){
-  var limit = 1;
+  var limit = 9;
   var page = req.query.page;
   if(page === undefined) {page = 1;}
   page = parseInt(page);
@@ -132,7 +132,7 @@ router.delete('/Activity/:id', function(req,res){
 
 //<-- Photo_Study ---
 router.get('/Study',function(req,res){
-  var limit = 1;
+  var limit = 9;
   var page = req.query.page;
   if(page === undefined) {page = 1;}
   page = parseInt(page);
@@ -228,7 +228,7 @@ router.delete('/Study/:id', function(req,res){
 
 //<-- Photo_Seminar ---
 router.get('/Seminar',function(req,res){
-  var limit = 1;
+  var limit = 9;
   var page = req.query.page;
   if(page === undefined) {page = 1;}
   page = parseInt(page);
