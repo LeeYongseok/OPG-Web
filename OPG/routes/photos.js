@@ -46,7 +46,6 @@ router.get('/Activity',function(req,res){
     var maxPageNum = Math.ceil(count/limit);
     PhotoMods.PhotoMod_Activity.find({}).sort('-createdAt').skip(skip).limit(limit).exec(function(err, photos) {
       if(err) return res.json({success:false, message:err});
-      console.log(photos);
       res.render("../views/PhotoGallery/photo",{
   			data: photos,
         title: 'Photo_MT_Activity',
@@ -111,7 +110,6 @@ router.put('/Activity/:id',upload.single('photo'),function(req,res){
 	req.body.updatedAt=Date.now();
 	PhotoMods.PhotoMod_Activity.findByIdAndUpdate(req.params.id,req.body,function(err,photos){
 		if(err) return res.json({success:false, message:err});
-    console.log(req.body);
 		res.redirect(req.params.id + '?page=' + req.query.page);
 	});
 });
@@ -121,7 +119,6 @@ router.delete('/Activity/:id', function(req,res){
 		if(err) {
       return res.json({success:false, message:err});
     }
-    console.log('filenamephotos:' + photos.filename);
     if(photos.filename !== undefined){
       fs.unlink('../public/uploadedimages/' + photos.filename);
     }
@@ -142,7 +139,6 @@ router.get('/Study',function(req,res){
     var maxPageNum = Math.ceil(count/limit);
     PhotoMods.PhotoMod_Study.find({}).sort('-createdAt').skip(skip).limit(limit).exec(function(err, photos) {
       if(err) return res.json({success:false, message:err});
-      console.log(photos);
       res.render("../views/PhotoGallery/photo",{
   			data: photos,
         title: 'Photo_Study',
@@ -207,7 +203,6 @@ router.put('/Study/:id',upload.single('photo'),function(req,res){
 	req.body.updatedAt=Date.now();
 	PhotoMods.PhotoMod_Study.findByIdAndUpdate(req.params.id,req.body,function(err,photos){
 		if(err) return res.json({success:false, message:err});
-    console.log(req.body);
 		res.redirect(req.params.id + '?page=' + req.query.page);
 	});
 });
@@ -217,7 +212,6 @@ router.delete('/Study/:id', function(req,res){
 		if(err) {
       return res.json({success:false, message:err});
     }
-    console.log('filenamephotos:' + photos.filename);
     if(photos.filename !== undefined){
       fs.unlink('../public/uploadedimages/' + photos.filename);
     }
@@ -238,7 +232,6 @@ router.get('/Seminar',function(req,res){
     var maxPageNum = Math.ceil(count/limit);
     PhotoMods.PhotoMod_Seminar.find({}).sort('-createdAt').skip(skip).limit(limit).exec(function(err, photos) {
       if(err) return res.json({success:false, message:err});
-      console.log(photos);
       res.render("../views/PhotoGallery/photo",{
   			data: photos,
         title: 'Photo_Seminar',
@@ -303,7 +296,6 @@ router.put('/Seminar/:id',upload.single('photo'),function(req,res){
 	req.body.updatedAt=Date.now();
 	PhotoMods.PhotoMod_Seminar.findByIdAndUpdate(req.params.id,req.body,function(err,photos){
 		if(err) return res.json({success:false, message:err});
-    console.log(req.body);
 		res.redirect(req.params.id + '?page=' + req.query.page);
 	});
 });
@@ -313,7 +305,6 @@ router.delete('/Seminar/:id', function(req,res){
 		if(err) {
       return res.json({success:false, message:err});
     }
-    console.log('filenamephotos:' + photos.filename);
     if(photos.filename !== undefined){
       fs.unlink('../public/uploadedimages/' + photos.filename);
     }
