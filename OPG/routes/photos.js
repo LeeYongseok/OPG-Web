@@ -7,7 +7,7 @@ var multer  = require('multer');
 //for multipart form post
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../public/uploadedimages');
+    cb(null, './public/uploadedimages');
   },
   filename: function (req, file, cb) {
       // cb(null, file.originalname);
@@ -111,6 +111,7 @@ router.put('/Activity/:id',upload.single('photo'),function(req,res){
 	PhotoMods.PhotoMod_Activity.findByIdAndUpdate(req.params.id,req.body,function(err,photos){
 		if(err) return res.json({success:false, message:err});
 		res.redirect(req.params.id + '?page=' + req.query.page);
+   
 	});
 });
 
