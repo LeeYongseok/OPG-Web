@@ -125,7 +125,7 @@ router.delete('/Activity/:id', function(req,res){
       return res.json({success:false, message:err});
     }
     if(photos.filename !== undefined){
-      fs.unlink('../public/uploadedimages/' + photos.filename);
+      fs.unlink(path.join(__dirname,'..','public','uploadedimages',photos.filename));
     }
 		res.redirect('/photo/Activity');
 	});
@@ -218,7 +218,7 @@ router.delete('/Study/:id', function(req,res){
       return res.json({success:false, message:err});
     }
     if(photos.filename !== undefined){
-      fs.unlink('../public/uploadedimages/' + photos.filename);
+      fs.unlink(path.join(__dirname,'..','public','uploadedimages',photos.filename));
     }
 		res.redirect('/photo/Study');
 	});
