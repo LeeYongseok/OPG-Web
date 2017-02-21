@@ -3,11 +3,16 @@ var router = express.Router();
 var fs = require('fs');
 var PhotoMods = require("../models/photos");
 var multer  = require('multer');
+var path = require('path');
+var mkdirp = require('mkdirp');
 
+//
+var UploadPath = path.join(__dirname,'..','public','uploadedimages');
+mkdirp.sync(UploadPath);
 //for multipart form post
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../public/uploadedimages');
+    cb(null, path.join(__dirname,'..','public','uploadedimages'));
   },
   filename: function (req, file, cb) {
       // cb(null, file.originalname);
@@ -16,7 +21,7 @@ var storage = multer.diskStorage({
       cb(null, Date.now() + '.' + extension[extension.length-1]);
   }
 });
-var upload = multer({ storage : storage});
+var upload = multer({storage : storage});
 //
 
 //Each different photo gallery [Activity, Study, Seminar]
@@ -120,7 +125,7 @@ router.delete('/Activity/:id', function(req,res){
       return res.json({success:false, message:err});
     }
     if(photos.filename !== undefined){
-      fs.unlink('../public/uploadedimages/' + photos.filename);
+      fs.unlink(path.join(__dirname,'..','public','uploadedimages',photos.filename));
     }
 		res.redirect('/photo/Activity');
 	});
@@ -213,7 +218,7 @@ router.delete('/Study/:id', function(req,res){
       return res.json({success:false, message:err});
     }
     if(photos.filename !== undefined){
-      fs.unlink('../public/uploadedimages/' + photos.filename);
+      fs.unlink(path.join(__dirname,'..','public','uploadedimages',photos.filename));
     }
 		res.redirect('/photo/Study');
 	});
@@ -306,7 +311,7 @@ router.delete('/Seminar/:id', function(req,res){
       return res.json({success:false, message:err});
     }
     if(photos.filename !== undefined){
-      fs.unlink('../public/uploadedimages/' + photos.filename);
+      fs.unlink(path.join(__dirname,'..','public','uploadedimages',photos.filename));
     }
 		res.redirect('/photo/Seminar');
 	});
