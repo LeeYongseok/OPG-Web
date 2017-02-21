@@ -4,7 +4,11 @@ var fs = require('fs');
 var PhotoMods = require("../models/photos");
 var multer  = require('multer');
 var path = require('path');
+var mkdirp = require('mkdirp');
 
+//
+var UploadPath = path.join(__dirname,'..','public','uploadedimages');
+mkdirp.sync(UploadPath);
 //for multipart form post
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
