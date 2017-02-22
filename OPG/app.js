@@ -6,16 +6,15 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fs=require('fs');
 var methodOverride = require('method-override');
+var multer  = require('multer');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 var photos = require('./routes/photos');
 var signUp = require('./routes/signUp');
-var post=require('./routes/post_board');
-var inquire=require('./routes/post_inquire');
-var study=require('./routes/post_study');
-var food=require('./routes/post_food');
 var about=require('./routes/about');
+var posts=require('./routes/posts');
+
 
 var app = express();
 var mongoose=require('mongoose');
@@ -23,6 +22,7 @@ mongoose.Promise = global.Promise;
 
 /*mongoDB connect내용은 git commit을 하지 말것!! 가장 중요 합니다.*/
 mongoose.connect(process.env.MongoDB_reussite);
+//process.env.MongoDB_reussite
 var db=mongoose.connection;
 db.once('open',function(){
 	console.log('Mongo DB connected!');
@@ -46,25 +46,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 
 
-//you should put "'get'function" down here!!
-
-// app.get('/',index);
-// app.get('/main',function(req,res){
-// 	res.render('main',{
-// 		title: 'make_title',
-// 		main_menu: 'main_menu'
-// 	});
-// });
-
 // 메인페이지
 app.use('/', index);
 // 회원가입 페이지
 app.use('/signUp', signUp);
 app.use('/users', users);
-app.use('/post',post);
-app.use('/inquire',inquire);
-app.use('/study',study);
-app.use('/food',food);
+
+//글 게시판
+app.use('/post',posts);
 
 //사진 게시판
 app.use('/photo', photos);

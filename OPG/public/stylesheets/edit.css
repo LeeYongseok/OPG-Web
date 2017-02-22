@@ -1,28 +1,16 @@
 .edit{
     width: 900px;
     margin: 30px auto;
-    text-align: center;
+    padding: 10% auto;
 }
 
 .edit #edit_title{
     display:block;
     background:linear-gradient(to top, #ffffff, #e6e6e6);
-    margin: 10px auto;
-    width: 80%;
+    width: 750px;
     text-shadow: none;
 }
 
-.edit #edit_body{
-    display:block;
-    background:linear-gradient(to top, #ffffff, #f7f7f7);
-    margin: 10px auto;
-    width: 80%;
-    height: 200px;
-    font-size: 15px;
-	color: #333;
-    border: 1px solid rgba(0,0,0,0.3);
-	border-radius: 4px;
-}
 
 .edit label{
     display: block;
