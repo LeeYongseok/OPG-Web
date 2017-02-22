@@ -12,19 +12,11 @@
       minHeight: 400,             // set minimum height of editor
       width:750, 
       focus: true,                  // set focus to editable area after initializing summernote
-      toolbar: [
-                ['style', ['bold','underline', 'clear','color']],
-                ['fontsize', ['fontsize']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-                ['misc', ['fullscreen','undo','redo','codeview']],
-                ['link', ['linkDialogShow', 'unlink']]
-            ],
       placeholder:'글을 입력해주세요 HTML코드도 추가 가능합니다.',
-      disableDragAndDrop: true,
+      disableDragAndDrop: true
       });
 
-        $('#summernote').summernote('insertHTML');
+        $('#summernote').summernote('code');
 
         
     });
