@@ -12,7 +12,9 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var photos = require('./routes/photos');
 var signUp = require('./routes/signUp');
+var about=require('./routes/about');
 var posts=require('./routes/posts');
+
 
 var app = express();
 var mongoose=require('mongoose');
@@ -44,16 +46,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 
 
-//you should put "'get'function" down here!!
-
-// app.get('/',index);
-// app.get('/main',function(req,res){
-// 	res.render('main',{
-// 		title: 'make_title',
-// 		main_menu: 'main_menu'
-// 	});
-// });
-
 // 메인페이지
 app.use('/', index);
 // 회원가입 페이지
@@ -65,6 +57,9 @@ app.use('/post',posts);
 
 //사진 게시판
 app.use('/photo', photos);
+
+//소개
+app.use('/about', about);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

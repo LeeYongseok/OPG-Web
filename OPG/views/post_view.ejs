@@ -3,6 +3,13 @@
   <head>
     <%- include ./partials/head.ejs %>
     <link rel="stylesheet" href="/stylesheets/view.css">
+    <script>
+
+    $(document).ready(function() {
+        $('#hidden_div').html('<%= data.body %>');
+          $('.p_body').html($('#hidden_div').text());
+    });
+    </script>
   </head>
   <body>
     <%- include ./partials/header+nav.ejs %>
@@ -38,7 +45,8 @@
                       <%= data.updatedAt.toLocaleTimeString() %>
                     </div>
                   <% } %>
-                  <p class="p_body"><%= data.body %></p>
+                  <div id="hidden_div" style="display: none"></div>
+                  <div class="p_body" id="summernote"></div>
                   <div class="tools">
                     <a href="/<%=path%>/<%= data._id %>/edit"><button class="btn">Edit</button></a>
                     <!-- Delete button Here -->
