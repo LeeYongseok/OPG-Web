@@ -33,6 +33,19 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', end
 
 .blog .blog_item .item_day, .blog .blog_item .item_writer{
     font-size: 100%; display: inline;
-} 
+}
 
 .blog .blog_item .item_writer {position: absolute; right: 0;}
+
+
+#input{
+    display:block;
+    background:linear-gradient(to top, #ffffff, #f7f7f7);
+    margin: 10px auto;
+    width: 50%;
+    height: 80%;
+    font-size: 13px;
+    color: #333;
+    border: 1px solid rgba(0,0,0,0.3);
+    border-radius: 4px;
+  }

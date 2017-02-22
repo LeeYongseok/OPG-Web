@@ -1,0 +1,16 @@
+#about_head{
+    text-align: center;
+    letter-spacing: 5px;
+}
+#about_main{
+    margin-bottom : 100px;
+}
+.hover_box1,.hover_box2,.hover_box3,.hover_box4,.hover_box5{
+    text-align: center;
+    height: 200px;
+    margin-bottom: 20px;
+}
+.box{
+    border:1px solid black;
+    padding-top: 30px;
+}
