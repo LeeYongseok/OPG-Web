@@ -44,16 +44,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 
 
-//you should put "'get'function" down here!!
-
-// app.get('/',index);
-// app.get('/main',function(req,res){
-// 	res.render('main',{
-// 		title: 'make_title',
-// 		main_menu: 'main_menu'
-// 	});
-// });
-
 // 메인페이지
 app.use('/', index);
 // 회원가입 페이지
