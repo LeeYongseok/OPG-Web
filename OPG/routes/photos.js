@@ -52,7 +52,7 @@ router.get('/Activity',function(req,res){
     PhotoMods.PhotoMod_Activity.find({}).sort('-createdAt').skip(skip).limit(limit).exec(function(err, photos) {
       if(err) return res.json({success:false, message:err});
       res.render("../views/PhotoGallery/photo",{
-  			data: photos,
+  			photodata: photos,
         title: 'Photo_MT_Activity',
         main_menu: 'MT & 활동',
         path: 'photo/Activity',
@@ -99,7 +99,7 @@ router.get('/Activity/:id/edit', function(req,res){
   PhotoMods.PhotoMod_Activity.findById(req.params.id, function(err, photos){
     if(err) return res.json({success:false, message:err});
     res.render('PhotoGallery/photo_edit', {
-      photodata:photos,
+      photodata: photos,
       title: 'Photo_MT_Activity',
       main_menu: ' MT & 활동',
       path:'photo/Activity',
@@ -145,7 +145,7 @@ router.get('/Study',function(req,res){
     PhotoMods.PhotoMod_Study.find({}).sort('-createdAt').skip(skip).limit(limit).exec(function(err, photos) {
       if(err) return res.json({success:false, message:err});
       res.render("../views/PhotoGallery/photo",{
-  			data: photos,
+  			photodata: photos,
         title: 'Photo_Study',
         main_menu: 'Study',
         path: 'photo/Study',
@@ -238,7 +238,7 @@ router.get('/Seminar',function(req,res){
     PhotoMods.PhotoMod_Seminar.find({}).sort('-createdAt').skip(skip).limit(limit).exec(function(err, photos) {
       if(err) return res.json({success:false, message:err});
       res.render("../views/PhotoGallery/photo",{
-  			data: photos,
+  			photodata: photos,
         title: 'Photo_Seminar',
         main_menu: 'Seminar',
         path: 'photo/Seminar',

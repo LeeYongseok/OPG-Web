@@ -1,0 +1,23 @@
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+<script>
+$(document).ready(function() {
+  $('#summernote').summernote({
+  height: 400,                 // set editor height
+  minHeight: 400,             // set minimum height of editor
+  width:750,
+  focus: true,                  // set focus to editable area after initializing summernote
+
+  placeholder:'글을 입력해주세요 HTML코드도 추가 가능합니다.',
+  disableDragAndDrop: true,
+  });
+  $('#summernote').summernote('insertHTML');
+
+  <% if((typeof photodata != "undefined")) { %>
+    if(!(/edit/.test($(location).attr('pathname')))){
+      $('#p_body').html($('#hidden_div').html('<%= photodata.body %>').text());
+    }
+  <% } %>
+
+});
+</script>

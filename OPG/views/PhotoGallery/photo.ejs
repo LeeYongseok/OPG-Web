@@ -53,7 +53,7 @@
               <div class="row mainText">
                <div class="cc">
                  <ul id="blog" class="blog ibw">
-                  <% data.forEach(function(e){
+                  <% photodata.forEach(function(e){
                     var imgsrc = getimgsrc(e);%>
                     <li class="blog_item ib fs">
                      <div class="ibw">
@@ -77,7 +77,7 @@
               <ul class="pagination">
                   <% if(page==1){ %>
                   <% var left_button = "disabled" %>
-                  <%}else{ %> 
+                  <%}else{ %>
                   <% left_button = "" %>
                   <% } %>
                   <li class="<%=left_button%>"><a href="/<%=path%>/?page=<%=(page-1) %>"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
@@ -96,7 +96,7 @@
                 <% } %>
                  <% if(page==maxPageNum){ %>
                       <% var right_button = "disabled" %>
-                      <%}else{ %> 
+                      <%}else{ %>
                        <% right_button = "" %>
                       <% } %>
                         <li class="<%=right_button%>"><a href="/<%=path%>/?page=<%=(page+1) %>"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
