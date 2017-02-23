@@ -28,7 +28,7 @@ $(document).ready(function(){
 
 
         if(full_height<=800){
-            $("#main").height(600).css("background-image", "url(Images/oncean.jpg)");
+            $("#main").height(600).css("background-image", "url(images/oncean.png)");
             $("#main").css("background-size", main_width.toString()+"px 600px");
             $("#main>#mid>.menu_tab").height(200);
             $("#main>.side>.menu_tab").height(300);
@@ -38,7 +38,7 @@ $(document).ready(function(){
             $("#main>#mid>.menu_tab:last").css("top",200);
         }
         else{
-            $("#main").height(full_height-200).css("background-image", "url(Images/oncean.jpg)");
+            $("#main").height(full_height-200).css("background-image", "url(images/oncean.png)");
             main_height = $("#main").height();
             $("#main>.side>.menu_tab").height(main_height/2);
             $("#main>#mid>.menu_tab").height((main_height/2)-100);
@@ -127,7 +127,7 @@ $(document).ready(function(){
         }
     });
 
-    $('header #head_tab>a:first').click(function (){
+    $('#login').click(function (){
         $('#loginPage').css('visibility','visible');
     })
 
