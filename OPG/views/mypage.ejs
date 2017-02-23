@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include ./partials/head.ejs %>
+    <link rel="stylesheet" href="/stylesheets/mypageStyle.css">
+</head>
+<body>
+    <%- include ./partials/header+nav.ejs %>
+    <div class="page-wrap">
+        <section class="text">
+            <div class="container">
+              <div class="row">
+                 <div class="col-xs-6">
+                     <h2><%= main_menu %></h2>
+                 </div>
+                <div class="col-xs-5 offset-xs-1">
+                    <div class="circle" id="circle1"></div>
+                    <div class="circle" id="circle2"></div>
+                    <div class="circle" id="circle3"></div>
+                </div>
+            </div>
+           <div class="row mainText user">
+             <form class="user-form form-horizontal" action="/user/<%=user._id %>?_method=put" method="post">
+              <div class="contentBox">
+               <fieldset>
+                <div class="form-group">
+                 <label for="currentPassword" class="col-sm-3 control-label">현재 비밀번호 *</label>
+                 <div class="col-sm-6">
+                  <input class="form-control" type="password" id="currentPassword" name="currentPassword" value="">
+                 </div>
+                </div>
+                <hr></hr>
+                <div class="form-group">
+                 <label for="id" class="col-sm-3 control-label">ID *</label>
+                 <div class="col-sm-6">
+                  <input class="form-control" type="text" id="id" name="id" value="<%= user.id %>">
+                 </div>
+                </div>
+                <div class="form-group">
+                 <label for="name" class="col-sm-3 control-label">이름 *</label>
+                 <div class="col-sm-6">
+                  <input class="form-control" type="text" id="name" name="name" value="<%= user.name %>">
+                 </div>
+                </div>
+                <div class="form-group">
+                 <label for="tel" class="col-sm-3 control-label">전화번호 *</label>
+                 <div class="col-sm-6">
+                  <input class="form-control" type="text" id="tel" name="tel" value="<%= user.tel %>">
+                 </div>
+                </div>
+                <div class="form-group">
+                 <label for="email" class="col-sm-3 control-label">E-mail *</label>
+                 <div class="col-sm-6">
+                  <input class="form-control" type="text" id="email" name="email" value="<%= user.mail %>">
+                 </div>
+                </div>
+                <hr></hr>
+                <div class="form-group">
+                 <label for="newPassword" class="col-sm-3 control-label">새로운 비밀번호</label>
+                 <div class="col-sm-6">
+                  <input class="form-control" type="password" id="newPassword" name="newPassword" value="">
+                 </div>
+                </div>
+                <div class="form-group">
+                 <label for="passwordConfirmation" class="col-sm-3 control-label">비밀번호 확인</label>
+                 <div class="col-sm-6">
+                  <input class="form-control" type="password" id="passwordConfirmation" name="passwordConfirmation" value="">
+                 </div>
+                </div>
+                <p class="col-sm-5 control-label">
+                 <small>* 표시 입력란은 꼭 입력해주세요</small>
+                </p>
+               </fieldset>
+              </div>
+
+              <div class="buttons">
+                <div class="col-sm-3"></div>
+               <button type="submit" class="btn btn-default">비밀번호 변경</button>
+              </div>
+             </form>
+         </div>
+<%- include ./partials/footer.ejs %>

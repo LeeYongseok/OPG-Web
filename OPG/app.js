@@ -63,7 +63,7 @@ app.use(function(req, res, next){
 	res.locals.isAuthenticated = req.isAuthenticated();	//passport 제공함수(로그인 여부 확인[true/false])
 	res.locals.currentUser= req.user;	// 로그인 시 유저의 정보를 가져옴
 	next(); // 다음으로 진행을 위해 설정
-}); // custom middleware 설정
+}); // custom middleware 설정, res.locals의 변수는 ejs에 사용가능
 
 
 
