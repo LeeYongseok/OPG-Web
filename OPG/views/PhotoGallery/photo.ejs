@@ -5,6 +5,13 @@
     <link rel="stylesheet" href="/stylesheets/photoStyle.css">
     <link rel="stylesheet" href="/stylesheets/text.css">
     <%- include photofunc.ejs %>
+    <script>
+      $(document).ready(function(){
+        $('li.disabled>a').on('click',function(e){
+          e.preventDefault();
+        });
+      });
+    </script>
 </head>
 <body>
     <%- include ../partials/header+nav.ejs %>
