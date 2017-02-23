@@ -12,6 +12,7 @@ $(document).ready(function() {
   lang:'ko-KR'
   });
 
+  <% if((typeof photodata) != "undefined"){ %>
     if(!(/edit/.test($(location).attr('pathname')))){
       $('#p_body').html($('#hidden_div').html('<%= photodata.body %>').text());
     }
