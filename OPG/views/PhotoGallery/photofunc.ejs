@@ -2,13 +2,14 @@
 
 getimgsrc = function getimgsrc(e) {
   var imgsrc = "/uploadedimages/e.filename";
-
   if (e.filename == undefined) {
-    if (e.photoaddress != undefined) {
+    if (e.photoaddress) {
       imgsrc = e.photoaddress ;
-    } else {
-      imgsrc = "https://unsplash.it/600/450/?random" ;
-      }
+      return imgsrc;
+    }
+    else {
+      imgsrc = '/images/No_image_available.png';
+    }
   } else if (e.filename != undefined) {
     imgsrc = "/uploadedimages/" + e.filename;
   }
