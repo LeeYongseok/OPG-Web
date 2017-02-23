@@ -35,7 +35,7 @@
         <div id="head_tab">
           <% if(isAuthenticated){ %>
             <a href="/user/logout" id="logout">로그아웃</a>
-            <a href=" /users/<%= currentUser.id %>">마이페이지</a>
+            <a href="/user/<%=currentUser._id%>">마이페이지</a>
           <% } else { %>
            <a href="#" id="login">로그인</a>
            <a href="/signUp">회원가입</a>
