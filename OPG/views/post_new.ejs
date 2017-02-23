@@ -3,8 +3,9 @@
   <head>
     <%- include ./partials/head.ejs %>
     <link rel="stylesheet" href="/stylesheets/edit.css">
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+    <link rel="stylesheet" href="/stylesheets/summernote.css">
+    <script src="/javascripts/summernote.min.js"></script>
+    <script src="/javascripts/summernote-ko-KR.js"></script>
     <script>
     $(document).ready(function() {
       $('#summernote').summernote({
@@ -13,7 +14,8 @@
       width:750, 
       focus: true,                  // set focus to editable area after initializing summernote
       placeholder:'글을 입력해주세요 HTML코드도 추가 가능합니다.',
-      disableDragAndDrop: true
+      disableDragAndDrop: true,
+      lang: 'ko-KR'
       });
 
         $('#summernote').summernote('code');
