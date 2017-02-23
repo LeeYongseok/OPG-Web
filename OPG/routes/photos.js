@@ -7,18 +7,19 @@ var path = require('path');
 var mkdirp = require('mkdirp');
 
 //
-var UploadPath = path.join(__dirname,'..','public','uploadedimages');
+var UploadPath = path.join(__dirname,'..','public','uploadedfiles');
 mkdirp.sync(UploadPath);
+
 //for multipart form post
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname,'..','public','uploadedimages'));
+    cb(null, path.join(__dirname,'..','public','uploadedfiles'));
   },
   filename: function (req, file, cb) {
-      // cb(null, file.originalname);
       var originalname = file.originalname;
       var extension = originalname.split(".");
-      cb(null, Date.now() + '.' + extension[extension.length-1]);
+      // cb(null, Date.now() + '.' + extension[extension.length-1]);
+      cb(null, Date.now() + '_' + file.originalname);
   }
 });
 var upload = multer({storage : storage});
@@ -29,11 +30,6 @@ var upload = multer({storage : storage});
 //If connects to photo page - redirect to Activity page
 router.get('/', function(req, res, next) {
   res.redirect('/photo/Activity');
-  // res.render('../views/PhotoGallery/photo', {
-  //   title: 'Photo Gallery',
-  //   main_menu: 'Photo Gallery',
-  //   path:'photo'
-  // });
 });
 
 //<-- Photo_MT_Activity ---
@@ -73,9 +69,12 @@ router.get('/Activity',function(req,res){
  });
 
 router.post('/Activity',upload.single('photo'),function(req,res){
+console.log("post/activity");
   if(req.file !== undefined){
     req.body.filename = req.file.filename;
+    req.body.originalfilename = req.file.originalname;
   }
+
 	PhotoMods.PhotoMod_Activity.create(req.body,function(err,photos){
 		if(err) return res.json({success:false, message:err});
 		res.redirect('/photo/Activity');
@@ -125,7 +124,7 @@ router.delete('/Activity/:id', function(req,res){
       return res.json({success:false, message:err});
     }
     if(photos.filename !== undefined){
-      fs.unlink(path.join(__dirname,'..','public','uploadedimages',photos.filename));
+      fs.unlink(path.join(__dirname,'..','public','uploadedfiles',photos.filename));
     }
 		res.redirect('/photo/Activity');
 	});
@@ -218,7 +217,7 @@ router.delete('/Study/:id', function(req,res){
       return res.json({success:false, message:err});
     }
     if(photos.filename !== undefined){
-      fs.unlink(path.join(__dirname,'..','public','uploadedimages',photos.filename));
+      fs.unlink(path.join(__dirname,'..','public','uploadedfiles',photos.filename));
     }
 		res.redirect('/photo/Study');
 	});
@@ -311,11 +310,117 @@ router.delete('/Seminar/:id', function(req,res){
       return res.json({success:false, message:err});
     }
     if(photos.filename !== undefined){
-      fs.unlink(path.join(__dirname,'..','public','uploadedimages',photos.filename));
+      fs.unlink(path.join(__dirname,'..','public','uploadedfiles',photos.filename));
     }
 		res.redirect('/photo/Seminar');
 	});
 });
 //---Photo_Seminar -->
+
+//<-- Photo_Work ---
+router.get('/Work',function(req,res){
+  var limit = 9;
+  var page = req.query.page;
+  if(page === undefined) {page = 1;}
+  page = parseInt(page);
+  //   //var page = Math.max(1,req.query.page);
+  //   var page = ((req.query.page)===undefined)?1:req.query.page;
+  //   //if(page===undefined) {page = 1;}
+  PhotoMods.PhotoMod_Work.count({}, function(err, count) {
+    if(err) return res.json({success:false, message:err});
+    var skip = (page-1)*limit;
+    var maxPageNum = Math.ceil(count/limit);
+    PhotoMods.PhotoMod_Work.find({}).sort('-createdAt').skip(skip).limit(limit).exec(function(err, photos) {
+      if(err) return res.json({success:false, message:err});
+      res.render("../views/PhotoGallery/photo",{
+  			photodata: photos,
+        title: 'Photo_Work',
+        main_menu: '작품',
+        path: 'photo/Work',
+        page: page,
+        maxPageNum:maxPageNum
+  		 });
+     });
+   });
+ });
+
+ router.get('/Work/new',function(req,res){
+ 	res.render("../views/PhotoGallery/photo_new",{
+ 			title: 'Photo_Work',
+ 			main_menu: '작품',
+ 			path:'photo/Work',
+      page: req.query.page
+ 		});
+ });
+
+router.post('/Work',upload.single('photo'),function(req,res){
+console.log("post/Work");
+  if(req.file !== undefined){
+    req.body.filename = req.file.filename;
+    req.body.originalfilename = req.file.originalname;
+  }
+
+	PhotoMods.PhotoMod_Work.create(req.body,function(err,photos){
+		if(err) return res.json({success:false, message:err});
+		res.redirect('/photo/Work');
+	});
+});
+
+router.get('/Work/:id', function(req, res){
+  PhotoMods.PhotoMod_Work.findOne({_id:req.params.id}, function(err, photos){
+    if(err) return res.json(err);
+    res.render('PhotoGallery/photo_view', {
+      photodata:photos,
+      title: 'Photo_Work',
+      main_menu: '작품',
+      page: req.query.page,
+      path:'photo/Work'
+    });
+  });
+});
+
+router.get('/Work/:id/edit', function(req,res){
+  PhotoMods.PhotoMod_Work.findById(req.params.id, function(err, photos){
+    if(err) return res.json({success:false, message:err});
+    res.render('PhotoGallery/photo_edit', {
+      photodata: photos,
+      title: 'Photo_Work',
+      main_menu: '작품',
+      path:'photo/Work',
+      page: req.query.page
+    });
+  });
+});
+
+router.put('/Work/:id',upload.single('photo'),function(req,res){
+  if(req.file !== undefined){
+    req.body.filename = req.file.filename;
+  }
+	req.body.updatedAt=Date.now();
+	PhotoMods.PhotoMod_Work.findByIdAndUpdate(req.params.id,req.body,function(err,photos){
+		if(err) return res.json({success:false, message:err});
+		res.redirect(req.params.id + '?page=' + req.query.page);
+	});
+});
+
+router.delete('/Work/:id', function(req,res){
+	PhotoMods.PhotoMod_Work.findByIdAndRemove(req.params.id, function(err, photos){
+		if(err) {
+      return res.json({success:false, message:err});
+    }
+    if(photos.filename !== undefined){
+      fs.unlink(path.join(__dirname,'..','public','uploadedfiles',photos.filename));
+    }
+		res.redirect('/photo/Work');
+	});
+});
+//---Photo_Work-->
+
+
+router.post('/imageupload', upload.single('image'), function(req,res){
+    // console.log(path.join('..','public','uploadedfiles',req.file.filename));
+    req.file.url = path.join('..','..','uploadedfiles',req.file.filename);
+  res.send(req.file);
+});
 
 module.exports = router;
