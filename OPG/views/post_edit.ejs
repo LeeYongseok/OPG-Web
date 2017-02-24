@@ -3,6 +3,26 @@
   <head>
     <%- include ./partials/head.ejs %>
     <link rel="stylesheet" href="/stylesheets/edit.css">
+    <link rel="stylesheet" href="/stylesheets/summernote.css">
+    <script src="/javascripts/summernote.min.js"></script>
+    <script src="/javascripts/summernote-ko-KR.js"></script>
+    <script>
+    $(document).ready(function() {
+      $('#summernote').summernote({
+      height: 400,                 // set editor height
+      minHeight: 400,             // set minimum height of editor
+      width:750, 
+      focus: true,                  // set focus to editable area after initializing summernote
+      placeholder:'글을 입력해주세요 HTML코드도 추가 가능합니다.',
+      disableDragAndDrop: true,
+      lang:'ko-KR'
+      });
+        $('#hidden_div').html('<%= data.body %>');
+        $('#summernote').summernote('code',$('#hidden_div').text());
+
+        
+    });
+    </script>
   </head>
   <body>
     <%- include ./partials/header+nav.ejs %>
@@ -31,7 +51,8 @@
                     <label for="edit_title">Title</label>
                     <input type="text" id="edit_title" name="post[title]" value="<%=data.title%>">
                     <label for="edit_body">Body</label>
-                    <textarea name="post[body]" id="edit_body"><%=data.body%></textarea>
+                    <div id="hidden_div" style="display: none"></div>
+                    <textarea name="post[body]" id="summernote"></textarea>
                     <button type="submit" class="btn">Submit</button>
                   </form>
                   <a href="/<%=path%>/<%=data._id%>"><button class="btn">Back</button></a>

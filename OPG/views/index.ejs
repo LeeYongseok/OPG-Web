@@ -3,6 +3,7 @@
 <head>
     <title><%= title %></title>
     <meta charset="utf-8">
+    <link rel="icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="/stylesheets/CSSresetstyle.css">
     <link rel="stylesheet" href="/stylesheets/indexStyle.css">
     <script src="/javascripts/jquery-3.1.1.min.js"></script>
@@ -15,9 +16,9 @@
         <div id="loginBg"></div>
         <div id="loginContainer">
             <img src="images/OPG_logo_black.png" alt="">
-            <form method="post" id="loginInput">
-                <label for="ID">ID</label>
-                <input id="ID" type="text" name="ID">
+            <form method="post" id="loginInput" action="user/login">
+                <label for="id">ID</label>
+                <input id="id" type="text" name="id">
                 <label for="password">Password</label>
                 <input id="password" type="password" name="password">
                 <div class="btnSet">
@@ -32,8 +33,13 @@
         <a href="/"><img class="logo" src="images/OPG_logo_white.png"></a>
         <a href="/"><h1 id="mainTitle"><span class="accent">O</span>pen-mind <span class="accent">P</span>rograming <span class="accent">G</span>roup</h1></a>
         <div id="head_tab">
-            <a href="#">로그인</a>
-            <a href="/signUp">회원가입</a>
+          <% if(isAuthenticated){ %>
+            <a href="/user/logout" id="logout">로그아웃</a>
+            <a href="/user/<%=currentUser._id%>">마이페이지</a>
+          <% } else { %>
+           <a href="#" id="login">로그인</a>
+           <a href="/signUp">회원가입</a>
+          <% } %>
             <a href="#">도움말</a>
         </div>
     </header>
@@ -42,8 +48,8 @@
            <div class="menu_tab">
                 <div class="menu">
                     <ul>
-                        <li><a href="#">OPG는?</a></li>
-                        <li><a href="#">멤버</a></li>
+                        <li><a href="/about">OPG는?</a></li>
+                        <li><a href="/member">멤버</a></li>
                     </ul>
                     <a href="#">소 개</a>
                 </div>
@@ -68,8 +74,8 @@
             <div class="menu_tab">
                 <div class="menu">
                     <ul>
-                        <li><a href="#">공지사항</a></li>
-                        <li><a href="#">새로운글</a></li>
+                        <li><a href="/notice">공지사항</a></li>
+                        <li><a href="/new_post">새로운글</a></li>
                     </ul>
                     <a href="#">소 식</a>
                 </div>
@@ -84,10 +90,10 @@
            <div class="menu_tab">
                 <div class="menu">
                     <ul>
-                        <li><a href="#">프로그래밍</a></li>
-                        <li><a href="#">공모전/전시회</a></li>
-                        <li><a href="#">IT</a></li>
-                        <li><a href="#">취업</a></li>
+                        <li><a href="/info/Programming">프로그래밍</a></li>
+                        <li><a href="/info/Exhibition">공모전/전시회</a></li>
+                        <li><a href="/info/IT">IT</a></li>
+                        <li><a href="/info/Job">취업</a></li>
                     </ul>
                     <a href="#">정보</a>
                 </div>
@@ -95,10 +101,10 @@
             <div class="menu_tab">
                 <div class="menu">
                     <ul>
-                        <li><a href="/inquire">질의응답</a></li>
-                        <li><a href="/post">자유게시판</a></li>
-                        <li><a href="/food">맛집정보</a></li>
-                        <li><a href="/study">스터디</a></li>
+                        <li><a href="/post/Inquire">질의응답</a></li>
+                        <li><a href="/post/Board">자유게시판</a></li>
+                        <li><a href="/post/Food">맛집정보</a></li>
+                        <li><a href="/post/Study">스터디</a></li>
                     </ul>
                     <a href="#">커뮤니티</a>
                 </div>
