@@ -37,6 +37,7 @@ function uploadImage(image) {
     processData : false,
     success: function(data) {
       console.log('data : '  + data.path);
+      $('#summernote').summernote('insertImage',data.url);
     },
     error : function(data){
       console.log(data);
