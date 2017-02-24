@@ -2,6 +2,7 @@
 <html>
   <head>
     <%- include ../partials/head.ejs %>
+    <%- include ../partials/inc_summernote.ejs %>
     <link rel="stylesheet" href="/stylesheets/photoStyle.css">
     <link rel="stylesheet" href="/stylesheets/edit.css">
   </head>
@@ -32,11 +33,14 @@
                   <label for="edit_title">Title</label>
                   <input id="edit_title" type="text" name="title" value="<%=photodata.title%>">
                   <label for="edit_body">Body</label>
-                  <textarea id="edit_body" name="body"><%=photodata.body%></textarea>
+                  <textarea id="summernote" name="body"><%=photodata.body%></textarea>
+                  <% if(photodata.filename = undefined){ %>
                   <div class="col-xs-8">
                     <input id="input" type="file" name="photo">
-                    <input id="input" type="text" name="photoaddress" value="<%=photodata.photoaddress%>" placeholder="Image Address">
+                    <!-- <input id="input" type="text" name="photoaddress" value="<%=photodata.photoaddress%>" placeholder="Image Address"> -->
                   </div>
+                  <% } %>
+                  <label>User Name</label>
                   <div class="col-xs-4">
                   <input id="input" type="text" name="username" value="<%=photodata.username%>">
                 </div>
