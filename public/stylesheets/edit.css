@@ -1,0 +1,37 @@
+.edit{
+    width: 900px;
+    margin: 30px auto;
+    padding: 10% auto;
+}
+
+.edit #edit_title{
+    display:block;
+    background:linear-gradient(to top, #ffffff, #e6e6e6);
+    width: 750px;
+    text-shadow: none;
+}
+
+
+.edit label{
+    display: block;
+    font-size: 20px;
+    text-align: left;
+    padding: 0 10%;
+}
+
+.edit button.btn{
+    position: relative;
+    float: left;
+    margin: 5px 10px;
+    left: 10%;
+    color:black;
+    background: transparent;
+    border-color: #ddd;
+}
+
+.edit button.btn:hover{
+    color:white;
+    background-color: #34B4D2;
+}
+
+

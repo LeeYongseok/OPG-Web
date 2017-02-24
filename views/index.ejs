@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title><%= title %></title>
+    <meta charset="utf-8">
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/stylesheets/CSSresetstyle.css">
+    <link rel="stylesheet" href="/stylesheets/indexStyle.css">
+    <script src="/javascripts/jquery-3.1.1.min.js"></script>
+    <script src="/javascripts/prefixfree.min.js"></script>
+    <script src="/javascripts/indexScript.js"></script>
+</head>
+<body>
+   <div id="page">
+   <div id="loginPage">
+        <div id="loginBg"></div>
+        <div id="loginContainer">
+            <img src="images/OPG_logo_black.png" alt="">
+            <form method="post" id="loginInput" action="user/login">
+                <label for="id">ID</label>
+                <input id="id" type="text" name="id">
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password">
+                <div class="btnSet">
+                    <input type="submit" name="login" value="Login" class="btn">
+                    <a href="/signUp"><input type="button" name="signUp" value="Sign Up" class="btn"></a>
+                    <input type="button" name="close" value="Close" id="close" class="btn">
+                </div>
+            </form>
+        </div>
+    </div>
+    <header>
+        <a href="/"><img class="logo" src="images/OPG_logo_white.png"></a>
+        <a href="/"><h1 id="mainTitle"><span class="accent">O</span>pen-mind <span class="accent">P</span>rograming <span class="accent">G</span>roup</h1></a>
+        <div id="head_tab">
+          <% if(isAuthenticated){ %>
+            <a href="/user/logout" id="logout">로그아웃</a>
+            <a href="/user/<%=currentUser._id%>">마이페이지</a>
+          <% } else { %>
+           <a href="#" id="login">로그인</a>
+           <a href="/signUp">회원가입</a>
+          <% } %>
+            <a href="#">도움말</a>
+        </div>
+    </header>
+    <section id="main">
+        <div class="side">
+           <div class="menu_tab">
+                <div class="menu">
+                    <ul>
+                        <li><a href="/about">OPG는?</a></li>
+                        <li><a href="/member">멤버</a></li>
+                    </ul>
+                    <a href="#">소 개</a>
+                </div>
+            </div>
+            <div class="menu_tab">
+                <div class="menu">
+                    <ul>
+                        <li><a href="/photo/Activity">MT/활동</a></li>
+                        <li><a href="/photo/Study">스터디</a></li>
+                        <li><a href="/photo/Seminar">세미나</a></li>
+                    </ul>
+                    <a href="#">사진게시판</a>
+                </div>
+            </div>
+        </div>
+        <div id="mid">
+            <div id="center">
+                <img src="images/OPG_logo_white(O).png">
+                <img src="images/OPG_logo_white(P).png">
+                <img src="images/OPG_logo_white(G).png">
+            </div>
+            <div class="menu_tab">
+                <div class="menu">
+                    <ul>
+                        <li><a href="/notice">공지사항</a></li>
+                        <li><a href="/new_post">새로운글</a></li>
+                    </ul>
+                    <a href="#">소 식</a>
+                </div>
+            </div>
+            <div class="menu_tab">
+                <div class="menu">
+                    <a href="./photo.html">작 품</a>
+                </div>
+            </div>
+        </div>
+        <div class="side">
+           <div class="menu_tab">
+                <div class="menu">
+                    <ul>
+                        <li><a href="/info/Programming">프로그래밍</a></li>
+                        <li><a href="/info/Exhibition">공모전/전시회</a></li>
+                        <li><a href="/info/IT">IT</a></li>
+                        <li><a href="/info/Job">취업</a></li>
+                    </ul>
+                    <a href="#">정보</a>
+                </div>
+            </div>
+            <div class="menu_tab">
+                <div class="menu">
+                    <ul>
+                        <li><a href="/post/Inquire">질의응답</a></li>
+                        <li><a href="/post/Board">자유게시판</a></li>
+                        <li><a href="/post/Food">맛집정보</a></li>
+                        <li><a href="/post/Study">스터디</a></li>
+                    </ul>
+                    <a href="#">커뮤니티</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer><h1>인천대학교 컴퓨터공학부 학술소모임</h1></footer>
+    </div>
+</body>
+</html>

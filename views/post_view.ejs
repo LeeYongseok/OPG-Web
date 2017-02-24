@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ./partials/head.ejs %>
+    <link rel="stylesheet" href="/stylesheets/view.css">
+    <script>
+
+    $(document).ready(function() {
+        $('#hidden_div').html('<%= data.body %>');
+          $('.p_body').html($('#hidden_div').text());
+    });
+    </script>
+  </head>
+  <body>
+    <%- include ./partials/header+nav.ejs %>
+    <div class="page-wrap">
+        <section class="programming">
+            <div class="container">
+              <div class="row">
+                 <div class="col-xs-12">
+                     <h2><%= main_menu %></h2>
+                 </div>
+             </div>
+             <div class="row">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-6 sub_info">
+                </div>
+                <div class="col-xs-5">
+                    <div class="circle" id="circle1"></div>
+                    <div class="circle" id="circle2"></div>
+                    <div class="circle" id="circle3"></div>
+                </div>
+              </div>
+<!--이곳에 자기가 원하는 레이아웃을 설정해 주도록 하자.-->
+              <div class="row">
+                <div class="show">
+                  <h3 class="title"><%= data.title %></h3>
+                  <div class="time small"><span>Created at </span><br> 
+                    <%= data.createdAt.toLocaleDateString() %> <br>
+                    <%= data.createdAt.toLocaleTimeString() %>
+                  </div>
+                  <% if(data.updatedAt) { %>
+                    <div class="time small"><span>Updated at </span><br>
+                      <%= data.updatedAt.toLocaleDateString() %> <br>
+                      <%= data.updatedAt.toLocaleTimeString() %>
+                    </div>
+                  <% } %>
+                  <span><small><%= data.author ? data.author.name : "" %></small></span>
+                  <div id="hidden_div" style="display: none"></div>
+                  <div class="p_body" id="summernote"></div>
+                   <div class="comments">
+                    <h4>Comments (<%= data.comments?data.comments.length:"0"%>)</h4>
+                    <% if(data.comments) { %>
+                    <% data.comments.forEach(function(comment){ %>
+                        <div class="comment">
+                          <div class="comment_top">
+                            <b><%= comment.author.name %></b>
+                            (<%= comment.date.toLocaleTimeString() %>,
+                             <%= comment.date.toLocaleDateString() %>)
+                             <% if(user && user.equals(comment.author._id)) { %>
+                             <form class="comment_delete" action="/<%=path%>/<%=data._id%>/comments/<%=comment._id%>?_method=DELETE" method="post">
+                               <button type="submit">X</button>
+                             </form>
+                             <% } %>
+                          </div>
+                          <div class="comment_body"><%= comment.body %></div>
+                        </div>
+                    <% }) %>
+                    <% } %>
+                    <form class="addComment checkValidation" action="/<%=path%>/<%=data._id%>/comments" method="post">
+                      <textarea name="comment[body]" class="cvRequired" cols="30" rows="3" cvRqErrMsg="comments is empty." cvRqErrTo="#cvErrTitle" placeholder="comments here!!"></textarea>
+                      <button type="submit" class="btn">Comment</button>
+                      <div id="cvErrTitle" class="message"></div>
+                    </form>
+                  </div>
+                  <br><br>
+                  <% if(isAuthenticated && currentUser.id == data.author.id){ %>
+                  <div class="tools">
+                    <a href="/<%=path%>/<%= data._id %>/edit"><button class="btn">Edit</button></a>
+                    <!-- Delete button Here -->
+                    <form class="btn_delete" action="/<%=path%>/<%=data._id%>?_method=DELETE" method="post">
+                      <button type="submit" class="btn">Delete</button>
+                    </form>
+                  </div>
+                  <% } %>
+                  <a href="/<%=path%>"><button class="btn">Back</button></a>
+                </div>
+              </div>
+
+
+
+<!---이곳까지 자기가 원하는 레이아웃을 설정해 주도록 하자.-->
+<%- include ./partials/footer.ejs %>

@@ -1,0 +1,398 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+@font-face{font-family:'Nanum Barun Gothic'; src:url('/font/NanumBarunGothic.woff');}
+
+body{
+    width:100%;
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    font-family: 'Nanum Barun Gothic', serif;
+}
+
+.page-wrap{
+    margin-top:40px;
+    padding: 30px;
+    box-sizing: border-box;
+    transition: all .3s ease-in;
+}
+
+section{
+    margin-bottom: 12rem;
+}
+
+p{
+    line-height: 1.7;
+}
+
+h2{
+    margin-top:30px;
+    font-size: 1.7em;
+    line-height: 1;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+header{
+    width: 100%;
+    position: fixed;
+    top:0;
+    background: #ffffff;
+    z-index: 1;
+}
+
+header .head{
+    position:relative;
+    height:50px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.head #text_logo{
+    font-family: 'Inconsolata', monospace;
+    position: relative;
+    font-weight: 700;
+    font-size:2rem
+}
+
+header .head>a{
+    display: inline;
+    width:50px; text-decoration: none; color:black;
+    margin-left: 15px;
+}
+
+header .head img{
+    height: 50px;
+}
+
+.head #text_logo:after{
+    margin-top:20px;
+   display:inline-block;
+    content: '';
+    width:45px;
+    height:5px;
+    border-top:5px solid #B5C3D5;
+    position:absolute;
+    bottom:-10px;
+    left:0;
+}
+
+section>.container{
+    position: relative;
+    transform-origin: left;
+    transition: all .3s ease-in;
+    min-width: 1170px;
+    width: 1170px;
+}
+
+section>.container h2{
+    font-size:3rem;
+    margin-top:40px;
+}
+
+section>.container h2:after{
+    margin-top:40px;
+    display:inline-block;
+    content: '';
+    width:45px;
+    height:10px;
+    border-top:5px solid #B5C3D5;
+    position:absolute;
+    bottom:-10px;
+    left:10px;
+}
+
+.sub_info>blockquote{
+    position: relative;
+    margin-top:30px;
+    font-size:2rem;
+    font-weight: 600;
+    height: 200px;
+}
+
+.mainText { margin-top: 50px; padding: 0 50px; }
+
+.circle{
+    position: relative;
+    content: '';
+    border: none;
+    box-sizing: border-box;
+    border-radius: 50%;
+    transition: all .5s ease;
+}
+
+#circle1{
+    background: linear-gradient(120deg,red,white);
+    width:10rem;
+    height: 10rem;
+    left:80%;
+}
+
+#circle2{
+    background: linear-gradient(120deg,#ccc,white);
+     width:8rem;
+    height: 8rem;
+    left:70%;
+}
+#circle3{
+    background: linear-gradient(120deg,skyblue,white);
+     width:5rem;
+    height: 5rem;
+    left:90%;
+}
+
+
+
+
+/*여기까지 기본 레이아웃 구성들*/
+
+
+
+#menu-toggle:focus{
+    outline: none;
+}
+
+#menu-toggle{
+    position: fixed;
+    right: 40px;
+    width: 40px;
+    height: 40px;
+    z-index: 1;
+    cursor: pointer;
+    border: none;
+    border-radius: 50px;
+    background: #fff;
+    transition: all .5s ease;
+}
+#menu-toggle>div{
+    position: absolute;
+    right:35px;
+    bottom:10px;
+    z-index: 1;
+}
+
+#menu-toggle>div:hover{
+    opacity:.5;
+}
+
+
+#menu-toggle:before,
+#menu-toggle:after {
+    position: absolute;
+    z-index: 1;
+    content: "";
+    content: "";
+    transition: all .5s ease;
+
+    background-color: #888;
+    box-sizing:border-box;
+}
+#menu-toggle:before {
+    top: 12px;
+    left: 20px;
+    width: 4px;
+    height: 20px;
+}
+#menu-toggle:after {
+    top:20px;
+    left: 12px;
+    width: 20px;
+    height: 4px;
+}
+
+#menu {
+    z-index: 999;
+    position: absolute;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    padding: 5px 30px 50px;
+    box-sizing: border-box;
+    transition: all .3s ease-in;
+    text-align: center;
+    background-color: #fff;
+    border-left: 1px solid #ddd;
+}
+
+#menu .brand{
+    height: 40px;
+    font-size: 40px;
+    font-weight: 900;
+    line-height: .6;
+    padding-top: 10px;
+}
+
+#menu .brand>a{
+    text-decoration: none;
+    color: #bbb;
+}
+
+#menu>ul {
+    padding: 0;
+    margin-top: 20px;
+}
+
+
+#menu ul li a{
+    display: block;
+
+    font-weight: 900;
+    line-height: 50px;
+    transition: all .3s ease;
+    text-decoration: none;
+    
+    color: black;
+    border-top: 1px solid #ccc;
+}
+
+#menu ul li:last-child a {
+    border-bottom: 1px solid #eee;
+}
+
+#menu ul li a:hover {
+    letter-spacing: 2px;
+}
+
+#menu li{
+    list-style-type: none;
+}
+
+#menu ul ul{
+    display: none;
+}
+
+#menu a.btn{
+    
+    bottom:10px;
+    width:50px;
+    height: 50px;
+    font-size: 3rem;
+    color:#ddd;
+}
+#menu a.btn:hover{
+    color:firebrick;
+}
+
+body.open #menu {
+    right: 0;
+}
+
+body.open .page-wrap {
+    margin-right: 300px;
+    
+}
+
+
+body.open button#menu-toggle{
+    right:340px;
+}
+
+body.open button#menu-toggle:before,
+body.open button#menu-toggle:after {
+            transform: rotate(45deg); 
+}
+
+body.open .container{
+    padding-right: 15px;
+}
+
+
+/*여기까지 메뉴 버튼과 메뉴구성*/
+
+
+a.up-scroll{
+    position:fixed;
+    bottom:25px;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    color:#ddd;
+    opacity:0;
+}
+
+
+a.up-scroll:focus{
+    color:#ddd;
+}
+
+a.up-scroll:hover{
+    color:black;
+}
+
+
+/*여기까지 up scroll 바 생성*/
+
+
+.pagination > li > a,
+.pagination > li > span {
+  color: #000;
+  font-weight: 200;
+    border-radius: 50%;
+    margin: 5px;
+    width: 40px;
+}
+
+.pagination > li > a:first-child,
+.pagination > li > span:first-child{
+    border-radius: 50%;
+}
+
+.pagination > li > a:last-child,
+.pagination > li > span:last-child{
+    border-radius: 50%;
+}
+
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+  z-index: 2;
+  color: #23527c;
+  background-color: #eee;
+  border-color: #ddd;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  z-index: 3;
+  color: #fff;
+  cursor: default;
+  background-color: #337ab7;
+  border-color: #337ab7;
+}
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+  color: #eee;
+  cursor: not-allowed;
+  background-color: #fff;
+  border-color: #ddd;
+}
+
+#imaginary_container{
+    margin-bottom: 10px;
+}
+.input-group{
+    z-index: 1;
+}
+
+.input-group-addon {
+  color: black;
+  background-color: #ffffff;
+  border-color: #ccc;
+}
+
+.input-group-addon button{
+    border: none;
+    background: none;
+}
+
+.input-group-addon:hover{
+    background-color: #eee;
+    color: #23527c;
+}
+

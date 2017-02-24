@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ./partials/head.ejs %>
+    <link rel="stylesheet" href="/stylesheets/edit.css">
+    <link rel="stylesheet" href="/stylesheets/summernote.css">
+    <script src="/javascripts/summernote.min.js"></script>
+    <script src="/javascripts/summernote-ko-KR.js"></script>
+    <script>
+    $(document).ready(function() {
+      $('#summernote').summernote({
+      height: 400,                 // set editor height
+      minHeight: 400,             // set minimum height of editor
+      width:750, 
+      focus: true,                  // set focus to editable area after initializing summernote
+      placeholder:'글을 입력해주세요 HTML코드도 추가 가능합니다.',
+      disableDragAndDrop: true,
+      lang:'ko-KR'
+      });
+        $('#hidden_div').html('<%= data.body %>');
+        $('#summernote').summernote('code',$('#hidden_div').text());
+
+        
+    });
+    </script>
+  </head>
+  <body>
+    <%- include ./partials/header+nav.ejs %>
+    <div class="page-wrap">
+        <section class="programming">
+            <div class="container">
+              <div class="row">
+                 <div class="col-xs-12">
+                     <h2><%= main_menu %></h2>
+                 </div>
+             </div>
+             <div class="row">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-6 sub_info">
+                </div>
+                <div class="col-xs-5">
+                    <div class="circle" id="circle1"></div>
+                    <div class="circle" id="circle2"></div>
+                    <div class="circle" id="circle3"></div>
+                </div>
+              </div>
+<!--이곳에 자기가 원하는 레이아웃을 설정해 주도록 하자.-->
+              <div class="row">
+                <div class="edit">
+                  <form class="posts_form" action="/<%=path%>/<%=data._id%>?_method=PUT" method="post">
+                    <label for="edit_title">Title</label>
+                    <input type="text" id="edit_title" name="post[title]" value="<%=data.title%>">
+                    <label for="edit_body">Body</label>
+                    <div id="hidden_div" style="display: none"></div>
+                    <textarea name="post[body]" id="summernote"></textarea>
+                    <button type="submit" class="btn">Submit</button>
+                  </form>
+                  <a href="/<%=path%>/<%=data._id%>"><button class="btn">Back</button></a>
+                </div>
+              </div>
+
+
+
+<!---이곳까지 자기가 원하는 레이아웃을 설정해 주도록 하자.-->
+<%- include ./partials/footer.ejs %>

@@ -1,0 +1,71 @@
+.show{
+    
+    width: 900px;
+    margin: 0 auto;
+}
+
+
+.show .title{
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    margin-bottom: 20px;
+    
+}
+
+.show .time{
+    float: left;
+    width: 50%;
+    height: 50px;
+    color: crimson;
+    padding-bottom: 50px;
+}
+
+.show .p_body{
+    clear: both;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    padding: 20px 0;
+    height: 400px;
+    overflow:scroll;
+}
+
+.show button.btn{
+    float: left;
+    margin-right: 10px;
+    color: black;
+    background: transparent;
+    border-color: #ddd;
+}
+
+.show button.btn:hover{
+    color:white;
+    background-color: #34B4D2;
+}
+
+.comments .comment{
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 5px;
+}
+
+.comments .comment button{
+    float: right;
+    font-size:3px;
+    border-radius: 50%;
+    background-color: rgba(255,0,0,0.7);
+    color:white;
+}
+
+.comments .comment button:hover{
+    background-color: rgba(255,0,0,1);
+}
+
+.addComment textarea{
+    width: 100%;
+}
+
+.addComment button{
+    position: relative;
+    left: 90%;
+    display: block;
+}

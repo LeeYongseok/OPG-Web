@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ./partials/head.ejs %>
+    <link rel="stylesheet" href="/stylesheets/programming.css">
+  </head>
+  <body>
+    <%- include ./partials/header+nav.ejs %>
+    <div class="page-wrap">
+        <section class="programming">
+            <div class="container">
+              <div class="row">
+                 <div class="col-xs-12">
+                     <h2><%= main_menu %></h2>
+                 </div>
+             </div>
+               <div class="row row-box">
+                 <div class="col-xs-12 col-sm-6 col-md-3">
+                     <div class="thumbnail">
+                         <img src="/images/code.png" alt="Language">
+                         <div class="caption">
+                             <h3>Language</h3>
+                             <p>
+                                 C언어 : 켄 톰슨이 만든 B언어를 보고, 그의 동료였던 데니스 리치가 1972년에 B언어에 데이터 유형 개념을 추가하여 만든 언어이다.</br>
+                                 C++ : C 언어의 문법을 대부분 사용할 수 있으며, 객체지향성이 더해진 C 언어의 확장형이라고 생각할 수도 있다.</br>
+                                 Java :썬 마이크로시스템즈에서 개발한 객체 지향적 프로그래밍 언어이다. 현재 웹 애플리케이션 개발에 가장 많이 사용하는 언어 가운데 하나이고, 모바일 기기용 소프트웨어 개발에도 널리 사용하고 있다. <br>
+                                 C# : 마이크로소프트에서 개발한 객체 지향 프로그래밍 언어이다. 닷넷 플랫폼에 강하게 의존하는 프로그래밍 언어이다. C++와 자바의 문법과 비슷한 문법을 가지고 있다.<br>
+                             </p>
+                             <p><a href="#" class="btn btn-xm" role="button">C언어</a>
+                             <a href="#" class="btn btn-xm" role="button">C++</a>
+                             <a href="#" class="btn btn-xm" role="button">Java</a>
+                             <a href="#" class="btn btn-xm" role="button">C#</a></p>
+                         </div>
+                     </div>
+                 </div>
+                                  <div class="col-xs-12 col-sm-6 col-md-3">
+                     <div class="thumbnail">
+                         <img src="/images/web.png" alt="Web">
+                         <div class="caption">
+                             <h3>Web</h3>
+                             <p>세계 규모의 거미집 또는 거미집 모양의 망이라는 뜻으로 하이퍼텍스트라는 기능에 의해 인터넷상에 분산되어 존재하는 온갖 종류의 정보를 통일된 방법으로 찾아볼 수 있게 하는 광역 정보 서비스 및 소프트웨어이며 웹에서는 정보가 웹 서버라고 하는 컴퓨터 내에서 하이퍼텍스트라는 형식으로 작성되어 홈 페이지라는 단위로 관리되며 링크라고 하는 정보에 의해 인터넷상에 분산되어있는 세계 각지의 하이퍼텍스트와 연결될 수 있다.</p>
+                             <p><a href="https://opentutorials.org/course/3" class="btn btn-xm" role="button">HTML</a>
+                             <a href="https://opentutorials.org/course/4" class="btn  btn-xm" role="button">CSS</a>
+                             <a href="https://opentutorials.org/course/48" class="btn btn-xm" role="button">JavaScript</a>
+                             <a href="https://opentutorials.org/course/53" class="btn btn-xm" role="button">JQuery</a></p>
+                         </div>
+                     </div>
+                 </div>
+                                  <div class="col-xs-12 col-sm-6 col-md-3">
+                     <div class="thumbnail">
+                         <img src="/images/server.png" alt="Server" style="height: 200px">
+                         <div class="caption">
+                             <h3>Server</h3>
+                             <p>서버는 클라이언트에게 네트워크를 통해 정보나 서비스를 제공하는 컴퓨터 또는 프로그램을 말한다. 특히, 서버에서 동작하는 소프트웨어를 서버 소프트웨어라 한다.서버는 프린터 제어나 파일 관리 등 네트워크 전체를 감시·제어하거나, 메인프레임이나 공중망을 통한 다른 네트워크과의 연결, 데이터·프로그램·파일 같은 소프트웨어 자원이나 모뎀·팩스·프린터 공유, 기타 장비 등 하드웨어 자원을 공유할 수 있도록 도와주는 역할을 한다. </p>
+                             <p><a href="#" class="btn btn-xm" role="button">ASP.NET</a>
+                             <a href="#" class="btn  btn-xm" role="button">JSP</a>
+                             <a href="https://opentutorials.org/course/62" class="btn btn-xm" role="button">PHP</a>
+                             <a href="https://opentutorials.org/course/2136" class="btn btn-xm" role="button">Node.js</a></p>
+                         </div>
+                     </div>
+                 </div>
+                                  <div class="col-xs-12 col-sm-6 col-md-3">
+                     <div class="thumbnail">
+                         <img src="/images/mobile.png" alt="Mobile">
+                         <div class="caption">
+                             <h3>Mobile</h3>
+                             <p>Android : 구글에서 개발한 운영체제로 국내에서 가장 쉽게 볼수 있는 스마트 기기 os입니다. 개방형 시스템으로 제조사에서도 쉽게 개발이 가능하다<br>ios : 애플에서 개발한 운영체제로 단일기종으로 가장 많은 판매량을 자랑하고 있는 아이폰의 운영체제이며, 안드로이드와는 다르게 약간은 폐쇄적인 운영체제이다.</p>
+                             <p><a href="#" class="btn btn-xm" role="button">Android</a>
+                             <a href="#" class="btn  btn-xm" role="button">IOS</a>                            
+                             </p>
+                         </div>
+                     </div>
+                 </div>
+                 <a href="/info/ProgrammingBoard" class="btn btn-md btn-primary">더보기</a>
+             </div>
+<!--이곳에 자기가 원하는 레이아웃을 설정해 주도록 하자.-->
+
+
+<!---이곳까지 자기가 원하는 레이아웃을 설정해 주도록 하자.-->
+<%- include ./partials/footer.ejs %>
