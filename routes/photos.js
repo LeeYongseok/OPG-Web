@@ -9,7 +9,7 @@ var mkdirp = require('mkdirp');
 //
 var UploadPath = path.join(__dirname,'..','public','uploadedfiles');
 mkdirp.sync(UploadPath);
-
+console.log('uploadpath' + UploadPath);
 //for multipart form post
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -68,15 +68,17 @@ router.get('/Activity',function(req,res){
  		});
  });
 
-router.post('/Activity',upload.single('photo'),function(req,res){
+router.post('/Activity',upload.any(),function(req,res){
 console.log("post/activity");
-  if(req.file !== undefined){
-    req.body.filename = req.file.filename;
-    req.body.originalfilename = req.file.originalname;
-  }
-
+console.log(req.files);
+  // if(req.file !== undefined){
+  //   req.body.filename = req.file.filename;
+  //   req.body.originalfilename = req.file.originalname;
+  // }
+console.log(req.body);
 	PhotoMods.PhotoMod_Activity.create(req.body,function(err,photos){
 		if(err) return res.json({success:false, message:err});
+    console.log(req.body);
 		res.redirect('/photo/Activity');
 	});
 });
@@ -419,8 +421,10 @@ router.delete('/Work/:id', function(req,res){
 
 router.post('/imageupload', upload.single('image'), function(req,res){
     // console.log(path.join('..','public','uploadedfiles',req.file.filename));
-    req.file.url = path.join('..','..','uploadedfiles',req.file.filename);
-  res.send(req.file);
+    console.log(req.file);
+    req.file.url = path.join('../','../','uploadedfiles/',req.file.filename);
+
+    res.send(req.file);
 });
 
 module.exports = router;

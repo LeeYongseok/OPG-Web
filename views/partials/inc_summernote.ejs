@@ -17,10 +17,10 @@ $(document).ready(function() {
     }
   });
 
-
   <% if((typeof photodata) != "undefined"){ %>
     if(!(/edit/.test($(location).attr('pathname')))){
-      $('#p_body').html($('#hidden_div').html('<%= photodata.body %>').text());
+      // $('#p_body').html($('#hidden_div').html('<%= photodata.body %>').text());
+      $('#summernote').summernote('code',<%=photodata.body%>);
     }
   <% } %>
 });
@@ -36,8 +36,8 @@ function uploadImage(image) {
     contentType : false,
     processData : false,
     success: function(data) {
-      console.log('data : '  + data.path);
-      $('#summernote').summernote('insertImage',data.url);
+      console.log('data : '  + data.url);
+      $('#summernote').summernote('insertImage', data.url);
     },
     error : function(data){
       console.log(data);
