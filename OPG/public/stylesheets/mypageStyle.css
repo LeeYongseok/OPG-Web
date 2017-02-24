@@ -1,0 +1,9 @@
+hr { border-top-width: 3px; }
+
+label { font-size: 120%; }
+
+small { font-weight: 700; color: red;}
+
+.buttons {margin-top: 10px;}
+
+.buttons>div {margin-right: 5px;}

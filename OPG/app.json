@@ -1,0 +1,10 @@
+{
+  "name": "OPG website",
+  "description": "OPG website for a Node.JS Express App",
+  "keywords": [
+    "nodejs",
+    "express"
+  ],
+  "repository": "https://github.com/jamesward/hello-node_js-express.git",
+  "logo": "https://nodejs.org/images/logos/nodejs.png"
+}

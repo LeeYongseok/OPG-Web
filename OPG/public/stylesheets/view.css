@@ -42,3 +42,30 @@
     color:white;
     background-color: #34B4D2;
 }
+
+.comments .comment{
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 5px;
+}
+
+.comments .comment button{
+    float: right;
+    font-size:3px;
+    border-radius: 50%;
+    background-color: rgba(255,0,0,0.7);
+    color:white;
+}
+
+.comments .comment button:hover{
+    background-color: rgba(255,0,0,1);
+}
+
+.addComment textarea{
+    width: 100%;
+}
+
+.addComment button{
+    position: relative;
+    left: 90%;
+    display: block;
+}
