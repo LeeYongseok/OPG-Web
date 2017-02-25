@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <%- include ./partials/head.ejs %>
+   <link rel="stylesheet" href="/stylesheets/about.css">
+</head>
+<body>
+<%- include ./partials/header+nav.ejs %>
+    <div class="page-wrap">
+        <section class="programming">
+            <div class="container">
+              <div class="row">
+                 <div class="col-xs-12">
+                    <div id="about_head">
+                         <hr><h1>ABOUT US</h1><hr>
+                     </div>
+                 </div>
+             </div>
+             <div class="row" id=about_main>
+                <div class="col-xs-1"></div>
+                <div class="col-xs-6 sub_info">
+                 <blockquote>
+                   <div class="headline"><span>O</span>pen-Mind <span>P</span>rogramming <span>G</span>roup</div>
+                    <br>열린 마음으로 프로그래밍을 하며
+                    <br>주기적인 공동 프로젝트를 통해 
+                    <br>지식을 함양시키는
+                    <br>인천대학교 컴퓨터 공학부 소모임입니다.
+                  </blockquote>
+                </div>
+                <div class="col-xs-5">
+                    <div class="circle" id="circle1"></div>
+                    <div class="circle" id="circle2"></div>
+                    <div class="circle" id="circle3"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class=col-xs-4>
+                    <div class=hover_box1>
+                    01<hr>
+                    세미나
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class=hover_box2>
+                    02<hr>
+                    작품전시회
+                    </div>    
+                </div>
+                <div class="col-xs-4">
+                    <div class=hover_box3>
+                    03<hr> 
+                    스터디  
+                    </div>
+                </div>
+                 <div class="col-xs-4 col-xs-offset-2">
+                    <div class=hover_box4>
+                    04<hr>
+                    MT
+                    </div>
+                </div>
+                 <div class="col-xs-4 offset">
+                    <div class=hover_box5>
+                    05<hr>  
+                    활동  
+                    </div>
+                </div>
+            </div>
+<%- include ./partials/footer.ejs %>
