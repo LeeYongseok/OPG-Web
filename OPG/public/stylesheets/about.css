@@ -10,27 +10,7 @@
     height: 200px;
     margin-bottom: 20px;
 }
-.hover_box4,.hover_box5{
-    margin-top:30px;
+.box{
+    border:1px solid black;
+    padding-top: 30px;
 }
-.hover_box1:hover{
-    content: url("/images/oncean.jpg");
-    box-shadow: 0 0 5px 5px sienna;
-}
-.hover_box2:hover{
-    content: url("/images/oncean.jpg");
-    box-shadow: 0 0 5px 5px sienna;
-}
-.hover_box3:hover{
-    content: url("/images/oncean.jpg");
-   box-shadow: 0 0 5px 5px sienna;
-}
-.hover_box4:hover{
-    content: url("/images/oncean.jpg");
-    box-shadow: 0 0 5px 5px sienna;
-}
-.hover_box5:hover{
-    content: url("/images/oncean.jpg");
-    box-shadow: 0 0 5px 5px sienna;
-}
-
