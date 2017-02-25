@@ -33,4 +33,13 @@
     content: url("/Images/oncean.png");
     box-shadow: 0 0 5px 5px sienna;
 }
-
+.headline{
+    letter-spacing: 2px;
+    font-size: 20px;
+    
+}
+.headline>span{
+    font-size: 24px;
+    font-weight: bold;
+    color: crimson;
+}
