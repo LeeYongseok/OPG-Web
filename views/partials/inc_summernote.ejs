@@ -20,7 +20,7 @@ $(document).ready(function() {
   <% if((typeof photodata) != "undefined"){ %>
     if(!(/edit/.test($(location).attr('pathname')))){
       // $('#p_body').html($('#hidden_div').html('<%= photodata.body %>').text());
-      $('#summernote').summernote('code',<%=photodata.body%>);
+      $('#summernote').summernote('code',"123");
     }
   <% } %>
 });

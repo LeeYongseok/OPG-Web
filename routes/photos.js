@@ -5,6 +5,7 @@ var PhotoMods = require("../models/photos");
 var multer  = require('multer');
 var path = require('path');
 var mkdirp = require('mkdirp');
+var util = require('../config/util.js');
 
 //
 var UploadPath = path.join(__dirname,'..','public','uploadedfiles');
@@ -38,14 +39,12 @@ router.get('/Activity',function(req,res){
   var page = req.query.page;
   if(page === undefined) {page = 1;}
   page = parseInt(page);
-  //   //var page = Math.max(1,req.query.page);
-  //   var page = ((req.query.page)===undefined)?1:req.query.page;
-  //   //if(page===undefined) {page = 1;}
+  console.log(req.user);
   PhotoMods.PhotoMod_Activity.count({}, function(err, count) {
     if(err) return res.json({success:false, message:err});
     var skip = (page-1)*limit;
     var maxPageNum = Math.ceil(count/limit);
-    PhotoMods.PhotoMod_Activity.find({}).sort('-createdAt').skip(skip).limit(limit).exec(function(err, photos) {
+    PhotoMods.PhotoMod_Activity.find({}).populate("author").sort('-createdAt').skip(skip).limit(limit).exec(function(err, photos) {
       if(err) return res.json({success:false, message:err});
       res.render("../views/PhotoGallery/photo",{
   			photodata: photos,
@@ -59,7 +58,7 @@ router.get('/Activity',function(req,res){
    });
  });
 
- router.get('/Activity/new',function(req,res){
+ router.get('/Activity/new',util.isLoggedin,function(req,res){
  	res.render("../views/PhotoGallery/photo_new",{
  			title: 'Photo_MT_Activity',
  			main_menu: 'MT & 활동',
@@ -68,14 +67,11 @@ router.get('/Activity',function(req,res){
  		});
  });
 
-router.post('/Activity',upload.any(),function(req,res){
-console.log("post/activity");
-console.log(req.files);
-  // if(req.file !== undefined){
-  //   req.body.filename = req.file.filename;
-  //   req.body.originalfilename = req.file.originalname;
-  // }
-console.log(req.body);
+router.post('/Activity',util.isLoggedin,upload.any(),function(req,res){
+// console.log("post/activity");
+// console.log(req.files);
+// console.log(req.body);
+	req.body.author = req.user._id;
 	PhotoMods.PhotoMod_Activity.create(req.body,function(err,photos){
 		if(err) return res.json({success:false, message:err});
     console.log(req.body);
@@ -84,7 +80,7 @@ console.log(req.body);
 });
 
 router.get('/Activity/:id', function(req, res){
-  PhotoMods.PhotoMod_Activity.findOne({_id:req.params.id}, function(err, photos){
+  PhotoMods.PhotoMod_Activity.findOne({_id:req.params.id}).populate(['author','comments.author']).exec(function(err, photos){
     if(err) return res.json(err);
     res.render('PhotoGallery/photo_view', {
       photodata:photos,
@@ -96,9 +92,10 @@ router.get('/Activity/:id', function(req, res){
   });
 });
 
-router.get('/Activity/:id/edit', function(req,res){
+router.get('/Activity/:id/edit', util.isLoggedin, function(req,res){
   PhotoMods.PhotoMod_Activity.findById(req.params.id, function(err, photos){
     if(err) return res.json({success:false, message:err});
+    if(!req.user._id.equals(photos.author)) return res.json({success:false, message:"Unauthrized Attempt"});
     res.render('PhotoGallery/photo_edit', {
       photodata: photos,
       title: 'Photo_MT_Activity',
@@ -109,28 +106,48 @@ router.get('/Activity/:id/edit', function(req,res){
   });
 });
 
-router.put('/Activity/:id',upload.single('photo'),function(req,res){
+router.put('/Activity/:id', util.isLoggedin, upload.single('photo'),function(req,res){
   if(req.file !== undefined){
     req.body.filename = req.file.filename;
   }
 	req.body.updatedAt=Date.now();
-	PhotoMods.PhotoMod_Activity.findByIdAndUpdate(req.params.id,req.body,function(err,photos){
+	PhotoMods.PhotoMod_Activity.findByIdAndUpdate({_id:req.params.id, author:req.user._id},req.body,function(err,photos){
 		if(err) return res.json({success:false, message:err});
+    if(!photos) return res.json({success:false, message:"No data found to update"});
 		res.redirect(req.params.id + '?page=' + req.query.page);
 	});
 });
 
-router.delete('/Activity/:id', function(req,res){
-	PhotoMods.PhotoMod_Activity.findByIdAndRemove(req.params.id, function(err, photos){
+router.delete('/Activity/:id', util.isLoggedin, function(req,res){
+	PhotoMods.PhotoMod_Activity.findByIdAndRemove({_id:req.params.id, author:req.user._id}, function(err, photos){
 		if(err) {
       return res.json({success:false, message:err});
     }
+    if(!photos) return res.json({success:false, message:"No data found to remove"});
     if(photos.filename !== undefined){
       fs.unlink(path.join(__dirname,'..','public','uploadedfiles',photos.filename));
     }
 		res.redirect('/photo/Activity');
 	});
 });
+
+////comment
+router.post('/Activity/:id/comments',function(req,res){
+	var newComment = req.body.comment;
+	newComment.author = req.user._id;
+	PhotoMods.PhotoMod_Activity.update({_id:req.params.id},{$push:{comments:newComment}},function(err,post){
+		if(err) return res.json({success:false, message:err});
+		res.redirect('/photo/Activity/'+req.params.id);
+	});
+});
+
+router.delete('/Activity/:id/comments/:commentId',function(req,res){
+		PhotoMods.PhotoMod_Activity.update({_id:req.params.id},{$pull:{comments:{_id:req.params.commentId}}},function(err,post){
+		if(err) return res.json({success:false, message:err});
+		res.redirect('/photo/Activity/'+req.params.id);
+	});
+});//destroy
+
 //---Photo_MT_Activity -->
 
 //<-- Photo_Study ---

@@ -22,24 +22,17 @@
                  <div class="col-xs-6">
                      <h2><%= main_menu %></h2>
                  </div>
+                 <div class="col-xs-5 offset-xs-1">
+                     <div class="circle" id="circle1"></div>
+                     <div class="circle" id="circle2"></div>
+                     <div class="circle" id="circle3"></div>
+                 </div>
              </div>
-             <div class="row">
-                <div class="col-xs-6 sub_info">
-                  <blockquote>
-                    <br>즐거운 소모임에서
-                    <br>MT 및 여러 활동의 추억을
-                    <br>사진으로 오래 남깁시다
-                  </blockquote>
-                </div>
-                <div class="col-xs-5 offset-xs-1">
-                    <div class="circle" id="circle1"></div>
-                    <div class="circle" id="circle2"></div>
-                    <div class="circle" id="circle3"></div>
-                </div>
-            </div>
             <div class="col-xs-12" id="imaginary_container">
               <div class="col-xs-4">
+              <% if(isAuthenticated) { %>
               <a href="/<%=path%>/new?page=<%=page%>"><button class="btn btn-primary">New</button></a>
+              <% } %>
             </div>
              <div class="col-xs-4"></div>
                    <select id="sel" name="sel">
@@ -63,14 +56,15 @@
                   <% photodata.forEach(function(e){
                     var imgsrc = getimgsrc(e);%>
                     <li class="blog_item ib fs">
+                      <a href="/<%=path%>/<%= e._id%>?page=<%=page%>">
                      <div class="ibw">
                        <div class="item_image iw ib">
                          <img src="<%= imgsrc %>" alt="">
                        </div>
                        <div class="item_details ib fs">
-                         <div class="item_header"><a href="/<%=path%>/<%= e._id%>?page=<%=page%>"><%=e.title%></div>
+                         <div class="item_header"><%=e.title%></div>
                          <div class="item_day"><%=e.createdAt.toLocaleDateString()%></div>
-                         <div class="item_writer"><%=e.username%></div>
+                         <div class="item_writer"><%=e.author?e.author.name:""%></div>
                        </div>
                      </div>
                    </li>

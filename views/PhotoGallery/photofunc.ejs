@@ -6,7 +6,7 @@ getimgsrc = function getimgsrc(data) {
     imgsrc = "/uploadedfiles/" + data.filename;
   }
   else {
-      imgsrc = '/images/No_image_available.png';
+      imgsrc = '/images/No_image_available.jpg';
   }
   return imgsrc;
 }
@@ -18,9 +18,9 @@ viewallimg = function viewallimage(data){
       filename : ('/uploadedfiles/'+ data.filename)
     };
   }
-  else {
-    return { default : '/images/No_image_available.png' };
-  }
+/*  else {
+    return { default : '/images/No_image_available.jpg' };
+  }*/
 }
 
 getfilepath = function getfilepath(data) {
