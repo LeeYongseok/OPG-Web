@@ -26,7 +26,6 @@
                     <div class="circle" id="circle3"></div>
                 </div>
               </div>
-
               <div class="new edit">
                 <h3>New</h3>
                 <form class="posts_form" action="/<%=path%>" method="post" enctype="multipart/form-data">
@@ -35,8 +34,9 @@
                   <label for="edit_body">Body</label>
                   <textarea id="summernote" name="body"></textarea>
                   <div class="col-xs-8">
-                    <input id="input" type="file" name="photo">
+                    <input id="input" type="file" name="file">
                   </div>
+                  <input type="hidden" name="images" id="images" value="">
                   <br />
                   <button type="submit" class="btn">Submit</button>
                 </form>

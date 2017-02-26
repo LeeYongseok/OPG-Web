@@ -49,8 +49,11 @@
           <img class="img-responsive img-thumbnail" src="<%=viewallimg(photodata)[index]%>" >
       </div>
     <% } %>
-    <div id="hidden_div" style="display: none"></div>
-    <div class="col-xs-12 panel panel-default" id="p_body"></div>
+    <div class="col-xs-12 panel panel-default" id="body"></div>
+
+    <% if(photodata.filePath != undefined) { %>
+      <div><a href="<%=getfilepath(photodata)%>" download><%=photodata.fileOriginalname%></a></div>
+    <% } %>
 
     <div class="comments">
      <h4>Comments (<%= photodata.comments?photodata.comments.length:"0"%>)</h4>
@@ -79,10 +82,6 @@
    </div>
 
     <div class="tools colx-xs-12">
-      <% if(photodata.filename != undefined) { %>
-        <% console.log("photodataorigin" + photodata.originalfilename);%>
-        <div><a href="<%=getfilepath(photodata)%>" download><%=photodata.originalfilename%> </div>
-      <% } %>
       <% if(isAuthenticated && currentUser.id == photodata.author.id){ %>
       <a href="/<%=path%>/<%= photodata._id %>/edit?page=<%=page%>"><button class="btn">Edit</button></a>
       <!-- Delete button Here -->

@@ -34,11 +34,14 @@
                   <input id="edit_title" type="text" name="title" value="<%=photodata.title%>">
                   <label for="edit_body">Body</label>
                   <textarea id="summernote" name="body"><%=photodata.body%></textarea>
-                  <% if(photodata.filename = undefined){ %>
+                  <input type="hidden" name="images" id="images" value="">
                   <div class="col-xs-8">
-                    <input id="input" type="file" name="photo">
+                    <% if(photodata.filePath != undefined){ %>
+                      <input id="input" type="file" name="photo" disabled> Uploaded file already exist.
+                    <% } else { %>
+                      <input id="input" type="file" name="photo">
+                    <%} %>
                   </div>
-                  <% } %>
                   <br />
                   <button type="submit" class="btn">Submit</button>
                 </form>

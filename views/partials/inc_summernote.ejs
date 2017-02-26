@@ -12,19 +12,21 @@ $(document).ready(function() {
     lang:'ko-KR',
     callbacks : {
       onImageUpload : function(image) {
-        uploadImage(image[0]);
+        for( var i= image.length -1;i>=0;i--) {
+          uploadImage(image[i]);
+        }
       }
     }
   });
-
   <% if((typeof photodata) != "undefined"){ %>
     if(!(/edit/.test($(location).attr('pathname')))){
-      // $('#p_body').html($('#hidden_div').html('<%= photodata.body %>').text());
-      $('#summernote').summernote('code',"123");
+      $('#body').html('<%- photodata.body %>');
     }
   <% } %>
 });
 
+
+var imageinput = [];
 function uploadImage(image) {
   var data = new FormData();
   data.append("image", image);
@@ -32,12 +34,14 @@ function uploadImage(image) {
     data : data,
     type : 'POST',
     url : '/photo/imageupload',
+    enctype : 'multipart/form-data',
     cache : false,
     contentType : false,
     processData : false,
     success: function(data) {
-      console.log('data : '  + data.url);
       $('#summernote').summernote('insertImage', data.url);
+      imageinput.push(data.url);
+      $('#images').val(JSON.stringify(imageinput.toString().split(",")));
     },
     error : function(data){
       console.log(data);

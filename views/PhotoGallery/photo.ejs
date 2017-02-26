@@ -53,13 +53,12 @@
               <div class="row mainText">
                <div class="cc">
                  <ul id="blog" class="blog ibw">
-                  <% photodata.forEach(function(e){
-                    var imgsrc = getimgsrc(e);%>
+                  <% photodata.forEach(function(e){ %>
                     <li class="blog_item ib fs">
                       <a href="/<%=path%>/<%= e._id%>?page=<%=page%>">
                      <div class="ibw">
                        <div class="item_image iw ib">
-                         <img src="<%= imgsrc %>" alt="">
+                         <img src="<%=getimgsrc(e) %>" alt="">
                        </div>
                        <div class="item_details ib fs">
                          <div class="item_header"><%=e.title%></div>
@@ -83,7 +82,6 @@
                   <% } %>
                   <li class="<%=left_button%>"><a href="/<%=path%>/?page=<%=(page-1) %>"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
                 <% var offset = 2; %>
-                <% console.log(page); %>
                 <% for(i=1; i<=maxPageNum; i++){ %>
                   <% if( i<=offset || i>maxPageNum-offset || (i>=page-(offset) && i<=page+(offset))){ %>
                     <% if(i != page) { %>

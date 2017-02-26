@@ -6,11 +6,11 @@ var multer  = require('multer');
 var path = require('path');
 var mkdirp = require('mkdirp');
 var util = require('../config/util.js');
+var cloudinary = require('cloudinary');
 
 //
 var UploadPath = path.join(__dirname,'..','public','uploadedfiles');
 mkdirp.sync(UploadPath);
-console.log('uploadpath' + UploadPath);
 //for multipart form post
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -21,12 +21,13 @@ var storage = multer.diskStorage({
       var extension = originalname.split(".");
       // cb(null, Date.now() + '.' + extension[extension.length-1]);
       cb(null, Date.now() + '_' + file.originalname);
+      // cb(null,file.originalname);
   }
 });
 var upload = multer({storage : storage});
 //
 
-//Each different photo gallery [Activity, Study, Seminar]
+//Each different photo gallery [Activity, Study, Seminar, Work]
 
 //If connects to photo page - redirect to Activity page
 router.get('/', function(req, res, next) {
@@ -39,7 +40,6 @@ router.get('/Activity',function(req,res){
   var page = req.query.page;
   if(page === undefined) {page = 1;}
   page = parseInt(page);
-  console.log(req.user);
   PhotoMods.PhotoMod_Activity.count({}, function(err, count) {
     if(err) return res.json({success:false, message:err});
     var skip = (page-1)*limit;
@@ -67,14 +67,15 @@ router.get('/Activity',function(req,res){
  		});
  });
 
-router.post('/Activity',util.isLoggedin,upload.any(),function(req,res){
-// console.log("post/activity");
-// console.log(req.files);
-// console.log(req.body);
-	req.body.author = req.user._id;
+router.post('/Activity',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+  req.body.author = req.user._id;
+  if(req.body.images) {req.body.images = JSON.parse(req.body.images);}
+  if(req.files.file !== undefined) {
+    req.body.filePath = req.files.file[0].path;
+    req.body.fileOriginalname = req.files.file[0].originalname;
+  }
 	PhotoMods.PhotoMod_Activity.create(req.body,function(err,photos){
 		if(err) return res.json({success:false, message:err});
-    console.log(req.body);
 		res.redirect('/photo/Activity');
 	});
 });
@@ -106,7 +107,7 @@ router.get('/Activity/:id/edit', util.isLoggedin, function(req,res){
   });
 });
 
-router.put('/Activity/:id', util.isLoggedin, upload.single('photo'),function(req,res){
+router.put('/Activity/:id', util.isLoggedin, upload.fields([{name:'file'},{name:'files'}]),function(req,res){
   if(req.file !== undefined){
     req.body.filename = req.file.filename;
   }
@@ -183,7 +184,7 @@ router.get('/Study',function(req,res){
  		});
  });
 
-router.post('/Study',upload.single('photo'),function(req,res){
+router.post('/Study',upload.fields([{name:'file'},{name:'files'}]),function(req,res){
   if(req.file !== undefined){
     req.body.filename = req.file.filename;
   }
@@ -219,7 +220,7 @@ router.get('/Study/:id/edit', function(req,res){
   });
 });
 
-router.put('/Study/:id',upload.single('photo'),function(req,res){
+router.put('/Study/:id',upload.fields([{name:'file'},{name:'files'}]),function(req,res){
   if(req.file !== undefined){
     req.body.filename = req.file.filename;
   }
@@ -276,7 +277,7 @@ router.get('/Seminar',function(req,res){
  		});
  });
 
-router.post('/Seminar',upload.single('photo'),function(req,res){
+router.post('/Seminar',upload.fields([{name:'file'},{name:'files'}]),function(req,res){
   if(req.file !== undefined){
     req.body.filename = req.file.filename;
   }
@@ -312,7 +313,7 @@ router.get('/Seminar/:id/edit', function(req,res){
   });
 });
 
-router.put('/Seminar/:id',upload.single('photo'),function(req,res){
+router.put('/Seminar/:id',upload.fields([{name:'file'},{name:'files'}]),function(req,res){
   if(req.file !== undefined){
     req.body.filename = req.file.filename;
   }
@@ -372,8 +373,7 @@ router.get('/Work',function(req,res){
  		});
  });
 
-router.post('/Work',upload.single('photo'),function(req,res){
-console.log("post/Work");
+router.post('/Work',upload.fields([{name:'file'},{name:'files'}]),function(req,res){
   if(req.file !== undefined){
     req.body.filename = req.file.filename;
     req.body.originalfilename = req.file.originalname;
@@ -411,7 +411,7 @@ router.get('/Work/:id/edit', function(req,res){
   });
 });
 
-router.put('/Work/:id',upload.single('photo'),function(req,res){
+router.put('/Work/:id',upload.fields([{name:'file'},{name:'files'}]),function(req,res){
   if(req.file !== undefined){
     req.body.filename = req.file.filename;
   }
@@ -435,13 +435,15 @@ router.delete('/Work/:id', function(req,res){
 });
 //---Photo_Work-->
 
-
-router.post('/imageupload', upload.single('image'), function(req,res){
-    // console.log(path.join('..','public','uploadedfiles',req.file.filename));
-    console.log(req.file);
-    req.file.url = path.join('../','../','uploadedfiles/',req.file.filename);
-
-    res.send(req.file);
+//<---Image Upload---
+router.post('/imageupload', upload.single('image'), function(req,res, next){
+    cloudinary.uploader.upload(req.file.path, function(result) {
+      if(result && req.file.path !== undefined){
+        fs.unlink(path.join(req.file.path));
+        console.log("LocalTemporary Image Deleted");
+      }
+      res.send(result);
+     }, {use_filename: true, unique_filename: true });
 });
-
+//---Image Upload--->
 module.exports = router;
