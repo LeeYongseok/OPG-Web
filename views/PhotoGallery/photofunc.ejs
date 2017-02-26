@@ -1,15 +1,19 @@
 <%
 
 getimgsrc = function getimgsrc(data) {
-  var imgsrc = "/uploadedfiles/data.filename";
-  if ((/\.(jpe?g|png|gif|bmp)$/i).test(data.filename)) {
-    imgsrc = "/uploadedfiles/" + data.filename;
+  var imgsrc;
+  if(data.images[0] !== "") {
+    return data.images[0];
+  }
+  else if (data.fileOriginalname && ((/\.(jpe?g|png|gif|bmp)$/i).test(data.fileOriginalname))) {
+    imgsrc = data.filePath;
   }
   else {
-      imgsrc = '/images/No_image_available.png';
+    imgsrc = '/images/No_image_available.jpg';
   }
-  return imgsrc;
-}
+    return imgsrc;
+  }
+
 
 
 viewallimg = function viewallimage(data){
@@ -18,13 +22,13 @@ viewallimg = function viewallimage(data){
       filename : ('/uploadedfiles/'+ data.filename)
     };
   }
-  else {
-    return { default : '/images/No_image_available.png' };
-  }
+/*  else {
+    return { default : '/images/No_image_available.jpg' };
+  }*/
 }
 
 getfilepath = function getfilepath(data) {
-  return ('/uploadedfiles/'+ data.filename);
+  return ('/uploadedfiles/'+ data.filePath);
 }
 
 %>

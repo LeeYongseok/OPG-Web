@@ -2,15 +2,20 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var photoSchema = new Schema({
-  username:{type:String, required:true},
+  author:{type:mongoose.Schema.Types.ObjectId, ref:"user", required:true},
   title:{type:String, required:true},
   body:{type:String, required: true},
   createdAt:{type:Date, default:Date.now},
   updatedAt:{type:Date},
-  originalfilename:{type:String},
-  filename:{type:String},
-  // photoaddress:{type:String}
+  fileOriginalname : {type:String},
+  filePath : {type:String},
+  images : {type : Array},
+  comments:[{
+    author: {type:mongoose.Schema.Types.ObjectId, ref:"user", required:true},
+    body: {type:String, required:true},
+    date: {type:Date, default:Date.now}  }]
 });
+
 
 var PhotoMod_Activity = mongoose.model('PhotoMod_Activity',photoSchema);
 var PhotoMod_Study = mongoose.model('PhotoMod_Study',photoSchema);
