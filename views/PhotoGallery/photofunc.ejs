@@ -1,35 +1,30 @@
 <%
 
-getimgsrc = function getimgsrc(e) {
-  var imgsrc = "/uploadedimages/e.filename";
-
-  if (e.filename == undefined) {
-    if (e.photoaddress != undefined) {
-      imgsrc = e.photoaddress ;
-    } else {
-      imgsrc = "https://unsplash.it/600/450/?random" ;
-      }
-  } else if (e.filename != undefined) {
-    imgsrc = "/uploadedimages/" + e.filename;
+getimgsrc = function getimgsrc(data) {
+  var imgsrc = "/uploadedfiles/data.filename";
+  if ((/\.(jpe?g|png|gif|bmp)$/i).test(data.filename)) {
+    imgsrc = "/uploadedfiles/" + data.filename;
+  }
+  else {
+      imgsrc = '/images/No_image_available.png';
   }
   return imgsrc;
 }
 
 
-viewallimg = function viewallimage(photodata){
-//  console.log(photodata.filename);
-//  console.log(photodata.photoaddress);
-  if(photodata.filename && photodata.photoaddress) {
+viewallimg = function viewallimage(data){
+  if( (/\.(jpe?g|png|gif|bmp)$/i).test(data.filename) ) {
     return {
-      filename : ('/uploadedimages/'+ photodata.filename),
-      address : photodata.photoaddress
+      filename : ('/uploadedfiles/'+ data.filename)
     };
-  } else if(photodata.filename != undefined) {
-    return {filename : ('/uploadedimages/' + photodata.filename)};
-  } else if(photodata.photoaddress != undefined) {
-    return {address : photodata.photoaddress };
-  } else return {default : photodata.photoaddress};
+  }
+  else {
+    return { default : '/images/No_image_available.png' };
+  }
+}
 
+getfilepath = function getfilepath(data) {
+  return ('/uploadedfiles/'+ data.filename);
 }
 
 %>

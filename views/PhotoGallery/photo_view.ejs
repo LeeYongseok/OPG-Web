@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="/stylesheets/photoStyle.css">
     <link rel="stylesheet" href="/stylesheets/view.css">
     <%- include photofunc.ejs %>
+    <%- include ../partials/inc_summernote.ejs %>
   </head>
   <body>
     <%- include ../partials/header+nav.ejs %>
@@ -49,8 +50,13 @@
           <img class="img-responsive img-thumbnail" src="<%=viewallimg(photodata)[index]%>" >
       </div>
     <% } %>
-    <div class="col-xs-12 panel panel-default"><%= photodata.body %></div>
+    <div id="hidden_div" style="display: none"></div>
+    <div class="col-xs-12 panel panel-default" id="p_body"></div>
     <div class="tools colx-xs-12">
+      <% if(photodata.filename != undefined) { %>
+        <% console.log("photodataorigin" + photodata.originalfilename);%>
+        <div><a href="<%=getfilepath(photodata)%>" download><%=photodata.originalfilename%> </div>
+      <% } %>
       <a href="/<%=path%>/<%= photodata._id %>/edit?page=<%=page%>"><button class="btn">Edit</button></a>
       <!-- Delete button Here -->
       <form class="btn_delete" action="/<%=path%>/<%=photodata._id%>?_method=DELETE" method="post">
