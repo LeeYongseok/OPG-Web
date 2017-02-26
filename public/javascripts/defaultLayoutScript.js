@@ -68,23 +68,23 @@ $(window).scroll(function(){
 
 /*스크롤바 생성 알고리즘*/
 
-$(window).resize(function(){
-    var ele = document.getElementsByTagName('body')[0];
-    if(hasClass(ele, "open")){
-     if($(window).width()<380){
-         $('#menu').prepend($('#menu-toggle'));
-         $('#menu-toggle').css({
-          "position":"absolute",
-             "right":"0"
-         });
-     }else{
+// $(window).resize(function(){
+//     var ele = document.getElementsByTagName('body')[0];
+//     if(hasClass(ele, "open")){
+//      if($(window).width()<380){
+//          $('#menu').prepend($('#menu-toggle'));
+//          $('#menu-toggle').css({
+//           "position":"absolute",
+//              "right":"0"
+//          });
+//      }else{
          
-        $('.head').append($('#menu-toggle'));
-         $('#menu-toggle').css({
-          "position":"absolute",
-             "right":"40px"
-        });
-         removeClass(ele, "open");
-     }
-    }
-}).resize();
+//         $('.head').append($('#menu-toggle'));
+//          $('#menu-toggle').css({
+//           "position":"absolute",
+//              "right":"40px"
+//         });
+//          removeClass(ele, "open");
+//      }
+//     }
+// }).resize();

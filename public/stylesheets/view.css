@@ -9,7 +9,7 @@
     border-bottom: 1px solid #ccc;
     width: 100%;
     margin-bottom: 20px;
-    
+    overflow: hidden;
 }
 
 .show .time{

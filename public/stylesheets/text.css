@@ -1,9 +1,11 @@
 .text table .title{
     padding-right: 200px;
+    overflow: hidden;
 }
 .text table th{
     padding:5px;
     border-bottom: 1px solid rgba(0,0,0,.5);
+    overflow: hidden;
 }
 .text table{
     margin-top: 10px;
