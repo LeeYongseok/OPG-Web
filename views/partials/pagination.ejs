@@ -1,0 +1,28 @@
+<div class="row" style="text-align:center">
+      <ul class="pagination">
+          <% if(page==1){ %>
+          <% var left_button = "disabled" %>
+          <%}else{ %>
+          <% left_button = "" %>
+          <% } %>
+          <li class="<%=left_button%>"><a href="/<%=path%>/?page=<%=(page-1) %>"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+        <% var offset = 2; %>
+        <% for(i=1; i<=maxPageNum; i++){ %>
+          <% if( i<=offset || i>maxPageNum-offset || (i>=page-(offset) && i<=page+(offset))){ %>
+            <% if(i != page) { %>
+              <li><a href="/photo/Activity?page=<%=i%>"> <%= i %> </a></li>
+            <% } else { %>
+              <li class="active"><a><%= i %></a></li>
+            <% } %>
+          <% } else if(i == offset+1 || i == maxPageNum-offset){ %>
+            <li><a>..</a></li>
+          <% } %>
+        <% } %>
+         <% if(page==maxPageNum){ %>
+              <% var right_button = "disabled" %>
+              <%}else{ %>
+               <% right_button = "" %>
+              <% } %>
+                <li class="<%=right_button%>"><a href="/<%=path%>/?page=<%=(page+1) %>"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+      </ul>
+</div>
