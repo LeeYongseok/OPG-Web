@@ -1,55 +1,55 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
-#menu .btn { 
-    display: inline-block; 
-    display: inline; 
-    padding: 4px 10px 4px; 
-    margin-bottom: 0; 
-    font-size: 13px; 
-    line-height: 18px; 
-    color: #333333; 
+@import url(//fonts.googleapis.com/css?family=Open+Sans);
+#menu .btn {
+    display: inline-block;
+    display: inline;
+    padding: 4px 10px 4px;
+    margin-bottom: 0;
+    font-size: 13px;
+    line-height: 18px;
+    color: #333333;
     text-align: center;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75); 
-    vertical-align: middle; 
-    background-color: #f5f5f5; 
-    background-image: linear-gradient(to top, #ffffff, #e6e6e6); 
-    background-repeat: repeat-x; 
-    border: 1px solid #e6e6e6; 
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05); 
-    cursor: pointer; 
-    margin-left: .3rem; 
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align: middle;
+    background-color: #f5f5f5;
+    background-image: linear-gradient(to top, #ffffff, #e6e6e6);
+    background-repeat: repeat-x;
+    border: 1px solid #e6e6e6;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    margin-left: .3rem;
 }
-.btn:hover, .btn:active, .btn.active, .btn.disabled{ 
-    background-color: #aaa; 
+.btn:hover, .btn:active, .btn.active, .btn.disabled{
+    background-color: #aaa;
 }
-#menu>.btn-sm { 
-    padding: 9px 14px; 
-    font-size: 15px; 
-    line-height: normal;  
-    border-radius: 5px; 
+#menu>.btn-sm {
+    padding: 9px 14px;
+    font-size: 15px;
+    line-height: normal;
+    border-radius: 5px;
 }
-#menu .btn:hover { 
-    color: #333333; 
-    text-decoration: none; 
+#menu .btn:hover {
+    color: #333333;
+    text-decoration: none;
     background: linear-gradient(to bottom, #ffffff, #000000);
     transition: background-position 0.1s linear;
 }
 
-#menu>div.login *{ 
-    box-sizing:border-box; 
+#menu>div.login *{
+    box-sizing:border-box;
 }
 
 
 .login {
-    padding: 3rem 0rem; 
+    padding: 3rem 0rem;
     position: relative;
     margin: auto;
 	width:95%;
 	height:150px;;
 }
 
-input { 
-	width: 100%; 
-	margin-bottom: 10px; 
+input {
+	width: 100%;
+	margin-bottom: 10px;
 	background: rgba(81,81,81,0.3);
 	border: none;
 	outline: none;
@@ -61,6 +61,6 @@ input {
 	border-radius: 4px;
 }
 
-input:focus {  
+input:focus {
     box-shadow: 0 1px 1px rgba(255,255,255,0.2);
 }
