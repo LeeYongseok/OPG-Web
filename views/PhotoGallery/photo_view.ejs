@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ../partials/head.ejs %>
+    <link rel="stylesheet" href="/stylesheets/photoStyle.css">
+    <link rel="stylesheet" href="/stylesheets/view.css">
+    <%- include photofunc.ejs %>
+    <%- include ../partials/inc_summernote.ejs %>
+  </head>
+  <body>
+    <%- include ../partials/header+nav.ejs %>
+    <div class="page-wrap">
+        <section class="programming">
+            <div class="container">
+              <div class="row">
+                 <div class="col-xs-12">
+                     <h2><%= main_menu %></h2>
+                 </div>
+             </div>
+             <div class="row">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-6 sub_info">
+                </div>
+                <div class="col-xs-5">
+                    <div class="circle" id="circle1"></div>
+                    <div class="circle" id="circle2"></div>
+                    <div class="circle" id="circle3"></div>
+                </div>
+              </div>
+<div class="row">
+  <div class="show">
+    <h3 class="title"><%= photodata.title %></h3>
+    <div class="col-xs-7">작성자
+      <h5 class="text-primary"><%=photodata.author?photodata.author.name:""%></h5>
+    </div>
+    <div class="col-xs-3 text-info"><span>Created at </span><br>
+      <%= photodata.createdAt.toLocaleDateString() %> <br>
+      <%= photodata.createdAt.toLocaleTimeString() %>
+    </div>
+    <% if(photodata.updatedAt) { %>
+      <div class="col-xs-2 text-info"><span>Updated at </span><br>
+        <%= photodata.updatedAt.toLocaleDateString() %> <br>
+        <%= photodata.updatedAt.toLocaleTimeString() %>
+      </div>
+    <% } %>
+    <% for(var index in viewallimg(photodata)){
+      console.log(viewallimg(photodata)[index]);%>
+      <div class="col-xs-12">
+          <img class="img-responsive img-thumbnail" src="<%=viewallimg(photodata)[index]%>" >
+      </div>
+    <% } %>
+    <div class="col-xs-12 panel panel-default" id="body"></div>
+
+    <% if(photodata.filePath != undefined) { %>
+      <div><a href="<%=getfilepath(photodata)%>" download><%=photodata.fileOriginalname%></a></div>
+    <% } %>
+
+    <div class="comments">
+     <h4>Comments (<%= photodata.comments?photodata.comments.length:"0"%>)</h4>
+     <% if(photodata.comments) { %>
+     <% photodata.comments.forEach(function(comment){ %>
+         <div class="comment">
+           <div class="comment_top">
+             <b><%= comment.author.name %></b>
+             (<%= comment.date.toLocaleTimeString() %>,
+              <%= comment.date.toLocaleDateString() %>)
+              <% if(currentUser && currentUser.equals(comment.author._id)) { %>
+              <form class="comment_delete" action="/<%=path%>/<%=photodata._id%>/comments/<%=comment._id%>?_method=DELETE" method="post">
+                <button type="submit">X</button>
+              </form>
+              <% } %>
+           </div>
+           <div class="comment_body"><%= comment.body %></div>
+         </div>
+     <% }) %>
+     <% } %>
+     <form class="addComment checkValidation" action="/<%=path%>/<%=photodata._id%>/comments" method="post">
+       <textarea name="comment[body]" class="cvRequired" cols="30" rows="3" cvRqErrMsg="comments is empty." cvRqErrTo="#cvErrTitle" placeholder="comments here!!"></textarea>
+       <button type="submit" class="btn">Comment</button>
+       <div id="cvErrTitle" class="message"></div>
+     </form>
+   </div>
+
+    <div class="tools colx-xs-12">
+      <% if(isAuthenticated && currentUser.id == photodata.author.id){ %>
+      <a href="/<%=path%>/<%= photodata._id %>/edit?page=<%=page%>"><button class="btn">Edit</button></a>
+      <!-- Delete button Here -->
+      <form class="btn_delete" action="/<%=path%>/<%=photodata._id%>?_method=DELETE" method="post">
+        <button type="submit" class="btn">Delete</button>
+      </form>
+      <% } %>
+    </div>
+    <a href="/<%=path%>?page=<%=page%>"><button class="btn">Back</button></a>
+  </div>
+</div>
+
+
+
+<%- include ../partials/footer.ejs %>

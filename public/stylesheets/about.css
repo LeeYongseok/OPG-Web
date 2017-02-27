@@ -1,0 +1,45 @@
+#about_head{
+    text-align: center;
+    letter-spacing: 5px;
+}
+#about_main{
+    margin-bottom : 100px;
+}
+.hover_box1,.hover_box2,.hover_box3,.hover_box4,.hover_box5{
+    text-align: center;
+    height: 200px;
+    margin-bottom: 20px;
+}
+.hover_box4,.hover_box5{
+    margin-top:30px;
+}
+.hover_box1:hover{
+    content: url("/Images/oncean.png");
+    box-shadow: 0 0 5px 5px sienna;
+}
+.hover_box2:hover{
+    content: url("/Images/oncean.png");
+    box-shadow: 0 0 5px 5px sienna;
+}
+.hover_box3:hover{
+    content: url("/Images/oncean.png");
+   box-shadow: 0 0 5px 5px sienna;
+}
+.hover_box4:hover{
+    content: url("/Images/oncean.png");
+    box-shadow: 0 0 5px 5px sienna;
+}
+.hover_box5:hover{
+    content: url("/Images/oncean.png");
+    box-shadow: 0 0 5px 5px sienna;
+}
+.headline{
+    letter-spacing: 2px;
+    font-size: 20px;
+    
+}
+.headline>span{
+    font-size: 24px;
+    font-weight: bold;
+    color: crimson;
+}

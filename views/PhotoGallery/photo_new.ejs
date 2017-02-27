@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ../partials/head.ejs %>
+    <%- include ../partials/inc_summernote.ejs %>
+    <link rel="stylesheet" href="/stylesheets/photoStyle.css">
+    <link rel="stylesheet" href="/stylesheets/edit.css">
+  </head>
+  <body>
+    <%- include ../partials/header+nav.ejs %>
+    <div class="page-wrap">
+        <section class="programming">
+            <div class="container">
+              <div class="row">
+                 <div class="col-xs-12">
+                     <h2><%= main_menu %></h2>
+                 </div>
+             </div>
+             <div class="row">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-6 sub_info">
+                </div>
+                <div class="col-xs-5">
+                    <div class="circle" id="circle1"></div>
+                    <div class="circle" id="circle2"></div>
+                    <div class="circle" id="circle3"></div>
+                </div>
+              </div>
+              <div class="new edit">
+                <h3>New</h3>
+                <form class="posts_form" action="/<%=path%>" method="post" enctype="multipart/form-data">
+                  <label for="edit_title">Title</label>
+                  <input id="edit_title" type="text" name="title" value="" placeholder="Title입력">
+                  <label for="edit_body">Body</label>
+                  <textarea id="summernote" name="body"></textarea>
+                  <div class="col-xs-8">
+                    <input id="input" type="file" name="file">
+                  </div>
+                  <input type="hidden" name="images" id="images" value="">
+                  <br />
+                  <button type="submit" class="btn">Submit</button>
+                </form>
+                <a href="/<%=path%>?page=<%=page%>"><button class="btn">Back</button></a>
+              </div>
+              <%- include ../partials/footer.ejs %>
