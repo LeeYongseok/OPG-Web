@@ -9,7 +9,7 @@ exports.index = function(req,res,schema,option){
     var maxPageNum = Math.ceil(count/limit);
     schema.find({}).populate("author").sort('-createdAt').skip(skip).limit(limit).exec(function(err, data) {
       if(err) return res.json({success:false, message:err});
-      res.render("../views/ImgBoard/photo",{
+      res.render("../views/ImgBoard/imgPost_Index",{
   			data: data,
         title: option.title,
         main_menu: option.title,
@@ -22,7 +22,7 @@ exports.index = function(req,res,schema,option){
 };
 
 exports.new = function(req,res,schema,option){
-  res.render("../views/ImgBoard/photo_new",{
+  res.render("../views/ImgBoard/imgPost_New",{
       title: option.title,
       main_menu: option.title,
       path: option.path,
@@ -46,7 +46,7 @@ exports.create = function(req,res,schema,option){
 exports.show = function(req,res,schema,option){
   schema.findById(req.params.id).populate(['author','comments.author']).exec(function(err, data){
     if(err) return res.json({success:false, message:err});
-    res.render('ImgBoard/photo_view', {
+    res.render('ImgBoard/imgPost_View', {
       data:data,
       title: option.title,
       main_menu: option.title,
@@ -60,7 +60,7 @@ exports.edit = function(req,res,schema,option){
   schema.findById(req.params.id, function(err, data){
     if(err) return res.json({success:false, message:err});
     if(!req.user._id.equals(data.author)) return res.json({success:false, message:"Unauthrized Attempt"});
-    res.render('ImgBoard/photo_edit', {
+    res.render('ImgBoard/imgPost_Edit', {
       data: data,
       title: option.title,
       main_menu: option.title + '글 수정',
