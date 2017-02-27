@@ -49,19 +49,15 @@
                   </div>
               </div>
               <div class="col-xs-12"></div>
-
               <div class="row mainText">
                <div class="cc">
                  <ul id="blog" class="blog ibw">
                   <% data.forEach(function(e){ %>
-                    <% var string = e.body; %>
-                    <% var tmp = document.createElement('div'); %>
-                    <% console.log(string); %>
                     <li class="blog_item ib fs">
                       <a href="/<%=path%>/<%= e._id%>?page=<%=page%>">
                      <div class="ibw">
                        <div class="item_image iw ib">
-                         <img src="<%=getimgsrc(e) %>" alt="">
+                         <img src="<%=getimgsrc(e)%>" alt="">
                        </div>
                        <div class="item_details ib fs">
                          <div class="item_header"><%=e.title%></div>

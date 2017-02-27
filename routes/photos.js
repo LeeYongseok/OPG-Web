@@ -79,7 +79,7 @@ router.put('/Activity/:id', util.isLoggedin, upload.fields([{name:'file'},{name:
 });
 
 router.delete('/Activity/:id', util.isLoggedin, function(req,res){
-  lib.destory(req,res,iPostMod.iPostMod_Activity,Activity_Option);
+  lib.destroy(req,res,iPostMod.iPostMod_Activity,Activity_Option);
 });
 
 ////comment
@@ -120,7 +120,7 @@ router.put('/Study/:id', util.isLoggedin, upload.fields([{name:'file'},{name:'fi
 });
 
 router.delete('/Study/:id', util.isLoggedin, function(req,res){
-  lib.destory(req,res,iPostMod.iPostMod_Study,Study_Option);
+  lib.destroy(req,res,iPostMod.iPostMod_Study,Study_Option);
 });
 
 ////comment
@@ -161,7 +161,7 @@ router.put('/Seminar/:id', util.isLoggedin, upload.fields([{name:'file'},{name:'
 });
 
 router.delete('/Seminar/:id', util.isLoggedin, function(req,res){
-  lib.destory(req,res,iPostMod.iPostMod_Seminar,Seminar_Option);
+  lib.destroy(req,res,iPostMod.iPostMod_Seminar,Seminar_Option);
 });
 
 ////comment
@@ -202,7 +202,7 @@ router.put('/Work/:id', util.isLoggedin, upload.fields([{name:'file'},{name:'fil
 });
 
 router.delete('/Work/:id', util.isLoggedin, function(req,res){
-  lib.destory(req,res,iPostMod.iPostMod_Work,Work_Option);
+  lib.destroy(req,res,iPostMod.iPostMod_Work,Work_Option);
 });
 
 ////comment
@@ -228,4 +228,8 @@ router.post('/imageupload', upload.single('image'), function(req,res, next){
      }, {use_filename: true, unique_filename: true });
 });
 //---Image Upload--->
+
+
+
+
 module.exports = router;

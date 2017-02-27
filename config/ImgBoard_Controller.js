@@ -1,3 +1,6 @@
+var fs = require('fs');
+var path = require('path');
+
 exports.index = function(req,res,schema,option){
   var limit = 9;
   var page = req.query.page;
@@ -37,6 +40,9 @@ exports.create = function(req,res,schema,option){
     req.body.filePath = req.files.file[0].path;
     req.body.fileOriginalname = req.files.file[0].originalname;
   }
+  for(var i in req.files.files) {
+    fs.unlink(req.files.files[i].path);
+  }
 	schema.create(req.body,function(err,data){
 		if(err) return res.json({success:false, message:err});
 		res.redirect('/' + option.path);
@@ -71,8 +77,13 @@ exports.edit = function(req,res,schema,option){
 };
 
 exports.update = function(req,res,schema,option){
-  if(req.file !== undefined){
-    req.body.filename = req.file.filename;
+  if(req.body.images) {req.body.images = JSON.parse(req.body.images);}
+  if(req.files.file !== undefined) {
+    req.body.filePath = req.files.file[0].path;
+    req.body.fileOriginalname = req.files.file[0].originalname;
+  }
+  for(var i in req.files.files) {
+    fs.unlink(req.files.files[i].path);
   }
   req.body.updatedAt=Date.now();
   schema.findByIdAndUpdate({_id:req.params.id, author:req.user._id},req.body,function(err,data){
