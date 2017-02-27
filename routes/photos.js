@@ -11,6 +11,7 @@ var cloudinary = require('cloudinary');
 //
 var UploadPath = path.join(__dirname,'..','public','uploadedfiles');
 mkdirp.sync(UploadPath);
+
 //for multipart form post
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -107,6 +108,7 @@ router.get('/Activity/:id/edit', util.isLoggedin, function(req,res){
   });
 });
 
+
 router.put('/Activity/:id', util.isLoggedin, upload.fields([{name:'file'},{name:'files'}]),function(req,res){
   if(req.file !== undefined){
     req.body.filename = req.file.filename;
@@ -184,14 +186,14 @@ router.get('/Study',function(req,res){
  		});
  });
 
+
 router.post('/Study',upload.fields([{name:'file'},{name:'files'}]),function(req,res){
   if(req.file !== undefined){
     req.body.filename = req.file.filename;
   }
 	PhotoMods.PhotoMod_Study.create(req.body,function(err,photos){
 		if(err) return res.json({success:false, message:err});
-		res.redirect('/photo/Study');
-	});
+		res.redirect('/photo/Study');	});
 });
 
 router.get('/Study/:id', function(req, res){
@@ -219,6 +221,7 @@ router.get('/Study/:id/edit', function(req,res){
     });
   });
 });
+
 
 router.put('/Study/:id',upload.fields([{name:'file'},{name:'files'}]),function(req,res){
   if(req.file !== undefined){
@@ -277,6 +280,7 @@ router.get('/Seminar',function(req,res){
  		});
  });
 
+
 router.post('/Seminar',upload.fields([{name:'file'},{name:'files'}]),function(req,res){
   if(req.file !== undefined){
     req.body.filename = req.file.filename;
@@ -312,6 +316,7 @@ router.get('/Seminar/:id/edit', function(req,res){
     });
   });
 });
+
 
 router.put('/Seminar/:id',upload.fields([{name:'file'},{name:'files'}]),function(req,res){
   if(req.file !== undefined){
@@ -373,6 +378,7 @@ router.get('/Work',function(req,res){
  		});
  });
 
+
 router.post('/Work',upload.fields([{name:'file'},{name:'files'}]),function(req,res){
   if(req.file !== undefined){
     req.body.filename = req.file.filename;
@@ -411,6 +417,7 @@ router.get('/Work/:id/edit', function(req,res){
   });
 });
 
+
 router.put('/Work/:id',upload.fields([{name:'file'},{name:'files'}]),function(req,res){
   if(req.file !== undefined){
     req.body.filename = req.file.filename;
@@ -434,6 +441,7 @@ router.delete('/Work/:id', function(req,res){
 	});
 });
 //---Photo_Work-->
+
 
 //<---Image Upload---
 router.post('/imageupload', upload.single('image'), function(req,res, next){

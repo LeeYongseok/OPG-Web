@@ -16,7 +16,6 @@ var photoSchema = new Schema({
     date: {type:Date, default:Date.now}  }]
 });
 
-
 var PhotoMod_Activity = mongoose.model('PhotoMod_Activity',photoSchema);
 var PhotoMod_Study = mongoose.model('PhotoMod_Study',photoSchema);
 var PhotoMod_Seminar = mongoose.model('PhotoMod_Seminar',photoSchema);

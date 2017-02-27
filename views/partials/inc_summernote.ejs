@@ -1,5 +1,5 @@
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
+<script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
 <script>
 $(document).ready(function() {
   $('#summernote').summernote({
@@ -25,7 +25,6 @@ $(document).ready(function() {
   <% } %>
 });
 
-
 var imageinput = [];
 function uploadImage(image) {
   var data = new FormData();
@@ -39,8 +38,8 @@ function uploadImage(image) {
     contentType : false,
     processData : false,
     success: function(data) {
-      $('#summernote').summernote('insertImage', data.url);
-      imageinput.push(data.url);
+      $('#summernote').summernote('insertImage', data.secure_url);
+      imageinput.push(data.secure_url);
       $('#images').val(JSON.stringify(imageinput.toString().split(",")));
     },
     error : function(data){
