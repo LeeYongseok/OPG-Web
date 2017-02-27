@@ -38,8 +38,8 @@ function uploadImage(image) {
     contentType : false,
     processData : false,
     success: function(data) {
-      $('#summernote').summernote('insertImage', data.url);
-      imageinput.push(data.url);
+      $('#summernote').summernote('insertImage', data.secure_url);
+      imageinput.push(data.secure_url);
       $('#images').val(JSON.stringify(imageinput.toString().split(",")));
     },
     error : function(data){
