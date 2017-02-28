@@ -4,7 +4,7 @@
     <%- include ../partials/head.ejs %>
     <link rel="stylesheet" href="/stylesheets/photoStyle.css">
     <link rel="stylesheet" href="/stylesheets/text.css">
-    <%- include photofunc.ejs %>
+    <%- include imgPost_Func.ejs %>
     <script>
       $(document).ready(function(){
         $('li.disabled>a').on('click',function(e){
@@ -49,16 +49,15 @@
                   </div>
               </div>
               <div class="col-xs-12"></div>
-
               <div class="row mainText">
                <div class="cc">
                  <ul id="blog" class="blog ibw">
-                  <% photodata.forEach(function(e){ %>
+                  <% data.forEach(function(e){ %>
                     <li class="blog_item ib fs">
                       <a href="/<%=path%>/<%= e._id%>?page=<%=page%>">
                      <div class="ibw">
                        <div class="item_image iw ib">
-                         <img src="<%=getimgsrc(e) %>" alt="">
+                         <img src="<%=getimgsrc(e)%>" alt="">
                        </div>
                        <div class="item_details ib fs">
                          <div class="item_header"><%=e.title%></div>
@@ -73,32 +72,5 @@
                </div>
            </div>
     </table>
-        <div class="row" style="text-align:center">
-              <ul class="pagination">
-                  <% if(page==1){ %>
-                  <% var left_button = "disabled" %>
-                  <%}else{ %>
-                  <% left_button = "" %>
-                  <% } %>
-                  <li class="<%=left_button%>"><a href="/<%=path%>/?page=<%=(page-1) %>"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
-                <% var offset = 2; %>
-                <% for(i=1; i<=maxPageNum; i++){ %>
-                  <% if( i<=offset || i>maxPageNum-offset || (i>=page-(offset) && i<=page+(offset))){ %>
-                    <% if(i != page) { %>
-                      <li><a href="/photo/Activity?page=<%=i%>"> <%= i %> </a></li>
-                    <% } else { %>
-                      <li class="active"><a><%= i %></a></li>
-                    <% } %>
-                  <% } else if(i == offset+1 || i == maxPageNum-offset){ %>
-                    <li><a>..</a></li>
-                  <% } %>
-                <% } %>
-                 <% if(page==maxPageNum){ %>
-                      <% var right_button = "disabled" %>
-                      <%}else{ %>
-                       <% right_button = "" %>
-                      <% } %>
-                        <li class="<%=right_button%>"><a href="/<%=path%>/?page=<%=(page+1) %>"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
-              </ul>
-        </div>
+<%- include ../partials/pagination.ejs %>
 <%- include ../partials/footer.ejs %>

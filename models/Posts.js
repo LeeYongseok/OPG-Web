@@ -7,12 +7,18 @@ var postSchema = mongoose.Schema({
 	author:{type:mongoose.Schema.Types.ObjectId, ref:"user", required:true},
 	createdAt:{type:Date,default:Date.now},
 	updatedAt:Date,
+	views: {type:Number, default:0},
 	comments:[{
 		author: {type:mongoose.Schema.Types.ObjectId, ref:"user", required:true},
 		body: {type:String, required:true},
 		date: {type:Date, default:Date.now}
 	}]
 });
+
+postSchema.methods.up_views = function(cb){
+	this.views += 1;
+	this.save(cb);
+}
 
 var Post_Board = mongoose.model('Post_Board',postSchema);
 var Post_Inquire = mongoose.model('Post_Inquire',postSchema);

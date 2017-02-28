@@ -3,7 +3,6 @@ exports.index = function(req,res,schema,option){
   	var page = req.query.page;
   	if(page === undefined) {page = 1;}
   	page = parseInt(page);
-
   	schema.count({},function(err,count){
   		if(err) return res.json({success:false, message:err});
     	var skip = (page-1)*limit;
@@ -44,6 +43,9 @@ exports.create = function(req,res,schema,option){
 exports.show = function(req,res,schema,option){
 	schema.findById(req.params.id).populate(['author','comments.author']).exec(function(err,post){
 		if(err) return res.json({success:false, message:err});
+		post.up_views(function(err,post){
+			if(err) return res.json({success:false, message:err});
+		});
 		res.render('post_view',{
 			data:post,
 			title: option.title,
@@ -53,6 +55,7 @@ exports.show = function(req,res,schema,option){
 			user:req.user
 		});
 	});
+	
 };
 
 exports.edit = function(req,res,schema,option){

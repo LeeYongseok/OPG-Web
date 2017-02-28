@@ -67,11 +67,13 @@
                         </div>
                     <% }) %>
                     <% } %>
+                    <% if(isAuthenticated) { %>
                     <form class="addComment checkValidation" action="/<%=path%>/<%=data._id%>/comments" method="post">
-                      <textarea name="comment[body]" class="cvRequired" cols="30" rows="3" cvRqErrMsg="comments is empty." cvRqErrTo="#cvErrTitle" placeholder="comments here!!"></textarea>
+                      <textarea name="comment[body]" class="cvRequired" cols="30" rows="3" cvRqErrMsg="comments is empty." cvRqErrTo="#cvErrTitle" placeholder="comments here!!" required="required"></textarea>
                       <button type="submit" class="btn">Comment</button>
                       <div id="cvErrTitle" class="message"></div>
                     </form>
+                    <% } %>
                   </div>
                   <br><br>
                   <% if(isAuthenticated && currentUser.id == data.author.id){ %>

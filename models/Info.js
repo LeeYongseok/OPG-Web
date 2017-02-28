@@ -7,12 +7,18 @@ var infoSchema = mongoose.Schema({
 	author:{type:mongoose.Schema.Types.ObjectId, ref:"user", required:true},
 	createdAt:{type:Date,default:Date.now},
 	updatedAt:Date,
+	views: {type:Number, default:0},
 	comments:[{
 		author: {type:mongoose.Schema.Types.ObjectId, ref:"user", required:true},
 		body: {type:String, required:true},
 		date: {type:Date, default:Date.now}
 	}]
 });
+
+infoSchema.methods.up_views = function(cb){
+	this.views += 1;
+	this.save(cb);
+}
 
 var Info_Programming = mongoose.model('Info_Programming',infoSchema);
 var Info_Exhibition = mongoose.model('Info_Exhibition',infoSchema);
