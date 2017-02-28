@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var photoSchema = new Schema({
+var ImgPostSchema = new Schema({
   author:{type:mongoose.Schema.Types.ObjectId, ref:"user", required:true},
   title:{type:String, required:true},
   body:{type:String, required: true},
@@ -16,14 +16,14 @@ var photoSchema = new Schema({
     date: {type:Date, default:Date.now}  }]
 });
 
-var PhotoMod_Activity = mongoose.model('PhotoMod_Activity',photoSchema);
-var PhotoMod_Study = mongoose.model('PhotoMod_Study',photoSchema);
-var PhotoMod_Seminar = mongoose.model('PhotoMod_Seminar',photoSchema);
-var PhotoMod_Work = mongoose.model('PhotoMod_Work',photoSchema);
+var iPostMod_Activity = mongoose.model('iPostMod_Activity',ImgPostSchema);
+var iPostMod_Study = mongoose.model('iPostMod_Study',ImgPostSchema);
+var iPostMod_Seminar = mongoose.model('iPostMod_Seminar',ImgPostSchema);
+var iPostMod_Work = mongoose.model('iPostMod_Work',ImgPostSchema);
 
 module.exports = {
-  PhotoMod_Activity :PhotoMod_Activity,
-  PhotoMod_Study : PhotoMod_Study,
-  PhotoMod_Seminar : PhotoMod_Seminar,
-  PhotoMod_Work : PhotoMod_Work
+  iPostMod_Activity :iPostMod_Activity,
+  iPostMod_Study : iPostMod_Study,
+  iPostMod_Seminar : iPostMod_Seminar,
+  iPostMod_Work : iPostMod_Work
 };

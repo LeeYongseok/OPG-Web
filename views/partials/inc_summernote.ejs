@@ -18,9 +18,9 @@ $(document).ready(function() {
       }
     }
   });
-  <% if((typeof photodata) != "undefined"){ %>
+  <% if((typeof data) != "undefined"){ %>
     if(!(/edit/.test($(location).attr('pathname')))){
-      $('#body').html('<%- photodata.body %>');
+      $('#body').html('<%- data.body %>');
     }
   <% } %>
 });
