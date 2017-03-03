@@ -1,8 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-
-var postSchema = mongoose.Schema({
+var noticeSchema = mongoose.Schema({
 	title:{type:String, required:true},
 	body:{type:String, required:true},
 	author:{type:mongoose.Schema.Types.ObjectId, ref:"user", required:true},
@@ -15,14 +14,9 @@ var postSchema = mongoose.Schema({
 	}]
 });
 
-var Post_Board = mongoose.model('Post_Board',postSchema);
-var Post_Inquire = mongoose.model('Post_Inquire',postSchema);
-var Post_Study = mongoose.model('Post_Study',postSchema);
-var Post_Food = mongoose.model('Post_Food',postSchema);
+
+var notice_Board = mongoose.model('notice_Board',noticeSchema);
 
 module.exports={
-	Post_Board:Post_Board,
-	Post_Inquire:Post_Inquire,
-	Post_Study:Post_Study,
-	Post_Food:Post_Food,
+    notice_Board:notice_Board
 };
