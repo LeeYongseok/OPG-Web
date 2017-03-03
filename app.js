@@ -16,9 +16,10 @@ var member = require('./routes/member');
 var user = require('./routes/users');
 var photos = require('./routes/photos');
 var signUp = require('./routes/signUp');
-var about=require('./routes/about');
-var posts=require('./routes/posts');
-var info=require('./routes/info');
+var about = require('./routes/about');
+var posts = require('./routes/posts');
+var info = require('./routes/info');
+var notice = require('./routes/notice');
 
 var app = express();
 var mongoose=require('mongoose');
@@ -84,6 +85,9 @@ app.use('/photo', photos);
 //소개
 app.use('/about', about);
 app.use('/info', info);
+
+//공지사항
+app.use('/notice',notice);
 
 
 // catch 404 and forward to error handler

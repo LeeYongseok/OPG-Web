@@ -1,3 +1,6 @@
+var fs = require('fs');
+var path = require('path');
+
 exports.index = function(req,res,schema,option){
 	var limit = 10;
   	var page = req.query.page;
@@ -9,7 +12,7 @@ exports.index = function(req,res,schema,option){
     	var maxPageNum = Math.ceil(count/limit);
 		schema.find({}).populate('author').sort('-createdAt').skip(skip).limit(limit).exec(function(err,posts){
 		if(err) return res.json({success:false, message:err});
-		res.render("post_index",{
+		res.render("../views/PostBoard/post_index",{
 			data:posts,
 			title: option.title,
 			main_menu: option.title,
@@ -23,7 +26,7 @@ exports.index = function(req,res,schema,option){
 };
 
 exports.new = function(req,res,schema,option){
-	res.render("post_new",{
+	res.render("../views/PostBoard/post_new",{
 		title: option.title,
 		main_menu: option.title+' 글 쓰기',
 		path:option.path,
@@ -46,7 +49,7 @@ exports.show = function(req,res,schema,option){
 		post.up_views(function(err,post){
 			if(err) return res.json({success:false, message:err});
 		});
-		res.render('post_view',{
+		res.render('../views/PostBoard/post_view',{
 			data:post,
 			title: option.title,
 			main_menu: option.title,
@@ -62,7 +65,7 @@ exports.edit = function(req,res,schema,option){
 	schema.findById(req.params.id,function(err,post){
 		if(err) return res.json({success:false, message:err});
 		if(!req.user._id.equals(post.author))return res.json({success:false, message:"Unauthrized Attempt"});
-		res.render('post_edit',{
+		res.render('../views/PostBoard/post_edit',{
 			data:post,
 			title: option.title,
 			main_menu: option.title+' 글 수정',
@@ -106,4 +109,3 @@ exports.comment_pull = function(req,res,schema,option){
 	res.redirect('/'+option.path+'/'+req.params.id);
 	});
 };
-
