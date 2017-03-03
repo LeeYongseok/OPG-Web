@@ -24,6 +24,8 @@ var Food_Option = {
 	title:'맛집 정보',
 	path:'post/Food'
 };
+
+
 // 자유게시판
 router.get('/', function(req, res, next) {
   res.redirect('/post/Board');
@@ -169,6 +171,8 @@ router.post('/Food/:id/comments',function(req,res){
 router.delete('/Food/:id/comments/:commentId',function(req,res){
 	lib.comment_pull(req,res,Posts.Post_Food,Food_Option);
 });//destroy
+
+
 
 module.exports = router;
 

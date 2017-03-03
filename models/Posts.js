@@ -29,5 +29,5 @@ module.exports={
 	Post_Board:Post_Board,
 	Post_Inquire:Post_Inquire,
 	Post_Study:Post_Study,
-	Post_Food:Post_Food
+	Post_Food:Post_Food,
 };
