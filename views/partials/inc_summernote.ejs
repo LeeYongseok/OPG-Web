@@ -1,5 +1,5 @@
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
+<script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
 <script>
 $(document).ready(function() {
   $('#summernote').summernote({
@@ -12,19 +12,20 @@ $(document).ready(function() {
     lang:'ko-KR',
     callbacks : {
       onImageUpload : function(image) {
-        uploadImage(image[0]);
+        for( var i= image.length -1;i>=0;i--) {
+          uploadImage(image[i]);
+        }
       }
     }
   });
-
-
-  <% if((typeof photodata) != "undefined"){ %>
+  <% if((typeof data) != "undefined"){ %>
     if(!(/edit/.test($(location).attr('pathname')))){
-      $('#p_body').html($('#hidden_div').html('<%= photodata.body %>').text());
+      $('#body').html('<%- data.body %>');
     }
   <% } %>
 });
 
+var imageinput = [];
 function uploadImage(image) {
   var data = new FormData();
   data.append("image", image);
@@ -32,12 +33,14 @@ function uploadImage(image) {
     data : data,
     type : 'POST',
     url : '/photo/imageupload',
+    enctype : 'multipart/form-data',
     cache : false,
     contentType : false,
     processData : false,
     success: function(data) {
-      console.log('data : '  + data.path);
-      $('#summernote').summernote('insertImage',data.url);
+      $('#summernote').summernote('insertImage', data.secure_url);
+      imageinput.push(data.secure_url);
+      $('#images').val(JSON.stringify(imageinput.toString().split(",")));
     },
     error : function(data){
       console.log(data);

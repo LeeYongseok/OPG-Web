@@ -29,7 +29,6 @@ mongoose.Promise = global.Promise;
 
 /*mongoDB connect내용은 git commit을 하지 말것!! 가장 중요 합니다.*/
 mongoose.connect(process.env.MongoDB);
-//process.env.MongoDB_reussite
 var db=mongoose.connection;
 db.once('open',function(){
 	console.log('Mongo DB connected!');

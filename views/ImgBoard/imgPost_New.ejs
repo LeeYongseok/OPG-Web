@@ -26,27 +26,20 @@
                     <div class="circle" id="circle3"></div>
                 </div>
               </div>
-
               <div class="new edit">
                 <h3>New</h3>
-                <form class="posts_form" action="/<%=path%>/<%=photodata.id%>?_method=PUT&page=<%=page%>" method="post" enctype="multipart/form-data">
+                <form class="posts_form" action="/<%=path%>" method="post" enctype="multipart/form-data">
                   <label for="edit_title">Title</label>
-                  <input id="edit_title" type="text" name="title" value="<%=photodata.title%>">
+                  <input id="edit_title" type="text" name="title" value="" placeholder="Title입력">
                   <label for="edit_body">Body</label>
-                  <textarea id="summernote" name="body"><%=photodata.body%></textarea>
-                  <% if(photodata.filename = undefined){ %>
+                  <textarea id="summernote" name="body"></textarea>
                   <div class="col-xs-8">
-                    <input id="input" type="file" name="photo">
-                    <!-- <input id="input" type="text" name="photoaddress" value="<%=photodata.photoaddress%>" placeholder="Image Address"> -->
+                    <input id="input" type="file" name="file">
                   </div>
-                  <% } %>
-                  <label>User Name</label>
-                  <div class="col-xs-4">
-                  <input id="input" type="text" name="username" value="<%=photodata.username%>">
-                </div>
+                  <input type="hidden" name="images" id="images" value="">
                   <br />
                   <button type="submit" class="btn">Submit</button>
                 </form>
-                <a href="/<%=path%>/<%=photodata.id%>?page=<%=page%>"><button class="btn">Back</button></a>
+                <a href="/<%=path%>?page=<%=page%>"><button class="btn">Back</button></a>
               </div>
               <%- include ../partials/footer.ejs %>

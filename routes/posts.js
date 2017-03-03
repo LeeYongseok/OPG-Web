@@ -3,6 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Posts=require('../models/Posts');
 var util = require('../config/util.js');
+
 var lib = require('../config/posts_controller.js')
 
 var Board_Option = {
@@ -28,7 +29,6 @@ var Food_Option = {
 // 자유게시판
 router.get('/', function(req, res, next) {
   res.redirect('/post/Board');
-
 });
 
 router.get('/Board',function(req,res){

@@ -1,0 +1,26 @@
+<%
+
+getfilepath = function getfilepath(data) {
+  return ('/uploadedfiles/'+ data.filePath);
+}
+
+<!-- Get Image url for thumbnail image on Index page -->
+getimgsrc = function getimgsrc(dbdata){
+  var m,
+    imgsrc,
+    urls = [],
+    str = dbdata.body,
+    rex = /<img.*?src="([^">]*\/([^">]*?))".*?>/g;
+    while (m = rex.exec(str)) {
+      urls.push(m[1]);
+    }
+    if(urls[0]){
+      imgsrc = urls[0];
+    } else if(dbdata.fileOriginalname && ((/\.(jpe?g|png|gif|bmp)$/i).test(data.fileOriginalname))){
+        imgsrc = dbdata.filePath;
+    } else {
+        imgsrc = '/images/No_image_available.jpg';
+    } return imgsrc;
+}
+
+%>

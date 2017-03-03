@@ -29,22 +29,22 @@
 
               <div class="new edit">
                 <h3>New</h3>
-                <form class="posts_form" action="/<%=path%>" method="post" enctype="multipart/form-data">
+                <form class="posts_form" action="/<%=path%>/<%=data.id%>?_method=PUT&page=<%=page%>" method="post" enctype="multipart/form-data">
                   <label for="edit_title">Title</label>
-                  <input id="edit_title" type="text" name="title" value="" placeholder="Title입력">
+                  <input id="edit_title" type="text" name="title" value="<%=data.title%>">
                   <label for="edit_body">Body</label>
-                  <textarea id="summernote" name="body"></textarea>
+                  <textarea id="summernote" name="body"><%=data.body%></textarea>
+                  <input type="hidden" name="images" id="images" value="">
                   <div class="col-xs-8">
-                    <input id="input" type="file" name="photo">
-                    <!-- <input id="input" type="text" name="photoaddress" placeholder="이미지주소"> -->
+                    <% if(data.filePath != undefined){ %>
+                      <input id="input" type="file" name="photo" disabled> Uploaded file already exist.
+                    <% } else { %>
+                      <input id="input" type="file" name="photo">
+                    <%} %>
                   </div>
-                  <label>User Name</label>
-                  <div class="col-xs-4">
-                  <input id="input" type="text" name="username" placeholder="Name">
-                </div>
                   <br />
                   <button type="submit" class="btn">Submit</button>
                 </form>
-                <a href="/<%=path%>?page=<%=page%>"><button class="btn">Back</button></a>
+                <a href="/<%=path%>/<%=data.id%>?page=<%=page%>"><button class="btn">Back</button></a>
               </div>
               <%- include ../partials/footer.ejs %>

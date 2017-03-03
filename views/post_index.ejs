@@ -63,7 +63,7 @@
                            <th><a href="/<%=path%>/<%= e._id %>?page=<%=page%>"><%= e.title %></a><span style="color:skyblue">(<%= e.comments.length %>)</span></th>
                            <th><%= e.author ? e.author.name : "" %></th>
                            <th><%= e.createdAt.toLocaleDateString() %></th>
-                           <th>None</th>
+                           <th><%= e.views %></th>
                        </tr>
                        <% count++ %>
                        <% }) %>
