@@ -6,7 +6,7 @@ var postSchema = mongoose.Schema({
 	body:{type:String, required:true},
 	author:{type:mongoose.Schema.Types.ObjectId, ref:"user", required:true},
 	createdAt:{type:Date,default:Date.now},
-	updatedAt:Date,
+	updatedAt:{type:Date},
 	fileOriginalname : {type:String},
   	filePath : {type:String},
   	images : {type : Array},

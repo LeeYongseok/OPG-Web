@@ -30,8 +30,6 @@ var Food_Option = {
 	path:'post/Food'
 };
 
-
-<<<<<<< HEAD
 //Create Directory for file save
 var UploadPath = path.join(__dirname,'..','public','uploadedfiles');
 mkdirp.sync(UploadPath);
@@ -53,9 +51,7 @@ var upload = multer({storage : storage});
 //
 
 // 자유게시판 when connect 'post/'  -redirect '/postBoard'
-=======
-// 자유게시판
->>>>>>> origin/master
+
 router.get('/', function(req, res, next) {
   res.redirect('/post/Board');
 });
@@ -202,20 +198,6 @@ router.delete('/Food/:id/comments/:commentId',function(req,res){
 });//destroy
 
 
-<<<<<<< HEAD
-//<---Image Upload---
-router.post('/imageupload', upload.single('image'), function(req,res, next){
-    cloudinary.uploader.upload(req.file.path, function(result) {
-      res.send(result);
-      if(result && req.file.path !== undefined){
-        fs.unlink(path.join(req.file.path));
-        console.log("LocalTemporary Image Deleted");
-      }
-     }, {use_filename: true, unique_filename: true });
-});
-//---Image Upload--->
-=======
->>>>>>> origin/master
 
 module.exports = router;
 
