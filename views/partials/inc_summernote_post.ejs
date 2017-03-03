@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="/stylesheets/summernote.css">
+<script src="/javascripts/summernote.min.js"></script>
+<script src="/javascripts/summernote-ko-KR.js"></script>
+<script>
+$(document).ready(function() {
+  $('#summernote').summernote({
+    height: 400,                 // set editor height
+    minHeight: 400,             // set minimum height of editor
+    width:750,
+    focus: true,                  // set focus to editable area after initializing summernote
+    placeholder:'글을 입력해주세요 HTML코드도 추가 가능합니다.',
+    disableDragAndDrop: true,
+    lang:'ko-KR',
+    callbacks : {
+      onImageUpload : function(image) {
+        for( var i= image.length -1;i>=0;i--) {
+          uploadImage(image[i]);
+        }
+      }
+    }
+  });
+  <% if((typeof data) != "undefined"){ %>
+    if(!(/edit/.test($(location).attr('pathname')))){
+      $('#body').html('<%- data.body %>');
+    }
+  <% } %>
+});
+
+var imageinput = [];
+function uploadImage(image) {
+  var data = new FormData();
+  data.append("image", image);
+  $.ajax({
+    data : data,
+    type : 'POST',
+    url : '/post/imageupload',
+    enctype : 'multipart/form-data',
+    cache : false,
+    contentType : false,
+    processData : false,
+    success: function(data) {
+      $('#summernote').summernote('insertImage', data.secure_url);
+      imageinput.push(data.secure_url);
+      $('#images').val(JSON.stringify(imageinput.toString().split(",")));
+    },
+    error : function(data){
+      console.log(data);
+    }
+  });
+}
+
+</script>
