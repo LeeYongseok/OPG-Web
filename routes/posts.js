@@ -31,7 +31,6 @@ var Food_Option = {
 };
 
 
-<<<<<<< HEAD
 //Create Directory for file save
 var UploadPath = path.join(__dirname,'..','public','uploadedfiles');
 mkdirp.sync(UploadPath);
@@ -53,9 +52,9 @@ var upload = multer({storage : storage});
 //
 
 // 자유게시판 when connect 'post/'  -redirect '/postBoard'
-=======
+
 // 자유게시판
->>>>>>> origin/master
+
 router.get('/', function(req, res, next) {
   res.redirect('/post/Board');
 });
@@ -201,8 +200,6 @@ router.delete('/Food/:id/comments/:commentId',function(req,res){
 	lib.comment_pull(req,res,Posts.Post_Food,Food_Option);
 });//destroy
 
-
-<<<<<<< HEAD
 //<---Image Upload---
 router.post('/imageupload', upload.single('image'), function(req,res, next){
     cloudinary.uploader.upload(req.file.path, function(result) {
@@ -214,8 +211,5 @@ router.post('/imageupload', upload.single('image'), function(req,res, next){
      }, {use_filename: true, unique_filename: true });
 });
 //---Image Upload--->
-=======
->>>>>>> origin/master
 
 module.exports = router;
-
