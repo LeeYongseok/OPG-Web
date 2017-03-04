@@ -7,11 +7,14 @@ var userSchema = mongoose.Schema({
 	    match:[/^.{3,}$/,"아이디는 3자 이상 입력하세요"], unique:true, trim:true},
   password:{type:String, required:[true,"비밀번호를 입력하세요"], select:false},
 	tel:{type:String, required:[true,"전화번호를 입력하세요"],
-	 		 match:[/^\d{11}/,"'-'를 제외한 숫자만 입력하세요.(11자리)"], unique:true, trim:true},
+	 		 match:[/^\d{11}$/,"'-'를 제외한 숫자만 입력하세요.(11자리)"], unique:true, trim:true},
   mail:{type:String, required:[true,"이메일을 입력하세요"],
 				match:[/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,"적합하지 않은 이메일 형식입니다."],
 				unique:true, trim:true},
-  admin:{type:Number, default:1 }
+	year:{type:String, required:[true,"입학년도를 입력하세요"],
+				match:[/^\d{4}$/,"4자리 숫자입니다"], trim: true},
+  admin:{type:Number, default:4 },
+	grade:{ type:String, default:"예비 멤버"}
 });
 
 userSchema.virtual("passwordConfirmation")
@@ -60,6 +63,7 @@ userSchema.path("password").validate(function(v) {
   if(user.newPassword !== user.passwordConfirmation) {
    user.invalidate("passwordConfirmation", "새로운 비밀번호와 일치하지 않습니다.");
   }
+	
  }
 });
 

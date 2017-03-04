@@ -4,7 +4,7 @@ var User = require('../models/User');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  User.find({}).sort({admin:1}).exec(function(err, users){    // 1
+  User.find({}).sort({year:1}).exec(function(err, users){    // 1
   if(err) return res.json(err);
   res.render('member',
   { users: users,
@@ -14,20 +14,16 @@ router.get('/', function(req, res, next) {
   });
 });
 
-// show
-router.get("/:name", function(req, res){
- User.findOne({name:req.params.name}, function(err, user){
-  if(err) return res.json(err);
-  res.render("member", {user: user});
- });
-});
-
 // edit
-router.get("/:name/edit", function(req, res){
- User.findOne({name:req.params.name}, function(err, user){
+router.get("/edit", function(req, res){
+  User.find({}).sort({year:1}).exec(function(err, users){    // 1
   if(err) return res.json(err);
-  res.render("member_edit", {user: user});
- });
+  res.render('member_edit',
+  { users: users,
+    title: 'Member',
+    main_menu: '멤버',
+    path: 'member/edit'});
+  });
 });
 
 // delete

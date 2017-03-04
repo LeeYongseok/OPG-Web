@@ -4,6 +4,8 @@ label { font-size: 120%; }
 
 small { font-weight: 700; color: red;}
 
+p {font-size: 120%; font-weight: 700; line-height: 230%}
+
 .buttons {margin-top: 10px;}
 
 .buttons>div {margin-right: 5px;}

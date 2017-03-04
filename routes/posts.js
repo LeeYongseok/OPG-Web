@@ -9,7 +9,7 @@ var cloudinary = require('cloudinary');
 var Posts=require('../models/Posts');
 var util = require('../config/util.js');
 
-var lib = require('../config/posts_controller.js')
+var lib = require('../config/posts_controller.js');
 
 var Board_Option = {
 	title:'자유게시판',

@@ -83,10 +83,17 @@
                   <% } %>
                 </div>
             </div>
-            <div class="form-group row">
-               <div class="col-xs-7"></div>
-               <input type="submit" id="submit" name="submit" value="Sign Up" class="col-xs-1">
-               <input type="reset" id="reset" name="reset" value="Reset" class="col-xs-1">
+            <div class="form-group row <%= (errors.year)?'has-error':'' %>">
+                 <div class="col-xs-2"></div>
+                 <label for="year" class="col-xs-2">입학년도</label>
+                 <input type="text" id="year" name="year" class="col-xs-1" placeholder="XXXX" value="<%= user.year %>">
+                  <div class="col-xs-3">
+                   <% if(errors.year){ %>
+                     <span class="help-block"><%= errors.year.message %></span>
+                   <% } %>
+                 </div>
+               <input type="submit" id="submit" name="submit" value="Sign Up" class="col-xs-1 btn-default">
+               <input type="reset" id="reset" name="reset" value="Reset" class="col-xs-1 btn-default">
            </div>
            <% if(errors.unhandled){ %>
              <div class="alert alert-danger">
