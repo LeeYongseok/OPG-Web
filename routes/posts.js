@@ -30,7 +30,6 @@ var Food_Option = {
 	path:'post/Food'
 };
 
-
 //Create Directory for file save
 var UploadPath = path.join(__dirname,'..','public','uploadedfiles');
 mkdirp.sync(UploadPath);
@@ -52,9 +51,6 @@ var upload = multer({storage : storage});
 //
 
 // 자유게시판 when connect 'post/'  -redirect '/postBoard'
-
-// 자유게시판
-
 router.get('/', function(req, res, next) {
   res.redirect('/post/Board');
 });

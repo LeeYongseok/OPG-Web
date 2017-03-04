@@ -1,6 +1,11 @@
 var express= require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var fs = require('fs');
+var multer  = require('multer');
+var path = require('path');
+var mkdirp = require('mkdirp');
+var cloudinary = require('cloudinary');
 var Info=require('../models/Info');
 var util = require('../config/util.js');
 var lib = require('../config/posts_controller.js')
@@ -37,6 +42,28 @@ var Job_Option = {
 	title:'취업 정보',
 	path:'info/Job'
 };
+
+//Create Directory for file save
+var UploadPath = path.join(__dirname,'..','public','uploadedfiles');
+mkdirp.sync(UploadPath);
+
+//multer setting
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname,'..','public','uploadedfiles'));
+  },
+  filename: function (req, file, cb) {
+      var originalname = file.originalname;
+      var extension = originalname.split(".");
+      // cb(null, Date.now() + '.' + extension[extension.length-1]);
+      cb(null, Date.now() + '_' + file.originalname);
+      // cb(null,file.originalname);
+  }
+});
+var upload = multer({storage : storage});
+//
+
+
 router.get('/', function(req, res, next) {
   res.redirect('/info/Programming');
 });
@@ -49,13 +76,15 @@ router.get('/Programming', function(req, res, next) {
   });
 });
 
+
+
 router.get('/ProgrammingBoard',function(req,res){
 	lib.index(req,res,Info.Info_Programming,Programming_Option);
 });//index
 router.get('/ProgrammingBoard/new',util.isLoggedin,function(req,res){
 	lib.new(req,res,Info.Info_Programming,Programming_Option);
 });//new
-router.post('/ProgrammingBoard',util.isLoggedin,function(req,res){
+router.post('/ProgrammingBoard',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.create(req,res,Info.Info_Programming,Programming_Option);
 });//create
 router.get('/ProgrammingBoard/:id',function(req,res){
@@ -64,7 +93,7 @@ router.get('/ProgrammingBoard/:id',function(req,res){
 router.get('/ProgrammingBoard/:id/edit',util.isLoggedin,function(req,res){
 	lib.edit(req,res,Info.Info_Programming,Programming_Option);
 });//edit
-router.put('/ProgrammingBoard/:id',util.isLoggedin,function(req,res){
+router.put('/ProgrammingBoard/:id',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.update(req,res,Info.Info_Programming,Programming_Option);
 });//update
 router.delete('/ProgrammingBoard/:id',util.isLoggedin,function(req,res){
@@ -93,7 +122,7 @@ router.get('/ProgrammingServer',function(req,res){
 router.get('/ProgrammingServer/new',util.isLoggedin,function(req,res){
 	lib.new(req,res,Info.Info_ProgrammingServer,ProgrammingServer_Option);
 });//new
-router.post('/ProgrammingServer',util.isLoggedin,function(req,res){
+router.post('/ProgrammingServer',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.create(req,res,Info.Info_ProgrammingServer,ProgrammingServer_Option);
 });//create
 router.get('/ProgrammingServer/:id',function(req,res){
@@ -102,7 +131,7 @@ router.get('/ProgrammingServer/:id',function(req,res){
 router.get('/ProgrammingServer/:id/edit',util.isLoggedin,function(req,res){
 	lib.edit(req,res,Info.Info_ProgrammingServer,ProgrammingServer_Option);
 });//edit
-router.put('/ProgrammingServer/:id',util.isLoggedin,function(req,res){
+router.put('/ProgrammingServer/:id',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.update(req,res,Info.Info_ProgrammingServer,ProgrammingServer_Option);
 });//update
 router.delete('/ProgrammingServer/:id',util.isLoggedin,function(req,res){
@@ -126,7 +155,7 @@ router.get('/ProgrammingLanguage',function(req,res){
 router.get('/ProgrammingLanguage/new',util.isLoggedin,function(req,res){
 	lib.new(req,res,Info.Info_ProgrammingLanguage,ProgrammingLanguage_Option);
 });//new
-router.post('/ProgrammingLanguage',util.isLoggedin,function(req,res){
+router.post('/ProgrammingLanguage',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.create(req,res,Info.Info_ProgrammingLanguage,ProgrammingLanguage_Option);
 });//create
 router.get('/ProgrammingLanguage/:id',function(req,res){
@@ -135,7 +164,7 @@ router.get('/ProgrammingLanguage/:id',function(req,res){
 router.get('/ProgrammingLanguage/:id/edit',util.isLoggedin,function(req,res){
 	lib.edit(req,res,Info.Info_ProgrammingLanguage,ProgrammingLanguage_Option);
 });//edit
-router.put('/ProgrammingLanguage/:id',util.isLoggedin,function(req,res){
+router.put('/ProgrammingLanguage/:id',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.update(req,res,Info.Info_ProgrammingLanguage,ProgrammingLanguage_Option);
 });//update
 router.delete('/ProgrammingLanguage/:id',util.isLoggedin,function(req,res){
@@ -164,13 +193,13 @@ router.get('/ProgrammingWeb',function(req,res){
 router.get('/ProgrammingWeb/new',util.isLoggedin,function(req,res){
 	lib.new(req,res,Info.Info_ProgrammingWeb,ProgrammingWeb_Option);
 });//new
-router.post('/ProgrammingWeb',util.isLoggedin,function(req,res){
+router.post('/ProgrammingWeb',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.create(req,res,Info.Info_ProgrammingWeb,ProgrammingWeb_Option);
 });//create
 router.get('/ProgrammingWeb/:id',function(req,res){
 	lib.show(req,res,Info.Info_ProgrammingWeb,ProgrammingWeb_Option);
 });//show
-router.get('/ProgrammingWeb/:id/edit',util.isLoggedin,function(req,res){
+router.get('/ProgrammingWeb/:id/edit',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.edit(req,res,Info.Info_ProgrammingWeb,ProgrammingWeb_Option);
 });//edit
 router.put('/ProgrammingWeb/:id',util.isLoggedin,function(req,res){
@@ -200,7 +229,7 @@ router.get('/ProgrammingMobile',function(req,res){
 router.get('/ProgrammingMobile/new',util.isLoggedin,function(req,res){
 	lib.new(req,res,Info.Info_ProgrammingMobile,ProgrammingMobile_Option);
 });//new
-router.post('/ProgrammingMobile',util.isLoggedin,function(req,res){
+router.post('/ProgrammingMobile',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.create(req,res,Info.Info_ProgrammingMobile,ProgrammingMobile_Option);
 });//create
 router.get('/ProgrammingMobile/:id',function(req,res){
@@ -209,7 +238,7 @@ router.get('/ProgrammingMobile/:id',function(req,res){
 router.get('/ProgrammingMobile/:id/edit',util.isLoggedin,function(req,res){
 	lib.edit(req,res,Info.Info_ProgrammingMobile,ProgrammingMobile_Option);
 });//edit
-router.put('/ProgrammingMobile/:id',util.isLoggedin,function(req,res){
+router.put('/ProgrammingMobile/:id',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.update(req,res,Info.Info_ProgrammingMobile,ProgrammingMobile_Option);
 });//update
 router.delete('/ProgrammingMobile/:id',util.isLoggedin,function(req,res){
@@ -238,7 +267,7 @@ router.get('/Exhibition',function(req,res){
 router.get('/Exhibition/new',util.isLoggedin,function(req,res){
 	lib.new(req,res,Info.Info_Exhibition,Exhibition_Option);
 });//new
-router.post('/Exhibition',util.isLoggedin,function(req,res){
+router.post('/Exhibition',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.create(req,res,Info.Info_Exhibition,Exhibition_Option);
 });//create
 router.get('/Exhibition/:id',function(req,res){
@@ -247,7 +276,7 @@ router.get('/Exhibition/:id',function(req,res){
 router.get('/Exhibition/:id/edit',util.isLoggedin,function(req,res){
 	lib.edit(req,res,Info.Info_Exhibition,Exhibition_Option);
 });//edit
-router.put('/Exhibition/:id',util.isLoggedin,function(req,res){
+router.put('/Exhibition/:id',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.update(req,res,Info.Info_Exhibition,Exhibition_Option);
 });//update
 router.delete('/Exhibition/:id',util.isLoggedin,function(req,res){
@@ -272,7 +301,7 @@ router.get('/IT',function(req,res){
 router.get('/IT/new',util.isLoggedin,function(req,res){
 	lib.new(req,res,Info.Info_IT,IT_Option);
 });//new
-router.post('/IT',util.isLoggedin,function(req,res){
+router.post('/IT',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.create(req,res,Info.Info_IT,IT_Option);
 });//create
 router.get('/IT/:id',function(req,res){
@@ -281,7 +310,7 @@ router.get('/IT/:id',function(req,res){
 router.get('/IT/:id/edit',util.isLoggedin,function(req,res){
 	lib.edit(req,res,Info.Info_IT,IT_Option);
 });//edit
-router.put('/IT/:id',util.isLoggedin,function(req,res){
+router.put('/IT/:id',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.update(req,res,Info.Info_IT,IT_Option);
 });//update
 router.delete('/IT/:id',util.isLoggedin,function(req,res){
@@ -305,7 +334,7 @@ router.get('/Job',function(req,res){
 router.get('/Job/new',util.isLoggedin,function(req,res){
 	lib.new(req,res,Info.Info_Job,Job_Option);
 });//new
-router.post('/Job',util.isLoggedin,function(req,res){
+router.post('/Job',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.create(req,res,Info.Info_Job,Job_Option);
 });//create
 router.get('/Job/:id',function(req,res){
@@ -314,7 +343,7 @@ router.get('/Job/:id',function(req,res){
 router.get('/Job/:id/edit',util.isLoggedin,function(req,res){
 	lib.edit(req,res,Info.Info_Job,Job_Option);
 });//edit
-router.put('/Job/:id',util.isLoggedin,function(req,res){
+router.put('/Job/:id',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.update(req,res,Info.Info_Job,Job_Option);
 });//update
 router.delete('/Job/:id',util.isLoggedin,function(req,res){
@@ -329,5 +358,6 @@ router.post('/Job/:id/comments',function(req,res){
 router.delete('/Job/:id/comments/:commentId',function(req,res){
 	lib.comment_pull(req,res,Info.Info_Job,Job_Option);
 });//destroy
+
 
 module.exports = router;

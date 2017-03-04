@@ -4,12 +4,6 @@
     <%- include ../partials/head.ejs %>
     <link rel="stylesheet" href="/stylesheets/edit.css">
     <%- include ../partials/inc_summernote_post.ejs %>
-    <script>
-    $(document).ready(function() {
-        $('#hidden_div').html('<%= data.body %>');
-        $('#summernote').summernote('code',$('#hidden_div').text());        
-    });
-    </script>
   </head>
   <body>
     <%- include ../partials/header+nav.ejs %>
@@ -38,8 +32,16 @@
                     <label for="edit_title">Title</label>
                     <input type="text" id="edit_title" name="post[title]" value="<%=data.title%>">
                     <label for="edit_body">Body</label>
-                    <div id="hidden_div" style="display: none"></div>
-                    <textarea name="post[body]" id="summernote"></textarea>
+                    <textarea name="post[body]" id="summernote"><%=data.body%></textarea>
+                    <input type="hidden" name="images" id="images" value="">
+                    <div class="col-xs-8">
+                    <% if(data.filePath != undefined){ %>
+                      <input id="input" type="file" name="file" disabled> Uploaded file already exist.
+                    <% } else { %>
+                      <input id="input" type="file" name="file">
+                    <%} %>
+                  </div>
+                  <br>
                     <button type="submit" class="btn">Submit</button>
                   </form>
                   <a href="/<%=path%>/<%=data._id%>"><button class="btn">Back</button></a>
