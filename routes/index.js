@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'OPG' });
 });
 
-
+//<---Image Upload---
 router.post('/imageupload', upload.single('image'), function(req,res, next){
     cloudinary.uploader.upload(req.file.path, function(result) {
       res.send(result);
