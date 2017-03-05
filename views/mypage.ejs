@@ -20,7 +20,7 @@
                 </div>
             </div>
            <div class="row mainText user">
-             <form class="user-form form-horizontal" action="/user/<%=currentUser._id %>?_method=put" method="post">
+             <form class="user-form form-horizontal" id="user" action="/user/<%=currentUser._id %>?_method=put" method="post">
               <div class="contentBox">
                <fieldset>
                 <div class="form-group <%= (errors.currentPassword)?'has-error':'' %>">
@@ -35,20 +35,26 @@
                 <hr></hr>
                 <div class="form-group <%= (errors.id)?'has-error':'' %>">
                  <label for="id" class="col-sm-3 control-label">ID *</label>
-                 <div class="col-sm-6">
+                 <div class="col-sm-3">
                   <input class="form-control" type="text" id="id" name="id" value="<%= user.id %>">
                   <% if(errors.id){ %>
                     <span class="help-block"><%= errors.id.message %></span>
                   <% } %>
                  </div>
                 </div>
-                <div class="form-group <%= (errors.name)?'has-error':''%>">
-                 <label for="name" class="col-sm-3 control-label">이름 *</label>
-                 <div class="col-sm-6">
-                  <input class="form-control" type="text" id="name" name="name" value="<%= user.name %>">
-                  <% if(errors.name){ %>
-                    <span class="help-block"><%= errors.name.message %></span>
-                  <% } %>
+                <div class="form-group">
+                  <div class=" <%= (errors.name)?'has-error':''%>">
+                   <label for="name" class="col-sm-3 control-label">이름 *</label>
+                   <div class="col-sm-3">
+                    <input class="form-control" type="text" id="name" name="name" value="<%= user.name %>">
+                    <% if(errors.name){ %>
+                      <span class="help-block"><%= errors.name.message %></span>
+                    <% } %>
+                   </div>
+                  </div>
+                 <label for="year" class="col-sm-2 control-label">회원등급:</label>
+                 <div class="col-sm-2">
+                    <p><%= user.grade %></p>
                  </div>
                 </div>
                 <div class="form-group <%= (errors.tel)?'has-error':''%>">
@@ -69,18 +75,26 @@
                   <% } %>
                  </div>
                 </div>
-                <div class="form-group <%= (errors.year)?'has-error':''%>">
-                 <label for="year" class="col-sm-3 control-label">입학년도 *</label>
-                 <div class="col-sm-2">
-                  <input class="form-control" type="text" id="year" name="year" value="<%= user.year %>">
-                  <% if(errors.year){ %>
-                    <span class="help-block"><%= errors.year.message %></span>
-                  <% } %>
+                <div class="form-group">
+                  <div class="<%= (errors.year)?'has-error':''%>">
+                   <label for="year" class="col-sm-3 control-label">입학년도 *</label>
+                   <div class="col-sm-3">
+                    <input class="form-control" type="text" id="year" name="year" value="<%= user.year %>">
+                    <% if(errors.year){ %>
+                      <span class="help-block"><%= errors.year.message %></span>
+                    <% } %>
+                  </div>
                  </div>
-                 <label for="year" class="col-sm-2 control-label">회원등급:</label>
-                 <div class="col-sm-2">
-                    <p><%= user.grade %></p>
-                 </div>
+                 <label for="state" class="col-sm-2 control-label">재학여부</label>
+                 <select class="col-sm-1" id="state" name="state" form="user">
+                   <% if(user.state === "졸업") { %>
+                      <option value="재학">재학</option>
+                      <option value="졸업" selected>졸업</option>
+                    <% } else { %>
+                      <option value="재학" selected>재학</option>
+                      <option value="졸업">졸업</option>
+                    <% } %>
+                 </select>
                 </div>
                 <hr></hr>
                 <div class="form-group <%= (errors.newPassword)?'has-error':'' %>">

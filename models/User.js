@@ -13,6 +13,7 @@ var userSchema = mongoose.Schema({
 				unique:true, trim:true},
 	year:{type:String, required:[true,"입학년도를 입력하세요"],
 				match:[/^\d{4}$/,"4자리 숫자입니다"], trim: true},
+	state:{type:String},
   admin:{type:Number, default:4 },
 	grade:{ type:String, default:"예비 멤버"}
 });
@@ -63,8 +64,7 @@ userSchema.path("password").validate(function(v) {
   if(user.newPassword !== user.passwordConfirmation) {
    user.invalidate("passwordConfirmation", "새로운 비밀번호와 일치하지 않습니다.");
   }
-	
- }
+	}
 });
 
 userSchema.pre("save", function (next){

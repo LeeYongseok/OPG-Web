@@ -54,27 +54,27 @@ router.get('/:id', function(req, res, next){
 
 router.put("/:id",function(req, res, next){
 
- User.findOne({_id:req.params.id})
- .select("password")
- .exec(function(err, user){
-  if(err) return res.json(err);
+   User.findOne({_id:req.params.id})
+   .select("password")
+   .exec(function(err, user){
+    if(err) return res.json(err);
 
-  // update user object
-  user.originalPassword = user.password;
-  user.password = req.body.newPassword? req.body.newPassword : user.password;
-  for(var p in req.body){
-   user[p] = req.body[p];
-  }
-  // save updated user
-  user.save(function(err, user){
-  if(err){
-    req.flash("user", req.body);
-    req.flash("errors", parseError(err));
-    return res.redirect("/user/"+req.params.id);
-   }
-   res.redirect("/user/"+req.params.id);
+    // update user object
+    user.originalPassword = user.password;
+    user.password = req.body.newPassword? req.body.newPassword : user.password;
+    for(var p in req.body){
+     user[p] = req.body[p];
+    }
+    // save updated user
+    user.save(function(err, user){
+    if(err){
+      req.flash("user", req.body);
+      req.flash("errors", parseError(err));
+      return res.redirect("/user/"+req.params.id);
+     }
+     res.redirect("/user/"+req.params.id);
+    });
   });
-});
 });
 
 module.exports = router;

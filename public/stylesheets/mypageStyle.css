@@ -9,3 +9,5 @@ p {font-size: 120%; font-weight: 700; line-height: 230%}
 .buttons {margin-top: 10px;}
 
 .buttons>div {margin-right: 5px;}
+
+select {font-size: 14px; height: 34px; border-radius: 4px;}

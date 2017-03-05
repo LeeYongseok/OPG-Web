@@ -66,7 +66,7 @@ exports.show = function(req,res,schema,option){
 			user:req.user
 		});
 	});
-	
+
 };
 
 exports.edit = function(req,res,schema,option){
