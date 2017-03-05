@@ -16,9 +16,10 @@ var member = require('./routes/member');
 var user = require('./routes/users');
 var photos = require('./routes/photos');
 var signUp = require('./routes/signUp');
-var about=require('./routes/about');
-var posts=require('./routes/posts');
-var info=require('./routes/info');
+var about = require('./routes/about');
+var posts = require('./routes/posts');
+var info = require('./routes/info');
+var notice = require('./routes/notice');
 
 var app = express();
 var mongoose=require('mongoose');
@@ -54,7 +55,7 @@ app.use(session({
 				secret:"MySecret",
 				resave: false,
 				saveUninitialized: true
-			})); //
+			}));
 app.use(passport.initialize()); // passport 초기화
 app.use(passport.session());		// passport와 session을 연결
 
@@ -85,6 +86,9 @@ app.use('/photo', photos);
 app.use('/about', about);
 app.use('/info', info);
 
+//공지사항
+app.use('/notice',notice);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -103,5 +107,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 module.exports = app;

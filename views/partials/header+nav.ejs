@@ -13,7 +13,7 @@
                 <% if(isAuthenticated){ %>
                   <p class="user"><%= currentUser.name %> 환영합니다.</p>
                   <a href="/user/logout" id="logout"><button type="button" class="btn btn-sm">로그아웃</button></a>
-                  <a href=" /user/<%=currentUser.id %>"><button type="button" class="btn btn-sm">마이페이지</button></a>
+                  <a href=" /user/<%=currentUser._id %>"><button type="button" class="btn btn-sm">마이페이지</button></a>
                 <% } else { %>
                   <input type="text" id="id" name="id" placeholder="ID" required="required" />
                   <input type="password" id="password" name="password" placeholder="Password" required="required" />

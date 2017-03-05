@@ -5,9 +5,8 @@ util.isLoggedin = function(req,res,next){
 		next();
 	}else{
 		req.flash("errors", {login:"Please login first"});
-  		res.redirect("/login");
+  		res.redirect("/");
 	}
 };
-
 
 module.exports = util;
