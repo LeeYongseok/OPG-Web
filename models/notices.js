@@ -7,6 +7,7 @@ var noticeSchema = mongoose.Schema({
 	author:{type:mongoose.Schema.Types.ObjectId, ref:"user", required:true},
 	createdAt:{type:Date,default:Date.now},
 	updatedAt:Date,
+    views: {type:Number, default:0},
 	comments:[{
 		author: {type:mongoose.Schema.Types.ObjectId, ref:"user", required:true},
 		body: {type:String, required:true},
@@ -14,6 +15,11 @@ var noticeSchema = mongoose.Schema({
 	}]
 });
 
+
+noticeSchema.methods.up_views = function(cb){
+	this.views += 1;
+	this.save(cb);
+};
 
 var notice_Board = mongoose.model('notice_Board',noticeSchema);
 
