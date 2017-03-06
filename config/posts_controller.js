@@ -19,6 +19,7 @@ exports.index = function(req,res,schema,option){
 			path:option.path,
 			page:page,
 			maxPageNum:maxPageNum,
+			count:count,
 			user:req.user
 		});
 	});
