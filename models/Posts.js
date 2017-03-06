@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var postSchema = mongoose.Schema({
-	title:{type:String, required:true},
-	body:{type:String, required:true},
+	title:{type:String, required:[true,"제목을 입력하세요."]},
+  body:{type:String, required:[true,"본문을 입력하세요."]},
 	author:{type:mongoose.Schema.Types.ObjectId, ref:"user", required:true},
 	createdAt:{type:Date,default:Date.now},
 	updatedAt:{type:Date},
@@ -21,7 +21,7 @@ var postSchema = mongoose.Schema({
 postSchema.methods.up_views = function(cb){
 	this.views += 1;
 	this.save(cb);
-}
+};
 
 var Post_Board = mongoose.model('Post_Board',postSchema);
 var Post_Inquire = mongoose.model('Post_Inquire',postSchema);
