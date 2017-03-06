@@ -6,8 +6,8 @@ var multer  = require('multer');
 var path = require('path');
 var mkdirp = require('mkdirp');
 var util = require('../config/util.js');
-var cloudinary = require('cloudinary');
-var lib = require('../config/ImgBoard_Controller.js');
+var imglib = require('../config/ImgBoard_Controller.js');
+var lib = require('../config/posts_controller.js');
 
 
 var Activity_Option = {
@@ -54,7 +54,7 @@ router.get('/', function(req, res, next) {
 
 //<-- Photo_MT_Activity ---
 router.get('/Activity',function(req,res){
-  lib.index(req,res,iPostMod.iPostMod_Activity,Activity_Option);
+  imglib.index(req,res,iPostMod.iPostMod_Activity,Activity_Option);
  });
 
  router.get('/Activity/new',util.isLoggedin,function(req,res){
@@ -88,14 +88,14 @@ router.post('/Activity/:id/comments',function(req,res){
 });
 
 router.delete('/Activity/:id/comments/:commentId',function(req,res){
-  lib.commnet_pull(req,res,iPostMod.iPostMod_Activity,Activity_Option);
+  lib.comment_pull(req,res,iPostMod.iPostMod_Activity,Activity_Option);
 });//destroy
 
 //---Photo_MT_Activity -->
 
 //<-- Photo_Study ---
 router.get('/Study',function(req,res){
-  lib.index(req,res,iPostMod.iPostMod_Study,Study_Option);
+  imglib.index(req,res,iPostMod.iPostMod_Study,Study_Option);
  });
 
  router.get('/Study/new',util.isLoggedin,function(req,res){
@@ -129,14 +129,14 @@ router.post('/Study/:id/comments',function(req,res){
 });
 
 router.delete('/Study/:id/comments/:commentId',function(req,res){
-  lib.commnet_pull(req,res,iPostMod.iPostMod_Study,Study_Option);
+  lib.comment_pull(req,res,iPostMod.iPostMod_Study,Study_Option);
 });//destroy
 
 //---Photo_Study -->
 
 //<-- Photo_Seminar ---
 router.get('/Seminar',function(req,res){
-  lib.index(req,res,iPostMod.iPostMod_Seminar,Seminar_Option);
+  imglib.index(req,res,iPostMod.iPostMod_Seminar,Seminar_Option);
  });
 
  router.get('/Seminar/new',util.isLoggedin,function(req,res){
@@ -170,14 +170,14 @@ router.post('/Seminar/:id/comments',function(req,res){
 });
 
 router.delete('/Seminar/:id/comments/:commentId',function(req,res){
-  lib.commnet_pull(req,res,iPostMod.iPostMod_Seminar,Seminar_Option);
+  lib.comment_pull(req,res,iPostMod.iPostMod_Seminar,Seminar_Option);
 });//destroy
 
 //---Photo_Seminar -->
 
 //<-- Photo_Work ---
 router.get('/Work',function(req,res){
-  lib.index(req,res,iPostMod.iPostMod_Work,Work_Option);
+  imglib.index(req,res,iPostMod.iPostMod_Work,Work_Option);
  });
 
  router.get('/Work/new',util.isLoggedin,function(req,res){
@@ -211,25 +211,9 @@ router.post('/Work/:id/comments',function(req,res){
 });
 
 router.delete('/Work/:id/comments/:commentId',function(req,res){
-  lib.commnet_pull(req,res,iPostMod.iPostMod_Work,Work_Option);
+  lib.comment_pull(req,res,iPostMod.iPostMod_Work,Work_Option);
 });//destroy
 
 //---Photo_Work-->
-
-
-//<---Image Upload---
-router.post('/imageupload', upload.single('image'), function(req,res, next){
-    cloudinary.uploader.upload(req.file.path, function(result) {
-      res.send(result);
-      if(result && req.file.path !== undefined){
-        fs.unlink(path.join(req.file.path));
-        console.log("LocalTemporary Image Deleted");
-      }
-     }, {use_filename: true, unique_filename: true });
-});
-//---Image Upload--->
-
-
-
 
 module.exports = router;
