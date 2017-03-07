@@ -3,7 +3,7 @@
   <head>
     <%- include ../partials/head.ejs %>
     <link rel="stylesheet" href="/stylesheets/edit.css">
-    <%- include ../partials/inc_summernote_post.ejs %>
+    <%- include ../partials/inc_summernote.ejs %>
   </head>
   <body>
     <%- include ../partials/header+nav.ejs %>
@@ -17,9 +17,9 @@
              </div>
              <div class="row">
                 <div class="col-xs-1"></div>
-                <div class="col-xs-6 sub_info circlepic">
+                <div class="col-xs-6 sub_info">
                 </div>
-                <div class="col-xs-5">
+                <div class="col-xs-5 circlepic">
                     <div class="circle" id="circle1"></div>
                     <div class="circle" id="circle2"></div>
                     <div class="circle" id="circle3"></div>
@@ -33,7 +33,7 @@
                   <input id="edit_title" type="text" name="post[title]" value="" placeholder="Title입력">
                   <textarea id="summernote" name="post[body]"></textarea>
                   <div class="col-xs-8">
-                    <input id="input" type="file" name="photo">
+                    <input id="input" type="file" name="file">
                   </div>
                   <input type="hidden" name="images" id="images" value="">     
                   <br>

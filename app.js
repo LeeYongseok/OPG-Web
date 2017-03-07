@@ -55,7 +55,7 @@ app.use(session({
 				secret:"MySecret",
 				resave: false,
 				saveUninitialized: true
-			})); //
+			}));
 app.use(passport.initialize()); // passport 초기화
 app.use(passport.session());		// passport와 session을 연결
 
@@ -107,5 +107,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 module.exports = app;

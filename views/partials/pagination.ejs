@@ -10,7 +10,7 @@
         <% for(i=1; i<=maxPageNum; i++){ %>
           <% if( i<=offset || i>maxPageNum-offset || (i>=page-(offset) && i<=page+(offset))){ %>
             <% if(i != page) { %>
-              <li><a href="/photo/Activity?page=<%=i%>"> <%= i %> </a></li>
+              <li><a href="/<%=path%>/?page=<%=i%>"> <%= i %> </a></li>
             <% } else { %>
               <li class="active"><a><%= i %></a></li>
             <% } %>

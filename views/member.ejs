@@ -2,6 +2,13 @@
 <html>
 <head>
     <%- include ./partials/head.ejs %>
+    <style>
+          .btn_white{ position: relative; float: left; margin: 5px 10px;
+                            color:black; background: transparent; border-color: #ddd; }
+          .btn_white:hover{ color:white; background-color: #34B4D2; }
+          .btn-default:hover { color:white; background-color: #34B4D2; }
+          select {font-size: 14px; height: 26px; border-radius: 4px;}
+    </style>
 </head>
 <body>
     <%- include ./partials/header+nav.ejs %>
@@ -40,8 +47,15 @@
                <thead>
                 <tr>
                  <th class="name">이름</th>
+                 <th class="year">입학년도</th>
                  <th class="tel">전화번호</th>
                  <th class="mail">이메일</th>
+                 <th class="state">재학여부</th>
+                 <th class="grade">회원등급</th>
+                 <% if(path === 'member/edit') {%>
+                   <th class="edit"></th>
+                   <th class="delete"></th>
+                 <% } %>
                 </tr>
                </thead>
                <tbody>
@@ -52,18 +66,75 @@
                 <% } %>
                 <% users.forEach(function(user) { %>
                  <tr>
-                  <td class="title">
+                  <td class="name">
                    <%= user.name%>
+                  </td>
+                  <td class="year">
+                   <%= user.year%>
                   </td>
                   <td class="tel">
                    <%= user.tel %>
                   </td>
-                  <td class="mail">
+                  <td class="mail" >
                     <%= user.mail%>
                   </td>
+                  <td class="state">
+                   <%= user.state%>
+                  </td>
+                  <% if(path ==='member') {%>
+                    <td class="grade">
+                     <%= user.grade%>
+                    </td>
+                  <%} else if(path === 'member/edit') {%>
+                    <form action="/member/<%= user._id %>?_method=PUT" method="post" id="<%= user._id %>user_edit">
+                      <!-- enctype="multipart/form-data"> -->
+                    <td class="grade">
+                      <select name="grade" id="grade" form="<%= user._id %>user_edit">
+                      <% if(user.admin === 1) { %>
+                        <option value="관리자" selected>관리자</option>
+                        <option value="임원">임원</option>
+                        <option value="OPG 회원">OPG 회원</option>
+                        <option value="예비 멤버">예비 멤버</option>
+                      <% } else if(user.admin === 2) { %>
+                        <option value="관리자">관리자</option>
+                        <option value="임원" selected>임원</option>
+                        <option value="OPG 회원">OPG 회원</option>
+                        <option value="예비 멤버">예비 멤버</option>
+                      <% } else if(user.admin === 3) { %>
+                        <option value="관리자">관리자</option>
+                        <option value="임원">임원</option>
+                        <option value="OPG 회원" selected>OPG 회원</option>
+                        <option value="예비 멤버">예비 멤버</option>
+                      <% } else if(user.admin === 4) { %>
+                        <option value="관리자">관리자</option>
+                        <option value="임원">임원</option>
+                        <option value="OPG 회원">OPG 회원</option>
+                        <option value="예비 멤버" selected>예비 멤버</option>
+                      <% } %>
+                      </select>
+                    </td>
+                    <td class="edit" >
+                         <button type="submit" class="btn btn-default">수정</button>
+                    </td>
+                    </form>
+                    <td class="delete" >
+                      <form action="/member/<%= user._id %>?_method=delete" method="post">
+                        <button type="submit" class="btn btn-default">삭제</button>
+                      </form>
+                    </td>
+                  <% } %>
                  </tr>
                 <% }) %>
                </tbody>
               </table>
+                <% if(isAuthenticated && currentUser.admin === 1) { %>
+                    <% if(path === 'member') {%>
+                        <a href="/member/edit"><button class="btn btn_white col-xs-1">Edit</button></a>
+                      <% } if(path === 'member/edit') {%>
+                        <a href="/member"><button class="btn btn_white col-xs-1">Back</button></a>
+                    <% } %>
+                <% } %>
+
            </div>
+<%- include ./partials/pagination.ejs %>
 <%- include ./partials/footer.ejs %>

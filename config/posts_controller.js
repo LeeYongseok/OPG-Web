@@ -37,6 +37,14 @@ exports.new = function(req,res,schema,option){
 
 exports.create = function(req,res,schema,option){
 	req.body.post.author = req.user._id;
+	if(req.body.images) {req.body.images = JSON.parse(req.body.images);}
+	if(req.files.file !== undefined) {
+	  req.body.post.filePath = req.files.file[0].path;
+	  req.body.post.fileOriginalname = req.files.file[0].originalname;
+	}
+	for(var i in req.files.files) {
+	  fs.unlink(req.files.files[i].path);
+	}
 	schema.create(req.body.post,function(err,post){
 		if(err) return res.json({success:false, message:err});
 		res.redirect('/'+option.path);
@@ -58,7 +66,7 @@ exports.show = function(req,res,schema,option){
 			user:req.user
 		});
 	});
-	
+
 };
 
 exports.edit = function(req,res,schema,option){
@@ -78,6 +86,14 @@ exports.edit = function(req,res,schema,option){
 
 
 exports.update = function(req,res,schema,option){
+	if(req.body.images) {req.body.images = JSON.parse(req.body.images);}
+    if(req.files.file !== undefined) {
+	  req.body.post.filePath = req.files.file[0].path;
+	  req.body.post.fileOriginalname = req.files.file[0].originalname;
+	}
+    for(var i in req.files.files) {
+      fs.unlink(req.files.files[i].path);
+    }
 	req.body.post.updatedAt=Date.now();
 	schema.findOneAndUpdate({_id:req.params.id, author:req.user._id},req.body.post,function(err,post){
 		if(err) return res.json({success:false, message:err});
@@ -90,6 +106,9 @@ exports.destroy = function(req,res,schema,option){
 	schema.findOneAndRemove({_id:req.params.id, author:req.user._id},function(err,post){
 		if(err) return res.json({success:false, message:err});
 		if(!post) return res.json({success:false, message:"No data found to remove"});
+		if(post.filename !== undefined){
+      		fs.unlink(path.join(__dirname,'..','public','uploadedfiles',data.filename));
+    	}
 		res.redirect('/'+option.path);
 	});
 };

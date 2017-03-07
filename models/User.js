@@ -2,12 +2,20 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs'); // password 암호화를 위해 사용하는 모듈
 
 var userSchema = mongoose.Schema({
-	name:{type:String, required:[true,"이름을 입력하세요"]},
-  id:{type:String, require:[true,"아이디를 입력하세요"], unique: true},
-  password:{type:String, require:[true,"비밀번호를 입력하세요"]},
-	tel:{type:String, required:true, unique:true},
-  mail:{type:String, require:[true,"이메일을 입력하세요"], unique:true},
-  admin:{type:Number, default:1 }
+	name:{type:String, required:[true,"이름을 입력하세요"], trim:true},
+  id:{type:String, required:[true,"아이디를 입력하세요"],
+	    match:[/^.{3,}$/,"아이디는 3자 이상 입력하세요"], unique:true, trim:true},
+  password:{type:String, required:[true,"비밀번호를 입력하세요"], select:false},
+	tel:{type:String, required:[true,"전화번호를 입력하세요"],
+	 		 match:[/^\d{11}$/,"'-'를 제외한 숫자만 입력하세요.(11자리)"], unique:true, trim:true},
+  mail:{type:String, required:[true,"이메일을 입력하세요"],
+				match:[/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,"적합하지 않은 이메일 형식입니다."],
+				unique:true, trim:true},
+	year:{type:String, required:[true,"입학년도를 입력하세요"],
+				match:[/^\d{4}$/,"4자리 숫자입니다"], trim: true},
+	state:{type:String},
+  admin:{type:Number, default:4 },
+	grade:{ type:String, default:"예비 멤버"}
 });
 
 userSchema.virtual("passwordConfirmation")
@@ -26,6 +34,9 @@ userSchema.virtual("newPassword")
 .get(function(){ return this._newPassword; })
 .set(function(value){ this._newPassword=value; });
 
+var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/; // password 정규표현식
+var passwordRegexErrorMessage = "8-16자의 문자/숫자 혼합 형식으로 입력해주세요"; // 정규표현식 에러메세지
+
 userSchema.path("password").validate(function(v) {
  var user = this; //
 
@@ -34,7 +45,11 @@ userSchema.path("password").validate(function(v) {
   if(!user.passwordConfirmation){
    user.invalidate("passwordConfirmation", "비밀번호확인을 입력해주세요.");
   }
-  if(user.password !== user.passwordConfirmation) {
+
+	if(!passwordRegex.test(user.password)){ // 해당 문자열이 정규표현식에 적합하면 true, 아니면 false
+	   user.invalidate("password", passwordRegexErrorMessage);
+	}
+	else if(user.password !== user.passwordConfirmation) {
    user.invalidate("passwordConfirmation", "입력한 비밀번호와 일치하지 않습니다.");
   }
  }
@@ -49,7 +64,7 @@ userSchema.path("password").validate(function(v) {
   if(user.newPassword !== user.passwordConfirmation) {
    user.invalidate("passwordConfirmation", "새로운 비밀번호와 일치하지 않습니다.");
   }
- }
+	}
 });
 
 userSchema.pre("save", function (next){
