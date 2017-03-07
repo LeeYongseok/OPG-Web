@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%- include ./partials/head.ejs %>
+    <%- include ../partials/head.ejs %>
     <link rel="stylesheet" href="/stylesheets/view.css">
     <script>
 
@@ -12,7 +12,7 @@
     </script>
   </head>
   <body>
-    <%- include ./partials/header+nav.ejs %>
+    <%- include ../partials/header+nav.ejs %>
     <div class="page-wrap">
         <section class="programming">
             <div class="container">
@@ -23,7 +23,7 @@
              </div>
              <div class="row">
                 <div class="col-xs-1"></div>
-                <div class="col-xs-6 sub_info">
+                <div class="col-xs-6 sub_info circlepic">
                 </div>
                 <div class="col-xs-5">
                     <div class="circle" id="circle1"></div>
@@ -46,6 +46,9 @@
                     </div>
                   <% } %>
                   <span><small><%= data.author ? data.author.name : "" %></small></span>
+                  <% if(data.filePath != undefined) { %>
+                    <div><a href="<%=getfilepath(data)%>" download><%=data.fileOriginalname%></a></div>
+                   <% } %>
                   <div id="hidden_div" style="display: none"></div>
                   <div class="p_body" id="summernote"></div>
                    <div class="comments">
@@ -92,4 +95,4 @@
 
 
 <!---이곳까지 자기가 원하는 레이아웃을 설정해 주도록 하자.-->
-<%- include ./partials/footer.ejs %>
+<%- include ../partials/footer.ejs %>

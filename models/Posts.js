@@ -7,6 +7,9 @@ var postSchema = mongoose.Schema({
 	author:{type:mongoose.Schema.Types.ObjectId, ref:"user", required:true},
 	createdAt:{type:Date,default:Date.now},
 	updatedAt:Date,
+	fileOriginalname : {type:String},
+  	filePath : {type:String},
+  	images : {type : Array},
 	views: {type:Number, default:0},
 	comments:[{
 		author: {type:mongoose.Schema.Types.ObjectId, ref:"user", required:true},
