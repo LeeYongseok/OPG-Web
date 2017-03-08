@@ -29,13 +29,23 @@
               <div class="new edit">
                 <h3>New Post</h3>
                 <form class="posts_form" action="/<%=path%>" method="post" enctype="multipart/form-data">
+                  <div class="<%= (errors.title)?'has-error':'' %>">
                   <label for="edit_title">Title</label>
                   <input id="edit_title" type="text" name="post[title]" value="" placeholder="Title입력">
-                  <textarea id="summernote" name="post[body]"></textarea>
+                  <% if(errors.title){ %>
+                    <span class="help-block"><%= errors.title.message %></span>
+                  <% } %>
+                  </div>
+                  <div class="<%= (errors.body)?'has-error':'' %>">
+                    <textarea id="summernote" name="post[body]"></textarea>
+                    <% if(errors.body){ %>
+                      <span class="help-block"><%= errors.body.message %></span>
+                    <% } %>
+                  </div>
                   <div class="col-xs-8">
                     <input id="input" type="file" name="file">
                   </div>
-                  <input type="hidden" name="images" id="images" value="">     
+                  <input type="hidden" name="images" id="images" value="">
                   <br>
                   <button type="submit" class="btn submit_btn">Submit</button>
                 </form>

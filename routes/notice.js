@@ -3,7 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var notices=require('../models/notices');
 var util = require('../config/util.js');
-var lib = require('../config/posts_controller.js')
+var lib = require('../config/posts_controller.js');
 
 var notice_Option = {
     title:'공지사항',

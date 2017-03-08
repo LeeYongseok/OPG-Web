@@ -16,7 +16,7 @@ section>article { background: #ccc; }
 .blog { padding: 0.1px 0; margin: 0 -1%; }
 
 .blog .blog_item { background: white; margin: 0 1.5% 5em;
-  padding: 1em; transition: width .3s ease-in-out;width: 30.33%;
+  padding: 1em; transition: width .3s ease-in-out; width: 30.33%;
   border: 1px solid lightgray;
 background: linear-gradient(135deg, rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', endColorstr='#f5f7f9',GradientType=1 );

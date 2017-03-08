@@ -27,11 +27,14 @@ exports.index = function(req,res,schema,option){
 };
 
 exports.new = function(req,res,schema,option){
+	var user = req.flash("user")[0] || {};
+	var errors = req.flash("errors")[0] || {};
 	res.render("../views/PostBoard/post_new",{
 		title: option.title,
 		main_menu: option.title+' 글 쓰기',
 		path:option.path,
-		page:req.query.page
+		page:req.query.page,
+		user:user, errors:errors
 	});
 };
 
@@ -47,7 +50,11 @@ exports.create = function(req,res,schema,option){
 	  fs.unlink(req.files.files[i].path);
 	}
 	schema.create(req.body.post,function(err,post){
-		if(err) return res.json({success:false, message:err});
+		if(err){
+			req.flash("user", req.body);
+			req.flash("errors", parseError(err));
+			return res.redirect("/"+option.path+"/new");
+		}
 		res.redirect('/'+option.path);
 	});
 };
@@ -71,6 +78,8 @@ exports.show = function(req,res,schema,option){
 };
 
 exports.edit = function(req,res,schema,option){
+	var user = req.flash("user")[0];
+	var errors = req.flash("errors")[0] || {};
 	schema.findById(req.params.id,function(err,post){
 		if(err) return res.json({success:false, message:err});
 		if(!req.user._id.equals(post.author))return res.json({success:false, message:"Unauthrized Attempt"});
@@ -80,7 +89,8 @@ exports.edit = function(req,res,schema,option){
 			main_menu: option.title+' 글 수정',
 			page: req.query.page,
 			path:option.path,
-			user:req.user
+			user:req.user,
+			User:user, errors: errors
 		});
 	});
 };
@@ -96,11 +106,24 @@ exports.update = function(req,res,schema,option){
       fs.unlink(req.files.files[i].path);
     }
 	req.body.post.updatedAt=Date.now();
-	schema.findOneAndUpdate({_id:req.params.id, author:req.user._id},req.body.post,function(err,post){
-		if(err) return res.json({success:false, message:err});
-		if(!post) return res.json({success:false, message:"No data found to update"});
-		res.redirect(req.params.id+ "?page=" +req.query.page);
-	});
+ schema.findOne({_id:req.params.id, author:req.user._id})
+ .exec(function(err, data){
+  if(err) return res.json(err);
+
+  // update user object
+  for(var p in req.body.post){
+ 	data[p] = req.body.post[p];
+  }
+  // save updated user
+  data.save(function(err, user){
+  if(err){
+ 	 req.flash("user", req.body);
+ 	 req.flash("errors", parseError(err));
+ 	 return res.redirect("/"+option.path+"/"+req.params.id+"/edit");
+ 	}
+ 	res.redirect(req.params.id+ "?page=" +req.query.page);
+  });
+ });
 };
 
 exports.destroy = function(req,res,schema,option){
@@ -129,3 +152,25 @@ exports.comment_pull = function(req,res,schema,option){
 	res.redirect('/'+option.path+'/'+req.params.id);
 	});
 };
+
+function parseError(errors){
+ var parsed = {};
+ if(errors.name == 'ValidationError'){
+  for(var name in errors.errors){
+   var validationError = errors.errors[name];
+   parsed[name] = { message:validationError.message };
+ } // mongoose에서 발생하는 validationError message를 변환
+ } else if(errors.code == "11000" ) {
+   if(errors.errmsg.indexOf("id") > 0){
+     parsed.id = { message:"이미 존재하는 아이디 입니다." };
+   } else if(errors.errmsg.indexOf("tel") > 0){
+     parsed.tel = { message:"이미 존재하는 번호 입니다." };
+   } else if(errors.errmsg.indexOf("mail") > 0){
+     parsed.mail = { message:"이미 존재하는 e-mail 입니다." };
+   }
+  // mongoDB에서 id의 error를 처리
+ } else {
+  parsed.unhandled = JSON.stringify(errors);
+ }
+ return parsed;
+}
