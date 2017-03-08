@@ -45,7 +45,10 @@
                             </span>
                         </div>
                     </div>
-                    <% if(isAuthenticated) { %>
+                    <% if(isAuthenticated && !(path==='notice')) { %>
+                    <a href="/<%=path%>/new?page=<%=page%>"><button class="btn btn_white">New</button></a>
+                    <% } %>
+                    <% if(isAuthenticated && currentUser.admin===1){ %>
                     <a href="/<%=path%>/new?page=<%=page%>"><button class="btn btn_white">New</button></a>
                     <% } %>
                      <table class="mainText">
@@ -56,16 +59,16 @@
                            <th class="date">작성일</th>
                            <th class="views">조회</th>
                        </tr>
-                       <% var count=(page-1)*10+1; %>
+                       <% var post_num=count-((page*10)-10); %>
                        <% data.forEach(function(e){ %>
                        <tr>
-                           <th class="number"><%= count %></th>
-                           <th class="title"><a href="/<%=path%>/<%= e._id %>?page=<%=page%>"><%= e.title %></a><span style="color:skyblue">(<%= e.comments.length %>)</span></th>
+                           <th class="number"><%= post_num %></th>
+                           <th class="title"><a href="/<%=path%>/<%= e._id %>?page=<%=page%>" ><%= e.title %></a><span style="color:skyblue">(<%= e.comments.length %>)</span></th>
                            <th class="author"><%= e.author ? e.author.name : "" %></th>
                            <th class="date"><%= e.createdAt.toLocaleDateString() %></th>
                            <th class="views"><%= e.views %></th>
                        </tr>
-                       <% count++ %>
+                       <% post_num-- %>
                        <% }) %>
                    </table>
 <!--이곳에 자기가 원하는 레이아웃을 설정해 주도록 하자.-->

@@ -1,9 +1,9 @@
 var express= require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var Posts=require('../models/Posts');
+var notices=require('../models/notices');
 var util = require('../config/util.js');
-var lib = require('../config/posts_controller.js')
+var lib = require('../config/posts_controller.js');
 
 var notice_Option = {
     title:'공지사항',
@@ -34,7 +34,7 @@ router.delete('/:id',util.isLoggedin,function(req,res){
 });//destroy
 
 ////comment
-router.post('/:id/comments',function(req,res){1
+router.post('/:id/comments',function(req,res){
 	lib.comment_push(req,res,notices.notice_Board,notice_Option);
 });
 

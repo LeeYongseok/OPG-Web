@@ -22,7 +22,7 @@
         <h1 class="col-xs-8">Sign Up</h1>
        </div>
         <hr />
-       <form method="post" class="from-horizontal" >
+       <form method="post" class="from-horizontal" id="signup">
             <div class="form-group row <%= (errors.name)?'has-error':'' %>">
                 <div class="col-xs-2"></div>
                 <label for="name" class="col-xs-2">이 름</label>
@@ -73,7 +73,7 @@
                   <% } %>
                 </div>
             </div>
-               <div class="form-group row <%= (errors.mail)?'has-error':'' %>">
+            <div class="form-group row <%= (errors.mail)?'has-error':'' %>">
                 <div class="col-xs-2"></div>
                 <label for="mail" class="col-xs-2">E-Mail</label>
                 <input type="email" id="mail" name="mail" class="col-xs-4" placeholder="ex) ID@mail.net" value="<%= user.mail %>">
@@ -83,10 +83,25 @@
                   <% } %>
                 </div>
             </div>
+            <div class="form-group row <%= (errors.year)?'has-error':'' %>">
+                 <div class="col-xs-2"></div>
+                 <label for="year" class="col-xs-2">입학년도</label>
+                 <input type="text" id="year" name="year" class="col-xs-1" placeholder="XXXX" value="<%= user.year %>">
+                  <div class="col-xs-2">
+                   <% if(errors.year){ %>
+                     <span class="help-block"><%= errors.year.message %></span>
+                   <% } %>
+                 </div>
+                 <label for="state" class="col-xs-1">상태</label>
+                 <select name="state" id="state" from="signup" class="col-xs-1">
+                    <option value="졸업">졸업</option>
+                    <option value="재학">재학</option>
+                 </select>
+            </div>
             <div class="form-group row">
-               <div class="col-xs-7"></div>
-               <input type="submit" id="submit" name="submit" value="Sign Up" class="col-xs-1">
-               <input type="reset" id="reset" name="reset" value="Reset" class="col-xs-1">
+              <div class="col-xs-6"></div>
+               <input type="submit" id="submit" name="submit" value="Sign Up" class="col-xs-1 btn-default">
+               <input type="reset" id="reset" name="reset" value="Reset" class="col-xs-1 btn-default">
            </div>
            <% if(errors.unhandled){ %>
              <div class="alert alert-danger">

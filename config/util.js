@@ -9,4 +9,14 @@ util.isLoggedin = function(req,res,next){
 	}
 };
 
+util.isadminOne = function(req,res,next){
+	if(req.isAuthenticated() && req.user.admin===1){
+		next();
+	}else{
+		req.flash("errors", {login:"Not admin"});
+  		res.redirect("/");
+	}
+};
+
+
 module.exports = util;

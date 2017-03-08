@@ -10,6 +10,8 @@
         $('li.disabled>a').on('click',function(e){
           e.preventDefault();
         });
+
+        $('img.post_image').width($('div.item_image').width());
       });
     </script>
 </head>
@@ -57,7 +59,7 @@
                       <a href="/<%=path%>/<%= e._id%>?page=<%=page%>">
                      <div class="ibw">
                        <div class="item_image iw ib">
-                         <img src="<%=getimgsrc(e)%>" alt="">
+                         <img class="post_image" src="<%=getimgsrc(e)%>" alt="">
                        </div>
                        <div class="item_details ib fs">
                          <div class="item_header"><%=e.title%></div>
