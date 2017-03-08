@@ -45,7 +45,10 @@
                             </span>
                         </div>
                     </div>
-                    <% if(isAuthenticated) { %>
+                    <% if(isAuthenticated && !(path==='notice')) { %>
+                    <a href="/<%=path%>/new?page=<%=page%>"><button class="btn btn_white">New</button></a>
+                    <% } %>
+                    <% if(isAuthenticated && currentUser.admin===1){ %>
                     <a href="/<%=path%>/new?page=<%=page%>"><button class="btn btn_white">New</button></a>
                     <% } %>
                      <table class="mainText">
