@@ -1,7 +1,7 @@
 var express= require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var Posts=require('../models/Posts');
+var notices=require('../models/notices');
 var util = require('../config/util.js');
 var lib = require('../config/posts_controller.js');
 
