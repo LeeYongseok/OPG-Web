@@ -36,7 +36,6 @@
 }
 .text table .date{
     width: 2rem;
-    font-size: 1rem;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: center;

@@ -53,7 +53,7 @@
                            <th class="number"><%= post_num %></th>
                            <th class="title"><a href="/<%=path%>/<%= e._id %>?page=<%=page%>" ><%= e.title %></a><span style="color:skyblue">(<%= e.comments.length %>)</span></th>
                            <th class="author"><%= e.author ? e.author.name : "" %></th>
-                           <th class="date"><%= e.createdAt.toLocaleDateString() %></th>
+                           <th class="date"><small><%= e.createdAt.toLocaleDateString() %></small></th>
                            <th class="views"><%= e.views %></th>
                        </tr>
                        <% post_num-- %>
