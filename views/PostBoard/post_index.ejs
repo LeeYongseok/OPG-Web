@@ -30,25 +30,13 @@
                 <div class="col-xs-1"></div>
                 <div class="col-xs-8">
                  <div class="col-xs-8"></div>
-
                   <div class="col-xs-4" id="imaginary_container">
-                         <select id="sel" name="sel">
-                      <option value="title">제목</option>
-                      <option value="author">작성자</option>
-                      </select> 
-                        <div class="input-group">
-                        <input type="text" class="form-control"  placeholder="Search" >
-                            <span class="input-group-addon">
-                                <button type="submit">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                </button>  
-                            </span>
-                        </div>
-                    </div>
+                    <%- include ../partials/search.ejs %>
+                  </div>
                     <% if(isAuthenticated && !(path==='notice')) { %>
                     <a href="/<%=path%>/new?page=<%=page%>"><button class="btn btn_white">New</button></a>
                     <% } %>
-                    <% if(isAuthenticated && currentUser.admin===1 (path==='notice')){ %>
+                    <% if(isAuthenticated && currentUser.admin===1 && (path==='notice')){ %>
                     <a href="/<%=path%>/new?page=<%=page%>"><button class="btn btn_white">New</button></a>
                     <% } %>
                      <table class="mainText">
