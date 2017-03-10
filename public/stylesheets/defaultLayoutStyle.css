@@ -1,5 +1,5 @@
 @import url('//fonts.googleapis.com/css?family=Inconsolata');
-@font-face{font-family:'Nanum Barun Gothic'; src:url('/font/NanumBarunGothic.woff');}
+@font-face{font-family:'Nanum Barun Gothic'; src: url('//cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/v1/NanumBarunGothic-Regular.woff'), url('/font/NanumBarunGothic.woff') ;}
 
 body{
     width:100%;
@@ -423,16 +423,16 @@ a.up-scroll:hover{
     section>.container h2{
         font-size:2rem;
     }
-    
+
     div.sub_info{
         display: none;
         font-size:1rem;
     }
-    
+
     div.search{
         display: none;
     }
-    
+
     .pagination > li > a,
     .pagination > li > span {
 
@@ -448,7 +448,7 @@ a.up-scroll:hover{
     .circlepic{
         display: none;
     }
-    
+
     #menu-toggle{
     position: fixed;
     right: : 30px;
@@ -461,7 +461,7 @@ a.up-scroll:hover{
     }
     #menu{
        display: none;
-        
+
     }
     body.open #menu{
         display:block;
@@ -470,4 +470,4 @@ a.up-scroll:hover{
     body.open button#menu-toggle{
     left:10px;
     }
-}    
+}
