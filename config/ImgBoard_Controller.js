@@ -12,7 +12,7 @@ exports.index = function(req,res,schema,option){
     var maxPageNum = Math.ceil(count/limit);
     schema.find({}).populate("author").sort('-createdAt').skip(skip).limit(limit).exec(function(err, data) {
       if(err) return res.json({success:false, message:err});
-      res.render("../views/ImgBoard/imgPost_Index",{
+      res.render("../views/PostBoard/imgPost_Index",{
   			data: data,
         title: option.title,
         main_menu: option.title,

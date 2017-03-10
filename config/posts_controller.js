@@ -1,5 +1,6 @@
 var fs = require('fs');
 var path = require('path');
+var cloudinary = require('cloudinary');
 var async = require('async');
 var Users=require('../models/User');
 var util=require('../config/util.js');
@@ -7,7 +8,7 @@ var mongoose = require('mongoose');
 
 
 exports.index = function(req,res,schema,option){
-	var limit = 10;
+		var limit = 10;
   	var page = req.query.page;
   	var search = util.createSearch(req.query);
   	if(page === undefined) {page = 1;}
@@ -97,23 +98,29 @@ exports.new = function(req,res,schema,option){
 
 
 exports.create = function(req,res,schema,option){
-	req.body.post.author = req.user._id;
-	if(req.body.images) {req.body.images = JSON.parse(req.body.images);}
-	if(req.files.file !== undefined) {
-	  req.body.post.filePath = req.files.file[0].path;
-	  req.body.post.fileOriginalname = req.files.file[0].originalname;
-	}
-	for(var i in req.files.files) {
-	  fs.unlink(req.files.files[i].path);
-	}
-	schema.create(req.body.post,function(err,post){
-		if(err){
-			req.flash("user", req.body);
-			req.flash("errors", parseError(err));
-			return res.redirect("/"+option.path+"/new");
+	async.waterfall([
+		function(callback){
+				cloudinaryfileupload(req, function(){
+					callback(null,req);
+				});
+		}],
+		function(err,req){
+			req.body.post.author = req.user._id;
+			if(req.body.images) {req.body.images = JSON.parse(req.body.images);}
+			for(var i in req.files.files) {
+				fs.unlink(req.files.files[i].path);
+			}
+			schema.create(req.body.post,function(err,post){
+				console.log(req.body.post);
+				if(err){
+					req.flash("user", req.body);
+					req.flash("errors", parseError(err));
+					return res.redirect("/"+option.path+"/new");
+				}
+				res.redirect('/'+option.path);
+			});
 		}
-		res.redirect('/'+option.path);
-	});
+	);
 };
 
 exports.show = function(req,res,schema,option){
@@ -154,33 +161,38 @@ exports.edit = function(req,res,schema,option){
 
 
 exports.update = function(req,res,schema,option){
-	if(req.body.images) {req.body.images = JSON.parse(req.body.images);}
-    if(req.files.file !== undefined) {
-	  req.body.post.filePath = req.files.file[0].path;
-	  req.body.post.fileOriginalname = req.files.file[0].originalname;
-	}
-    for(var i in req.files.files) {
-      fs.unlink(req.files.files[i].path);
-    }
-	req.body.post.updatedAt=Date.now();
- schema.findOne({_id:req.params.id, author:req.user._id})
- .exec(function(err, data){
-  if(err) return res.json(err);
+	async.waterfall([
+		function(callback){
+				cloudinaryfileupload(req, function(){
+					callback(null,req);
+				});
+		}],
+		function(err,req){
+			if(req.body.images) {req.body.images = JSON.parse(req.body.images);}
+		    for(var i in req.files.files) {
+		      fs.unlink(req.files.files[i].path);
+		    }
+			req.body.post.updatedAt=Date.now();
+		 schema.findOne({_id:req.params.id, author:req.user._id})
+		 .exec(function(err, data){
+		  if(err) return res.json(err);
 
-  // update user object
-  for(var p in req.body.post){
- 	data[p] = req.body.post[p];
-  }
-  // save updated user
-  data.save(function(err, user){
-  if(err){
- 	 req.flash("user", req.body);
- 	 req.flash("errors", parseError(err));
- 	 return res.redirect("/"+option.path+"/"+req.params.id+"/edit");
- 	}
- 	res.redirect(req.params.id+ "?page=" +req.query.page);
-  });
- });
+		  // update user object
+		  for(var p in req.body.post){
+		 	data[p] = req.body.post[p];
+		  }
+		  // save updated user
+		  data.save(function(err, user){
+		  if(err){
+		 	 req.flash("user", req.body);
+		 	 req.flash("errors", parseError(err));
+		 	 return res.redirect("/"+option.path+"/"+req.params.id+"/edit");
+		 	}
+		 	res.redirect(req.params.id+ "?page=" +req.query.page);
+		  });
+		 });
+	 }
+ );
 };
 
 exports.destroy = function(req,res,schema,option){
@@ -230,4 +242,19 @@ function parseError(errors){
   parsed.unhandled = JSON.stringify(errors);
  }
  return parsed;
+}
+
+function cloudinaryfileupload(req, callback){
+	if(req.files.file !== undefined){
+		cloudinary.uploader.upload(req.files.file[0].path, function(result) {
+				 console.log(result);
+				if(result && req.files.file[0].path !== undefined){
+					req.body.post.filePath = result.secure_url;
+					req.body.post.fileOriginalname = req.files.file[0].originalname;
+					fs.unlink(path.join(req.files.file[0].path));
+					console.log("LocalTemporary File Deleted");
+					callback();
+				}
+			}, { resource_type: 'auto', use_filename: true, unique_filename: true});
+		} else callback();
 }

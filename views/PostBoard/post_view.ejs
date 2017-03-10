@@ -4,7 +4,7 @@
     <%- include ../partials/head.ejs %>
     <link rel="stylesheet" href="/stylesheets/photoStyle.css">
     <link rel="stylesheet" href="/stylesheets/view.css">
-    <%- include post_func.ejs %>
+    <%- include Post_Func.ejs %>
     <%- include ../partials/inc_summernote.ejs %>
   </head>
   <body>
@@ -43,7 +43,7 @@
                   <% } %>
                   <span><small><%= data.author ? data.author.name : "" %></small></span>
                   <% if(user && (data.filePath != undefined)) { %>
-                    <div>Download:<a href="<%=getfilepath(data)%>" download><%=data.fileOriginalname%></a></div>
+                    <div>Attached file: <a href="<%=getfilepath(data)%>"><%=data.fileOriginalname%></a></div>
                    <% } %>
                   <div class="p_body" id="body"></div>
                    <div class="comments">
