@@ -20,51 +20,99 @@
                 </div>
             </div>
            <div class="row mainText user">
-             <form class="user-form form-horizontal" action="/user/<%=user._id %>?_method=put" method="post">
+             <form class="user-form form-horizontal" id="user" action="/user/<%=currentUser._id %>?_method=put" method="post">
               <div class="contentBox">
                <fieldset>
-                <div class="form-group">
+                <div class="form-group <%= (errors.currentPassword)?'has-error':'' %>">
                  <label for="currentPassword" class="col-sm-3 control-label">현재 비밀번호 *</label>
                  <div class="col-sm-6">
                   <input class="form-control" type="password" id="currentPassword" name="currentPassword" value="">
+                  <% if(errors.currentPassword){ %>
+                    <span class="help-block"><%= errors.currentPassword.message %></span>
+                  <% } %>
                  </div>
                 </div>
                 <hr></hr>
-                <div class="form-group">
+                <div class="form-group <%= (errors.id)?'has-error':'' %>">
                  <label for="id" class="col-sm-3 control-label">ID *</label>
-                 <div class="col-sm-6">
+                 <div class="col-sm-3">
                   <input class="form-control" type="text" id="id" name="id" value="<%= user.id %>">
+                  <% if(errors.id){ %>
+                    <span class="help-block"><%= errors.id.message %></span>
+                  <% } %>
                  </div>
                 </div>
                 <div class="form-group">
-                 <label for="name" class="col-sm-3 control-label">이름 *</label>
-                 <div class="col-sm-6">
-                  <input class="form-control" type="text" id="name" name="name" value="<%= user.name %>">
+                  <div class=" <%= (errors.name)?'has-error':''%>">
+                   <label for="name" class="col-sm-3 control-label">이름 *</label>
+                   <div class="col-sm-3">
+                    <input class="form-control" type="text" id="name" name="name" value="<%= user.name %>">
+                    <% if(errors.name){ %>
+                      <span class="help-block"><%= errors.name.message %></span>
+                    <% } %>
+                   </div>
+                  </div>
+                 <label for="year" class="col-sm-2 control-label">회원등급:</label>
+                 <div class="col-sm-2">
+                    <p><%= user.grade %></p>
                  </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group <%= (errors.tel)?'has-error':''%>">
                  <label for="tel" class="col-sm-3 control-label">전화번호 *</label>
                  <div class="col-sm-6">
                   <input class="form-control" type="text" id="tel" name="tel" value="<%= user.tel %>">
+                  <% if(errors.tel){ %>
+                    <span class="help-block"><%= errors.tel.message %></span>
+                  <% } %>
+                 </div>
+                </div>
+                <div class="form-group <%= (errors.mail)?'has-error':''%>">
+                 <label for="mail" class="col-sm-3 control-label">E-mail *</label>
+                 <div class="col-sm-6">
+                  <input class="form-control" type="text" id="mail" name="mail" value="<%= user.mail %>">
+                  <% if(errors.mail){ %>
+                    <span class="help-block"><%= errors.mail.message %></span>
+                  <% } %>
                  </div>
                 </div>
                 <div class="form-group">
-                 <label for="email" class="col-sm-3 control-label">E-mail *</label>
-                 <div class="col-sm-6">
-                  <input class="form-control" type="text" id="email" name="email" value="<%= user.mail %>">
+                  <div class="<%= (errors.year)?'has-error':''%>">
+                   <label for="year" class="col-sm-3 control-label">입학년도 *</label>
+                   <div class="col-sm-3">
+                    <input class="form-control" type="text" id="year" name="year" value="<%= user.year %>">
+                    <% if(errors.year){ %>
+                      <span class="help-block"><%= errors.year.message %></span>
+                    <% } %>
+                  </div>
                  </div>
+                 <label for="state" class="col-sm-2 control-label">재학여부</label>
+                 <select class="col-sm-1" id="state" name="state" form="user">
+                   <% if(user.state === "졸업") { %>
+                      <option value="재학">재학</option>
+                      <option value="졸업" selected>졸업</option>
+                    <% } else { %>
+                      <option value="재학" selected>재학</option>
+                      <option value="졸업">졸업</option>
+                    <% } %>
+                 </select>
                 </div>
                 <hr></hr>
-                <div class="form-group">
+                <div class="form-group <%= (errors.newPassword)?'has-error':'' %>">
                  <label for="newPassword" class="col-sm-3 control-label">새로운 비밀번호</label>
                  <div class="col-sm-6">
                   <input class="form-control" type="password" id="newPassword" name="newPassword" value="">
+                  <% if(errors.newPassword){ %>
+                     <span class="help-block"><%= errors.newPassword.message %></span>
+                  <% } %>
                  </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group <%= (errors.passwordConfirmation)?'has-error':'' %>">
                  <label for="passwordConfirmation" class="col-sm-3 control-label">비밀번호 확인</label>
                  <div class="col-sm-6">
                   <input class="form-control" type="password" id="passwordConfirmation" name="passwordConfirmation" value="">
+                  <% if(errors.passwordConfirmation){ %>
+                     <span class="help-block"><%= errors.passwordConfirmation.message %></span>
+                  <% } %>
                  </div>
                 </div>
                 <p class="col-sm-5 control-label">
@@ -72,11 +120,15 @@
                 </p>
                </fieldset>
               </div>
-
               <div class="buttons">
                 <div class="col-sm-3"></div>
-               <button type="submit" class="btn btn-default">비밀번호 변경</button>
+               <button type="submit" class="btn btn-default">정보 변경</button>
               </div>
+              <% if(errors.unhandled){ %>
+               <div class="alert alert-danger">
+                <%= errors.unhandled.message %>
+               </div>
+              <% } %>
              </form>
          </div>
 <%- include ./partials/footer.ejs %>

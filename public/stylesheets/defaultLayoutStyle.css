@@ -6,6 +6,7 @@ body{
     margin: 0;
     font-family: "Roboto", sans-serif;
     font-family: 'Nanum Barun Gothic', serif;
+    overflow-x:hidden; overflow-y:auto;
 }
 
 .page-wrap{
@@ -36,7 +37,7 @@ header{
     position: fixed;
     top:0;
     background: #ffffff;
-    z-index: 1;
+    z-index: 10;
 }
 
 header .head{
@@ -395,3 +396,78 @@ a.up-scroll:hover{
     background-color: #eee;
     color: #23527c;
 }
+@media (max-width: 500px) and (min-width: 300px)  {
+    html{
+        overflow-x: hidden;
+        min-width:340px;
+        width:100%;
+    }
+    header{
+        width:100%;
+    }
+
+    .head{
+        width: 100%;
+    }
+    .head span{
+        display: none;
+    }
+    .page-wrap{
+    margin-top:10px;
+    padding: 10px;
+    }
+    section>.container{
+        min-width: 340px;
+        width:340px;
+    }
+    section>.container h2{
+        font-size:2rem;
+    }
+    
+    div.sub_info{
+        display: none;
+        font-size:1rem;
+    }
+    
+    div.search{
+        display: none;
+    }
+    
+    .pagination > li > a,
+    .pagination > li > span {
+
+    font-size:1rem;
+    margin: 1px;
+    width: 10px;
+}
+    p{
+        width:80%;
+        font-size:1rem;
+    }
+
+    .circlepic{
+        display: none;
+    }
+    
+    #menu-toggle{
+    position: fixed;
+    right: : 30px;
+    }
+    #menu-toggle>div{
+    position: absolute;
+    right:30px;
+    bottom:10px;
+    z-index: 999;
+    }
+    #menu{
+       display: none;
+        
+    }
+    body.open #menu{
+        display:block;
+       right:0px;
+    }
+    body.open button#menu-toggle{
+    left:10px;
+    }
+}    

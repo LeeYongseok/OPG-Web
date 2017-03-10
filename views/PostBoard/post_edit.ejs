@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ../partials/head.ejs %>
+    <link rel="stylesheet" href="/stylesheets/edit.css">
+    <%- include ../partials/inc_summernote.ejs %>
+  </head>
+  <body>
+    <%- include ../partials/header+nav.ejs %>
+    <div class="page-wrap">
+        <section class="programming">
+            <div class="container">
+              <div class="row">
+                 <div class="col-xs-12">
+                     <h2><%= main_menu %></h2>
+                 </div>
+             </div>
+             <div class="row">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-6 sub_info">
+                </div>
+                <div class="col-xs-5 circlepic">
+                    <div class="circle" id="circle1"></div>
+                    <div class="circle" id="circle2"></div>
+                    <div class="circle" id="circle3"></div>
+                </div>
+              </div>
+<!--이곳에 자기가 원하는 레이아웃을 설정해 주도록 하자.-->
+              <div class="row">
+                <div class="edit">
+                  <form class="posts_form" action="/<%=path%>/<%=data._id%>?_method=PUT" method="post" enctype="multipart/form-data">
+                    <div class="<%= (errors.title)?'has-error':'' %>">
+                    <label for="edit_title">Title</label>
+                    <input id="edit_title" type="text" name="post[title]" value="<%= data.title %>" placeholder="Title입력">
+                    <% if(errors.title){ %>
+                      <span class="help-block"><%= errors.title.message %></span>
+                    <% } %>
+                    </div>
+                    <div class="<%= (errors.body)?'has-error':'' %>">
+                      <label for="edit_body">Body</label>
+                      <textarea id="summernote" name="post[body]"><%= data.body%></textarea>
+                      <% if(errors.body){ %>
+                        <span class="help-block"><%= errors.body.message %></span>
+                      <% } %>
+                    </div>
+                    <input type="hidden" name="images" id="images" value="">
+                    <div class="col-xs-8">
+                    <% if(data.filePath != undefined){ %>
+                      <input id="input" type="file" name="file" disabled> Attached file already exist.
+                    <% } else { %>
+                      <input id="input" type="file" name="file">
+                    <%} %>
+                  </div>
+                  <br>
+                    <button type="submit" class="btn">Submit</button>
+                  </form>
+                  <a href="/<%=path%>/<%=data._id%>"><button class="btn">Back</button></a>
+                </div>
+              </div>
+
+
+
+<!---이곳까지 자기가 원하는 레이아웃을 설정해 주도록 하자.-->
+<%- include ../partials/footer.ejs %>

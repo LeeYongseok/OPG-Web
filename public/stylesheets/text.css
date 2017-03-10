@@ -1,6 +1,13 @@
 .text table .title{
-    padding-right: 200px;
+    width: 300px;
     overflow: hidden;
+    text-overflow: ellipsis;
+}
+.text table .title a{
+    display: inline-block;
+    width: 500px;
+    overflow: hidden;
+    text-overflow: ellipsis; 
 }
 .text table th{
     padding:5px;
@@ -12,6 +19,35 @@
     width: 100%;
     border-top:4px solid rgba(0,0,0,.5);
     border-bottom:4px solid rgba(0,0,0,.5);
+}
+.text table .number{
+    width: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    white-space:nowrap;
+}
+.text table .author{
+    width: 3rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: right;
+    white-space:nowrap;
+}
+.text table .date{
+    width: 2rem;
+    font-size: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    white-space:nowrap;
+}
+.text table .views{
+    width: 1rem;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
 }
 .text h2{
     padding-top: 40px;
@@ -41,3 +77,44 @@
 #imaginary_container{
     z-index: 2;
 }
+
+button.btn_white{
+    position: relative;
+    float: left;
+    margin: 5px 10px;
+    color:black;
+    background: transparent;
+    border-color: #ddd;
+}
+
+button.btn_white:hover{
+    color:white;
+    background-color: #34B4D2;
+}
+
+
+@media (max-width: 500px) and (min-width: 300px) {
+    .text h2{
+        padding-top: 1rem;
+    }
+    .text table{
+        margin-top:30px;
+        width:120% !important;
+        font-size: 1rem;
+    }
+    .text table th{
+        padding:5px 2px;
+    }
+    .text table .title a{
+    width: 150px;
+    }
+    .text table .date{
+         display: none;
+    }
+    .text table .views{
+        display: none;
+    }
+    #imaginary_container>*{
+        display: none;
+    }
+}    

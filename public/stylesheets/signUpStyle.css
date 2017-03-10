@@ -10,10 +10,12 @@ body { background-color: darkslateblue;}
 
 .form-group {margin-top: 40px;}
 
-.form-group>label {color : white; font-size: 180%; line-height: 46px;}
+.form-group label {color : white; font-size: 180%; line-height: 46px;}
 
-.form-group>input {font-size: 180%; padding: 5px 20px;}
+.form-group input {font-size: 150%; padding: 5px 20px;}
 
-.form-group:last-child>input{padding: 5px 0; font-size: 150%; border-radius: 8px; margin-right: 20px;}
+select {font-size: 150%; padding: 5px 20px;}
 
-.form-group:last-child>input:last-child{padding: 5px 15px;}
+.form-group:last-child>.btn-default{padding: 5px 0; font-size: 150%; border-radius: 8px; margin-right: 20px;}
+
+.form-group:last-child>.btn-default:last-child{padding: 5px 15px;}
