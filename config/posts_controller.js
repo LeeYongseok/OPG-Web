@@ -2,31 +2,87 @@ var fs = require('fs');
 var path = require('path');
 var cloudinary = require('cloudinary');
 var async = require('async');
+var Users=require('../models/User');
+var util=require('../config/util.js');
+var mongoose = require('mongoose');
+
 
 exports.index = function(req,res,schema,option){
 		var limit = 10;
   	var page = req.query.page;
+  	var search = util.createSearch(req.query);
   	if(page === undefined) {page = 1;}
   	page = parseInt(page);
-  	schema.count({},function(err,count){
-  		if(err) return res.json({success:false, message:err});
-    	var skip = (page-1)*limit;
-    	var maxPageNum = Math.ceil(count/limit);
-		schema.find({}).populate('author').sort('-createdAt').skip(skip).limit(limit).exec(function(err,posts){
-		if(err) return res.json({success:false, message:err});
-		res.render("../views/PostBoard/post_index",{
-			data:posts,
-			title: option.title,
-			main_menu: option.title,
-			path:option.path,
-			page:page,
-			maxPageNum:maxPageNum,
-			count:count,
-			user:req.user
-		});
-	});
-	});
+  	async.waterfall([function(callback){
+	  		if(!search.findUser) return callback(null);
+			Users.find(search.findUser,function(err,users){
+				if(err) callback(err);
+				var or=[];
+				users.forEach(function(user){
+					or.push({author:mongoose.Types.ObjectId(user._id)});
+				});
+				if(search.findText.$or){
+					search.findText.$or = search.findText.$or.concat(or);
+				}else if(or.length>0){
+					search.findText = {$or:or};
+				}
+				callback(null);
+			});
+	  	},function(callback){
+	  		if(search.findUser&& !search.findText.$or)return callback(null,null,0,0);
+	  		schema.count(search.findText,function(err,count){
+	  		if(err){callback(err);}
+	    	skip = (page-1)*limit;
+	    	maxPageNum = Math.ceil(count/limit);
+	    	callback(null,skip,maxPageNum,count);
+			});
+	  	},function (skip,maxPageNum,count,callback){
+	  		if(search.findUser&&!search.findText.$or)return callback(null,[],0,0);
+	  		schema.find(search.findText).populate('author').sort('-createdAt').skip(skip).limit(limit).exec(function(err,posts){
+				if(err) {return callback(err);}
+				callback(null,posts,maxPageNum,count);
+			});
+	  	}],function(err,posts,maxPageNum,count){
+	  		if(err) return res.json({success:false, message:err});
+	  		res.render("../views/PostBoard/post_index",{
+					data:posts,
+					title: option.title,
+					main_menu: option.title,
+					path:option.path,
+					page:page,
+					maxPageNum:maxPageNum,
+					search:search,
+					count:count,
+					urlQuery:req._parsedUrl.query,
+					user:req.user
+			});
+	 });
 };
+
+// exports.index = function(req,res,schema,option){
+// 	var limit = 10;
+//   	var page = req.query.page;
+//   	if(page === undefined) {page = 1;}
+//   	page = parseInt(page);
+//   	schema.count({},function(err,count){
+//   		if(err) return res.json({success:false, message:err});
+//     	var skip = (page-1)*limit;
+//     	var maxPageNum = Math.ceil(count/limit);
+// 		schema.find({}).populate('author').sort('-createdAt').skip(skip).limit(limit).exec(function(err,posts){
+// 		if(err) return res.json({success:false, message:err});
+// 		res.render("../views/PostBoard/post_index",{
+// 			data:posts,
+// 			title: option.title,
+// 			main_menu: option.title,
+// 			path:option.path,
+// 			page:page,
+// 			maxPageNum:maxPageNum,
+// 			count:count,
+// 			user:req.user
+// 		});
+// 	});
+// 	});
+// };
 
 exports.new = function(req,res,schema,option){
 	var user = req.flash("user")[0] || {};
