@@ -21,8 +21,8 @@ var storage = multer.diskStorage({
       var originalname = file.originalname;
       var extension = originalname.split(".");
       // cb(null, Date.now() + '.' + extension[extension.length-1]);
-      cb(null, Date.now() + '_' + file.originalname);
-      // cb(null,file.originalname);
+      // cb(null, Date.now() + '_' + file.originalname);
+      cb(null,file.originalname);
   }
 });
 var upload = multer({storage : storage});
