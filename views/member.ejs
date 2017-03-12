@@ -7,7 +7,7 @@
                             color:black; background: transparent; border-color: #ddd; }
           .btn_white:hover{ color:white; background-color: #34B4D2; }
           .btn-default:hover { color:white; background-color: #34B4D2; }
-          select {font-size: 14px; height: 26px; border-radius: 4px;}
+          select {font-size: 14px; height: 32px; border-radius: 15px; float: left; margin-right: 15px;}
     </style>
 </head>
 <body>
@@ -27,22 +27,24 @@
             </div>
            <div class="row mainText">
              <div class="col-xs-7"></div>
-             <div class="col-xs-1" id="imaginary_container">
-                  <select id="sel" name="sel">
-                  <option value="name">이름</option>
-                  <option value="grade">회원등급</option>
+             <div class="col-xs-5" id="imaginary_container">
+              <form method="get" action="/<%=path%>">
+                  <select id="sel" name="searchType">
+                  <option value="name" <%= search.searchType=="name"?select="selected":""%>>이름</option>
+                  <option value="year" <%= search.searchType=="year"?select="selected":""%>>입학년도</option>
+                  <option value="state" <%= search.searchType=="state"?select="selected":""%>>재학여부</option>
+                  <option value="grade" <%= search.searchType=="grade"?select="selected":""%>>회원등급</option>
                   </select>
+                  <div class="input-group">
+                  <input type="text" id="search" name="searchText" class="form-control"  placeholder="Search" >
+                      <span class="input-group-addon">
+                          <button type="submit">
+                              <span class="glyphicon glyphicon-search"></span>
+                          </button>
+                      </span>
+                    </div>
+                  </form>
               </div>
-              <div class="col-xs-4" id="imaginary_container">
-                   <form class="input-group" method="post">
-                   <input type="text" id="search" name="name" class="form-control"  placeholder="Name" >
-                       <span class="input-group-addon">
-                           <button type="submit">
-                               <span class="glyphicon glyphicon-search"></span>
-                           </button>
-                       </span>
-                   </form>
-               </div>
              <table class="table table-striped posts">
                <thead>
                 <tr>

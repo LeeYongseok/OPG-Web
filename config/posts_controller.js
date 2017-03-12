@@ -109,7 +109,7 @@ exports.create = function(req,res,schema,option){
 	schema.create(req.body.post,function(err,post){
 		if(err){
 			req.flash("user", req.body);
-			req.flash("errors", parseError(err));
+			req.flash("errors", util.parseError(err));
 			return res.redirect("/"+option.path+"/new");
 		}
 		res.redirect('/'+option.path);
@@ -175,7 +175,7 @@ exports.update = function(req,res,schema,option){
   data.save(function(err, user){
   if(err){
  	 req.flash("user", req.body);
- 	 req.flash("errors", parseError(err));
+ 	 req.flash("errors", util.parseError(err));
  	 return res.redirect("/"+option.path+"/"+req.params.id+"/edit");
  	}
  	res.redirect(req.params.id+ "?page=" +req.query.page);
@@ -209,25 +209,3 @@ exports.comment_pull = function(req,res,schema,option){
 	res.redirect('/'+option.path+'/'+req.params.id);
 	});
 };
-
-function parseError(errors){
- var parsed = {};
- if(errors.name == 'ValidationError'){
-  for(var name in errors.errors){
-   var validationError = errors.errors[name];
-   parsed[name] = { message:validationError.message };
- } // mongoose에서 발생하는 validationError message를 변환
- } else if(errors.code == "11000" ) {
-   if(errors.errmsg.indexOf("id") > 0){
-     parsed.id = { message:"이미 존재하는 아이디 입니다." };
-   } else if(errors.errmsg.indexOf("tel") > 0){
-     parsed.tel = { message:"이미 존재하는 번호 입니다." };
-   } else if(errors.errmsg.indexOf("mail") > 0){
-     parsed.mail = { message:"이미 존재하는 e-mail 입니다." };
-   }
-  // mongoDB에서 id의 error를 처리
- } else {
-  parsed.unhandled = JSON.stringify(errors);
- }
- return parsed;
-}
