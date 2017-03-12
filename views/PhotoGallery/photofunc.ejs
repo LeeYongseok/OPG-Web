@@ -1,0 +1,30 @@
+<%
+
+getimgsrc = function getimgsrc(data) {
+  var imgsrc = "/uploadedfiles/data.filename";
+  if ((/\.(jpe?g|png|gif|bmp)$/i).test(data.filename)) {
+    imgsrc = "/uploadedfiles/" + data.filename;
+  }
+  else {
+      imgsrc = '/images/No_image_available.png';
+  }
+  return imgsrc;
+}
+
+
+viewallimg = function viewallimage(data){
+  if( (/\.(jpe?g|png|gif|bmp)$/i).test(data.filename) ) {
+    return {
+      filename : ('/uploadedfiles/'+ data.filename)
+    };
+  }
+  else {
+    return { default : '/images/No_image_available.png' };
+  }
+}
+
+getfilepath = function getfilepath(data) {
+  return ('/uploadedfiles/'+ data.filename);
+}
+
+%>
