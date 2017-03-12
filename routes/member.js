@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var async = require('async');
 var User = require('../models/User');
 var util = require('../config/util.js');
 
@@ -7,13 +8,24 @@ var util = require('../config/util.js');
 router.get('/', function(req, res, next) {
   var limit = 15;
     var page = req.query.page;
+    var search = util.createSearch(req.query);
     if(page === undefined) {page = 1;}
     page = parseInt(page);
-  User.count({},function(err, count){
-    if(err) return res.json({success:false, message:err});
-    var skip = (page-1)*limit;
-    var maxPageNum = Math.ceil(count/limit);
-    User.find({}).sort({year:1}).skip(skip).limit(limit).exec(function(err, users){
+    async.waterfall([function(callback){
+      if(search.findUser&& !search.findText.$or)return callback(null,null,0,0);
+      User.count(search.findText,function(err,count){
+      if(err){callback(err);}
+      skip = (page-1)*limit;
+      maxPageNum = Math.ceil(count/limit);
+      callback(null,skip,maxPageNum,count);
+    });
+    },function (skip,maxPageNum,count,callback){
+      if(search.findUser&&!search.findText.$or)return callback(null,[],0,0);
+      User.find(search.findText).sort({name:1 ,year:1}).skip(skip).limit(limit).exec(function(err, users){
+      if(err) {return callback(err);}
+      callback(null,users,maxPageNum,count);
+    });
+  }],function(err,users,maxPageNum,count){
     if(err) return res.json({success:false, message:err});
     res.render('member',
     { users: users,
@@ -21,10 +33,10 @@ router.get('/', function(req, res, next) {
       main_menu: '멤버',
       page:page,
 			maxPageNum:maxPageNum,
-      path: 'member'});
+      path: 'member',
+      search:search});
     });
   });
-});
 
 // edit
 router.get("/edit",util.isadminOne, function(req, res){

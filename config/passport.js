@@ -32,7 +32,7 @@ passport.use("local-login",
     } else {
      req.flash("id", id );
      req.flash("errors", {login:"Incorrect ID or password"});
-     alert("아이디와 비밀번호를 확인해주세요.");
+     console.log("아이디와 비밀번호를 입력하세요.");
      return done(null, false);  // user가 전달되지 않으면 local-strategy는 실패로 간주
     }
    });

@@ -1,10 +1,28 @@
 var util = {};
 
 util.isLoggedin = function(req,res,next){
-	if(req.isAuthenticated()){
+	if(req.isAuthenticated() && req.user.admin <= 4){
 		next();
 	}else{
 		req.flash("errors", {login:"Please login first"});
+  		res.redirect("/");
+	}
+};
+
+util.isadminThree = function(req,res,next){
+	if(req.isAuthenticated() && req.user.admin <= 3){
+		next();
+	}else{
+		req.flash("errors", {login:"Not admin"});
+  		res.redirect("/");
+	}
+};
+
+util.isadminTwo = function(req,res,next){
+	if(req.isAuthenticated() && req.user.admin <= 2){
+		next();
+	}else{
+		req.flash("errors", {login:"Not admin"});
   		res.redirect("/");
 	}
 };
@@ -28,6 +46,18 @@ util.createSearch = function(queries){
 		if(searchType.indexOf("title")>=0){
 			postQuery.push({title:{$regex:new RegExp(queries.searchText,"i")}});
 		}
+		if(searchType.indexOf("name")>=0){
+			postQuery.push({name:{$regex:new RegExp(queries.searchText,"i")}});
+		}
+		if(searchType.indexOf("year")>=0){
+			postQuery.push({year:{$regex:new RegExp(queries.searchText,"i")}});
+		}
+		if(searchType.indexOf("state")>=0){
+			postQuery.push({state:{$regex:new RegExp(queries.searchText,"i")}});
+		}
+		if(searchType.indexOf("grade")>=0){
+			postQuery.push({grade:{$regex:new RegExp(queries.searchText,"i")}});
+		}
 		if(searchType.indexOf("author")>=0){
 			findUser={name:{$regex:new RegExp(queries.searchText,"i")}};
 		}
@@ -36,6 +66,27 @@ util.createSearch = function(queries){
 	return {searchType:queries.searchType, searchText:queries.searchText, findText:findText, findUser:findUser};
 };
 
+util.parseError = function(errors){
+ var parsed = {};
+ if(errors.name == 'ValidationError'){
+  for(var name in errors.errors){
+   var validationError = errors.errors[name];
+   parsed[name] = { message:validationError.message };
+ } // mongoose에서 발생하는 validationError message를 변환
+ } else if(errors.code == "11000" ) {
+   if(errors.errmsg.indexOf("id") > 0){
+     parsed.id = { message:"이미 존재하는 아이디 입니다." };
+   } else if(errors.errmsg.indexOf("tel") > 0){
+     parsed.tel = { message:"이미 존재하는 번호 입니다." };
+   } else if(errors.errmsg.indexOf("mail") > 0){
+     parsed.mail = { message:"이미 존재하는 e-mail 입니다." };
+   }
+  // mongoDB에서 id의 error를 처리
+ } else {
+  parsed.unhandled = JSON.stringify(errors);
+ }
+ return parsed;
+};
 
 
 module.exports = util;
