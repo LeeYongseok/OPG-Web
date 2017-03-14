@@ -9,6 +9,7 @@ var methodOverride = require('method-override');
 var multer  = require('multer');
 var flash = require('connect-flash');
 var session = require('express-session');
+
 var passport = require('./config/passport');  // 설치한 npm의 모듈이 아닌 내가 만든것으로 가져옴
 
 var index = require('./routes/index');
@@ -20,6 +21,7 @@ var about = require('./routes/about');
 var posts = require('./routes/posts');
 var info = require('./routes/info');
 var notice = require('./routes/notice');
+var new_post = require('./routes/new_post');
 
 var app = express();
 var mongoose=require('mongoose');
@@ -88,7 +90,7 @@ app.use('/info', info);
 
 //공지사항
 app.use('/notice',notice);
-
+app.use('/new_post',new_post);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -107,7 +109,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
 
 module.exports = app;

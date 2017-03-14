@@ -198,6 +198,19 @@ exports.comment_pull = function(req,res,schema,option){
 	});
 };
 
+exports.latest_list = function(array,expire_date,schema,path,callback){
+	if(!schema) return callback(null,array);		
+	schema.find().populate('author').sort('-createdAt').limit(5).exec(function(err,posts){
+	  	if(err) return callback(null,array);		
+		posts.forEach(function(post){
+			if(post.createdAt.getTime()>expire_date.getTime()){
+				array.push({post:post,path:path});
+			}
+		});
+		callback(null,array);
+	}); // limit을 지정해 줌으로서 너무 많은 양의 포스트 들이 올라갔을 때 적절히 제한 해 주는 역활을 한다.
+};
+
 function cloudinaryfileupload(req, callback){
 	if(req.files.file !== undefined){
 		cloudinary.uploader.upload(req.files.file[0].path, function(result) {
