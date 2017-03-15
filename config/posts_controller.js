@@ -200,13 +200,15 @@ exports.comment_pull = function(req,res,schema,option){
 
 exports.latest_list = function(array,expire_date,schema,path,callback){
 	if(!schema) return callback(null,array);		
-	schema.find({"createdAt":{"$gt":expire_date}}).populate('author').exec(function(err,posts){
+	schema.find().populate('author').sort('-createdAt').limit(5).exec(function(err,posts){
 	  	if(err) return callback(null,array);		
 		posts.forEach(function(post){
-				array.push({post:post,path:path});		
+			if(post.createdAt.getTime()>expire_date.getTime()){
+				array.push({post:post,path:path});
+			}
 		});
 		callback(null,array);
-	}); // limit을 지정해 줌으로서 너무 많은 양의 포스트 들이 올라갔을 때 적절히 제한 해 주는 역활을 한다. query를 추가하는 것이 속도개선에 유리한듯하다.
+	}); // limit을 지정해 줌으로서 너무 많은 양의 포스트 들이 올라갔을 때 적절히 제한 해 주는 역활을 한다.
 };
 
 function cloudinaryfileupload(req, callback){

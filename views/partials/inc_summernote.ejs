@@ -1,12 +1,10 @@
 <link href="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
 <script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
 <script>
-var device_width=$(window).width();
 $(document).ready(function() {
-if(device_width>=500){
   $('#summernote').summernote({
     height: 400,                 // set editor height
-    minHeight: 400,             // set minimum height of editor 
+    minHeight: 400,             // set minimum height of editor
     width:750,
     focus: true,                  // set focus to editable area after initializing summernote
     placeholder:'글을 입력해주세요 HTML코드도 추가 가능합니다.',
@@ -20,24 +18,6 @@ if(device_width>=500){
       }
     }
   });
-}else{
-  $('#summernote').summernote({
-    height: 400,                 // set editor height
-    minHeight: 400,             // set minimum height of editor 
-    width:300,
-    focus: true,                  // set focus to editable area after initializing summernote
-    placeholder:'글을 입력해주세요 HTML코드도 추가 가능합니다.',
-    disableDragAndDrop: true,
-    lang:'ko-KR',
-    callbacks : {
-      onImageUpload : function(image) {
-        for( var i= image.length -1;i>=0;i--) {
-          uploadImage(image[i]);
-        }
-      }
-    }
-  }); 
-}  
   <% if((typeof data) != "undefined"){ %>
     if(!(/edit/.test($(location).attr('pathname')))){
       $('#body').html('<%- data.body %>');
