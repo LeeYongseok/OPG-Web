@@ -29,7 +29,7 @@ router.get('/',function(req,res){
 	  	},function(new_list,callback){
   			lib.latest_list(new_list,expire_date,Posts.Post_Study,'post/Study',callback);
 	  	},function(new_list,callback){
-  			lib.latest_list(new_list,expire_date,Posts.Post_Study,'post/Food',callback);
+  			lib.latest_list(new_list,expire_date,Posts.Post_Food,'post/Food',callback);
 	  	},function(new_list,callback){
   			lib.latest_list(new_list,expire_date,Info.Info_ProgrammingBoard,'info/ProgrammingBoard',callback);
 	  	},function(new_list,callback){
