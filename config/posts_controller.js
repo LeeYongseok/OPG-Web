@@ -59,30 +59,6 @@ exports.index = function(req,res,schema,option){
 	 });
 };
 
-// exports.index = function(req,res,schema,option){
-// 	var limit = 10;
-//   	var page = req.query.page;
-//   	if(page === undefined) {page = 1;}
-//   	page = parseInt(page);
-//   	schema.count({},function(err,count){
-//   		if(err) return res.json({success:false, message:err});
-//     	var skip = (page-1)*limit;
-//     	var maxPageNum = Math.ceil(count/limit);
-// 		schema.find({}).populate('author').sort('-createdAt').skip(skip).limit(limit).exec(function(err,posts){
-// 		if(err) return res.json({success:false, message:err});
-// 		res.render("../views/PostBoard/post_index",{
-// 			data:posts,
-// 			title: option.title,
-// 			main_menu: option.title,
-// 			path:option.path,
-// 			page:page,
-// 			maxPageNum:maxPageNum,
-// 			count:count,
-// 			user:req.user
-// 		});
-// 	});
-// 	});
-// };
 
 exports.new = function(req,res,schema,option){
 	var user = req.flash("user")[0] || {};
@@ -222,27 +198,16 @@ exports.comment_pull = function(req,res,schema,option){
 	});
 };
 
-function parseError(errors){
- var parsed = {};
- if(errors.name == 'ValidationError'){
-  for(var name in errors.errors){
-   var validationError = errors.errors[name];
-   parsed[name] = { message:validationError.message };
- } // mongoose에서 발생하는 validationError message를 변환
- } else if(errors.code == "11000" ) {
-   if(errors.errmsg.indexOf("id") > 0){
-     parsed.id = { message:"이미 존재하는 아이디 입니다." };
-   } else if(errors.errmsg.indexOf("tel") > 0){
-     parsed.tel = { message:"이미 존재하는 번호 입니다." };
-   } else if(errors.errmsg.indexOf("mail") > 0){
-     parsed.mail = { message:"이미 존재하는 e-mail 입니다." };
-   }
-  // mongoDB에서 id의 error를 처리
- } else {
-  parsed.unhandled = JSON.stringify(errors);
- }
- return parsed;
-}
+exports.latest_list = function(array,expire_date,schema,path,callback){
+	if(!schema) return callback(null,array);		
+	schema.find({"createdAt":{"$gt":expire_date}}).populate('author').exec(function(err,posts){
+	  	if(err) return callback(null,array);		
+		posts.forEach(function(post){
+				array.push({post:post,path:path});		
+		});
+		callback(null,array);
+	}); // limit을 지정해 줌으로서 너무 많은 양의 포스트 들이 올라갔을 때 적절히 제한 해 주는 역활을 한다. query를 추가하는 것이 속도개선에 유리한듯하다.
+};
 
 function cloudinaryfileupload(req, callback){
 	if(req.files.file !== undefined){
@@ -258,3 +223,4 @@ function cloudinaryfileupload(req, callback){
 			}, { resource_type: 'auto', use_filename: true, unique_filename: true});
 		} else callback();
 }
+
