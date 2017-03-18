@@ -70,6 +70,9 @@ router.get('/', function(req, res, next) {
 
 //Programming
 router.get('/Programming', function(req, res, next) {
+	if(!req.user){
+		req.session.redirectTo= '/info/Programming';
+	}
   res.render('programming',{
   	title:'프로그래밍',
   	main_menu:'PROGRAMMING'

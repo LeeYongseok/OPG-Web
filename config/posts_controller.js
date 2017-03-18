@@ -8,6 +8,9 @@ var mongoose = require('mongoose');
 
 
 exports.index = function(req,res,schema,option){
+	if(!req.user){
+		req.session.redirectTo= '/'+option.path;
+	}
 	var limit = 10;
   	var page = req.query.page;
   	var search = util.createSearch(req.query);

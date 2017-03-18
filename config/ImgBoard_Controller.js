@@ -2,6 +2,9 @@ var fs = require('fs');
 var path = require('path');
 
 exports.index = function(req,res,schema,option){
+  if(!req.user){
+    req.session.redirectTo= '/'+option.path;
+  }
   var limit = 9;
   var page = req.query.page;
   if(page === undefined) {page = 1;}
