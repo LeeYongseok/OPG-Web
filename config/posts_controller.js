@@ -172,12 +172,18 @@ exports.update = function(req,res,schema,option){
 };
 
 exports.destroy = function(req,res,schema,option){
-	schema.findOneAndRemove({_id:req.params.id, author:req.user._id},function(err,post){
+	schema.findOne({_id:req.params.id},function(err,post){
+		if(post.author=mongoose.Types.ObjectId(req.user._id)||req.user.admin==1){
+			post.remove(function(err){
+				if(err) return res.json({success:false, message:err});
+
+			});
+			if(post.filename !== undefined){
+      		fs.unlink(path.join(__dirname,'..','public','uploadedfiles',data.filename));
+    		};
+		};
 		if(err) return res.json({success:false, message:err});
 		if(!post) return res.json({success:false, message:"No data found to remove"});
-		if(post.filename !== undefined){
-      		fs.unlink(path.join(__dirname,'..','public','uploadedfiles',data.filename));
-    	}
 		res.redirect('/'+option.path);
 	});
 };

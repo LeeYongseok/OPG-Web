@@ -74,15 +74,19 @@
                     <% } %>
                   </div>
                   <br><br>
-                  <% if(isAuthenticated && currentUser.id === data.author.id){ %>
+                 
                   <div class="tools">
+                   <% if(isAuthenticated && currentUser.id === data.author.id){ %>
                     <a href="/<%=path%>/<%= data._id %>/edit"><button class="btn">Edit</button></a>
+                    <% } %>
+                   <% if(isAuthenticated && (currentUser.id === data.author.id ||  currentUser.admin == 1)){ %>
                     <!-- Delete button Here -->
                     <form class="btn_delete" action="/<%=path%>/<%=data._id%>?_method=DELETE" method="post">
                       <button type="submit" class="btn">Delete</button>
                     </form>
+                    <% } %>
                   </div>
-                  <% } %>
+                  
                   <a href="/<%=path%>"><button class="btn">Back</button></a>
                 </div>
               </div>

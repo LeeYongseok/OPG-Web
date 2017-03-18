@@ -59,12 +59,12 @@ router.get('/Board',function(req,res){
 });//index
 
 
-router.get('/Board/new',util.isLoggedin,function(req,res){
+router.get('/Board/new',util.isadminThree,function(req,res){
 	lib.new(req,res,Posts.Post_Board,Board_Option);
 });//new
 
 
-router.post('/Board',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.post('/Board',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.create(req,res,Posts.Post_Board,Board_Option);
 });//create
 
@@ -72,24 +72,24 @@ router.get('/Board/:id',function(req,res){
 	lib.show(req,res,Posts.Post_Board,Board_Option);
 });//show
 
-router.get('/Board/:id/edit',util.isLoggedin,function(req,res){
+router.get('/Board/:id/edit',util.isadminThree,function(req,res){
 	lib.edit(req,res,Posts.Post_Board,Board_Option);
 });//edit
 
-router.put('/Board/:id',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.put('/Board/:id',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.update(req,res,Posts.Post_Board,Board_Option);
 });//update
 
-router.delete('/Board/:id',util.isLoggedin,function(req,res){
+router.delete('/Board/:id',util.isPossibleDelete,function(req,res){
 	lib.destroy(req,res,Posts.Post_Board,Board_Option);
 });//destroy
 
 ////comment
-router.post('/Board/:id/comments',function(req,res){
+router.post('/Board/:id/comments',util.isadminThree,function(req,res){
 	lib.comment_push(req,res,Posts.Post_Board,Board_Option);
 });
 
-router.delete('/Board/:id/comments/:commentId',function(req,res){
+router.delete('/Board/:id/comments/:commentId',util.isadminThree,function(req,res){
 	lib.comment_pull(req,res,Posts.Post_Board,Board_Option);
 });//destroy
 
@@ -99,31 +99,31 @@ router.delete('/Board/:id/comments/:commentId',function(req,res){
 router.get('/Inquire',function(req,res){
 	lib.index(req,res,Posts.Post_Inquire,Inquire_Option);
 });//index
-router.get('/Inquire/new',util.isLoggedin,function(req,res){
+router.get('/Inquire/new',util.isadminThree,function(req,res){
 	lib.new(req,res,Posts.Post_Inquire,Inquire_Option);
 });//new
-router.post('/Inquire',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.post('/Inquire',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.create(req,res,Posts.Post_Inquire,Inquire_Option);
 });//create
-router.get('/Inquire/:id',function(req,res){
+router.get('/Inquire/:id',util.isLoggedin,function(req,res){
 	lib.show(req,res,Posts.Post_Inquire,Inquire_Option);
 });//show
-router.get('/Inquire/:id/edit',util.isLoggedin,function(req,res){
+router.get('/Inquire/:id/edit',util.isadminThree,function(req,res){
 	lib.edit(req,res,Posts.Post_Inquire,Inquire_Option);
 });//edit
-router.put('/Inquire/:id',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.put('/Inquire/:id',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.update(req,res,Posts.Post_Inquire,Inquire_Option);
 });//update
-router.delete('/Inquire/:id',util.isLoggedin,function(req,res){
+router.delete('/Inquire/:id',util.isPossibleDelete,function(req,res){
 	lib.destroy(req,res,Posts.Post_Inquire,Inquire_Option);
 });//destroy
 
 ////comment
-router.post('/Inquire/:id/comments',function(req,res){
+router.post('/Inquire/:id/comments',util.isadminThree,function(req,res){
 	lib.comment_push(req,res,Posts.Post_Inquire,Inquire_Option);
 });
 
-router.delete('/Inquire/:id/comments/:commentId',function(req,res){
+router.delete('/Inquire/:id/comments/:commentId',util.isadminThree,function(req,res){
 	lib.comment_pull(req,res,Posts.Post_Inquire,Inquire_Option);
 });//destroy
 
@@ -133,31 +133,31 @@ router.delete('/Inquire/:id/comments/:commentId',function(req,res){
 router.get('/Study',function(req,res){
 	lib.index(req,res,Posts.Post_Study,Study_Option);
 });//index
-router.get('/Study/new',util.isLoggedin,function(req,res){
+router.get('/Study/new',util.isadminThree,function(req,res){
 	lib.new(req,res,Posts.Post_Study,Study_Option);
 });//new
-router.post('/Study',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.post('/Study',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.create(req,res,Posts.Post_Study,Study_Option);
 });//create
-router.get('/Study/:id',function(req,res){
+router.get('/Study/:id',util.isLoggedin,function(req,res){
 	lib.show(req,res,Posts.Post_Study,Study_Option);
 });//show
-router.get('/Study/:id/edit',util.isLoggedin,function(req,res){
+router.get('/Study/:id/edit',util.isadminThree,function(req,res){
 	lib.edit(req,res,Posts.Post_Study,Study_Option);
 });//edit
-router.put('/Study/:id',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.put('/Study/:id',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.update(req,res,Posts.Post_Study,Study_Option);
 });//update
-router.delete('/Study/:id',util.isLoggedin,function(req,res){
+router.delete('/Study/:id',util.isPossibleDelete,function(req,res){
 	lib.destroy(req,res,Posts.Post_Study,Study_Option);
 });//destroy
 
 ////comment
-router.post('/Study/:id/comments',function(req,res){
+router.post('/Study/:id/comments',util.isadminThree,function(req,res){
 	lib.comment_push(req,res,Posts.Post_Study,Study_Option);
 });
 
-router.delete('/Study/:id/comments/:commentId',function(req,res){
+router.delete('/Study/:id/comments/:commentId',util.isadminThree,function(req,res){
 	lib.comment_pull(req,res,Posts.Post_Study,Study_Option);
 });//destroy
 
@@ -167,31 +167,31 @@ router.delete('/Study/:id/comments/:commentId',function(req,res){
 router.get('/Food',function(req,res){
 	lib.index(req,res,Posts.Post_Food,Food_Option);
 });//index
-router.get('/Food/new',util.isLoggedin,function(req,res){
+router.get('/Food/new',util.isadminThree,function(req,res){
 	lib.new(req,res,Posts.Post_Food,Food_Option);
 });//new
-router.post('/Food',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.post('/Food',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.create(req,res,Posts.Post_Food,Food_Option);
 });//create
 router.get('/Food/:id',function(req,res){
 	lib.show(req,res,Posts.Post_Food,Food_Option);
 });//show
-router.get('/Food/:id/edit',util.isLoggedin,function(req,res){
+router.get('/Food/:id/edit',util.isadminThree,function(req,res){
 	lib.edit(req,res,Posts.Post_Food,Food_Option);
 });//edit
-router.put('/Food/:id',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.put('/Food/:id',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.update(req,res,Posts.Post_Food,Food_Option);
 });//update
-router.delete('/Food/:id',util.isLoggedin,function(req,res){
+router.delete('/Food/:id',util.isPossibleDelete,function(req,res){
 	lib.destroy(req,res,Posts.Post_Food,Food_Option);
 });//destroy
 
 ////comment
-router.post('/Food/:id/comments',function(req,res){
+router.post('/Food/:id/comments',util.isadminThree,function(req,res){
 	lib.comment_push(req,res,Posts.Post_Food,Food_Option);
 });
 
-router.delete('/Food/:id/comments/:commentId',function(req,res){
+router.delete('/Food/:id/comments/:commentId',util.isadminThree,function(req,res){
 	lib.comment_pull(req,res,Posts.Post_Food,Food_Option);
 });//destroy
 
