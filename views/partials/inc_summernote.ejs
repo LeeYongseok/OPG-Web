@@ -6,7 +6,7 @@ $(document).ready(function() {
 if(device_width>=500){
   $('#summernote').summernote({
     height: 400,                 // set editor height
-    minHeight: 400,             // set minimum height of editor 
+    minHeight: 400,             // set minimum height of editor
     width:750,
     focus: true,                  // set focus to editable area after initializing summernote
     placeholder:'글을 입력해주세요 HTML코드도 추가 가능합니다.',
@@ -23,7 +23,7 @@ if(device_width>=500){
 }else{
   $('#summernote').summernote({
     height: 400,                 // set editor height
-    minHeight: 400,             // set minimum height of editor 
+    minHeight: 400,             // set minimum height of editor
     width:300,
     focus: true,                  // set focus to editable area after initializing summernote
     placeholder:'글을 입력해주세요 HTML코드도 추가 가능합니다.',
@@ -36,8 +36,8 @@ if(device_width>=500){
         }
       }
     }
-  }); 
-}  
+  });
+}
   <% if((typeof data) != "undefined"){ %>
     if(!(/edit/.test($(location).attr('pathname')))){
       $('#body').html('<%- data.body %>');
@@ -49,6 +49,7 @@ var imageinput = [];
 function uploadImage(image) {
   var data = new FormData();
   data.append("image", image);
+  $('.sp-loading').show();
   $.ajax({
     data : data,
     type : 'POST',
@@ -58,7 +59,9 @@ function uploadImage(image) {
     contentType : false,
     processData : false,
     success: function(data) {
-      $('#summernote').summernote('insertImage', data.secure_url);
+      $('#summernote').summernote('insertImage', data.secure_url, function(){
+        $('.sp-loading').hide();
+      });
       imageinput.push(data.secure_url);
       $('#images').val(JSON.stringify(imageinput.toString().split(",")));
     },
