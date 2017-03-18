@@ -14,7 +14,7 @@ var expire_date = new Date();
 expire_date.setDate(expire_date.getDate()-7); // 기한은 7일로 지정함
 
 //공지사항
-router.get('/',function(req,res){
+router.get('/',util.isLoggedin,function(req,res){
   	var page = req.query.page;
   	var list=[];
   	if(page === undefined) {page = 1;}

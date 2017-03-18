@@ -81,31 +81,31 @@ router.get('/Programming', function(req, res, next) {
 router.get('/ProgrammingBoard',function(req,res){
 	lib.index(req,res,Info.Info_Programming,Programming_Option);
 });//index
-router.get('/ProgrammingBoard/new',util.isLoggedin,function(req,res){
+router.get('/ProgrammingBoard/new',util.isadminThree,function(req,res){
 	lib.new(req,res,Info.Info_Programming,Programming_Option);
 });//new
-router.post('/ProgrammingBoard',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.post('/ProgrammingBoard',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.create(req,res,Info.Info_Programming,Programming_Option);
 });//create
-router.get('/ProgrammingBoard/:id',function(req,res){
+router.get('/ProgrammingBoard/:id',util.isLoggedin,function(req,res){
 	lib.show(req,res,Info.Info_Programming,Programming_Option);
 });//show
-router.get('/ProgrammingBoard/:id/edit',util.isLoggedin,function(req,res){
+router.get('/ProgrammingBoard/:id/edit',util.isadminThree,function(req,res){
 	lib.edit(req,res,Info.Info_Programming,Programming_Option);
 });//edit
-router.put('/ProgrammingBoard/:id',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.put('/ProgrammingBoard/:id',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.update(req,res,Info.Info_Programming,Programming_Option);
 });//update
-router.delete('/ProgrammingBoard/:id',util.isLoggedin,function(req,res){
+router.delete('/ProgrammingBoard/:id',util.isPossibleDelete,function(req,res){
 	lib.destroy(req,res,Info.Info_Programming,Programming_Option);
 });//destroy
 
 ////comment
-router.post('/ProgrammingBoard/:id/comments',function(req,res){
+router.post('/ProgrammingBoard/:id/comments',util.isadminThree,function(req,res){
 	lib.comment_push(req,res,Info.Info_Programming,Programming_Option);
 });
 
-router.delete('/ProgrammingBoard/:id/comments/:commentId',function(req,res){
+router.delete('/ProgrammingBoard/:id/comments/:commentId',util.isadminThree,function(req,res){
 	lib.comment_pull(req,res,Info.Info_Programming,Programming_Option);
 });//destroy
 
@@ -119,31 +119,31 @@ router.delete('/ProgrammingBoard/:id/comments/:commentId',function(req,res){
 router.get('/ProgrammingServer',function(req,res){
 	lib.index(req,res,Info.Info_ProgrammingServer,ProgrammingServer_Option);
 });//index
-router.get('/ProgrammingServer/new',util.isLoggedin,function(req,res){
+router.get('/ProgrammingServer/new',util.isadminThree,function(req,res){
 	lib.new(req,res,Info.Info_ProgrammingServer,ProgrammingServer_Option);
 });//new
-router.post('/ProgrammingServer',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.post('/ProgrammingServer',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.create(req,res,Info.Info_ProgrammingServer,ProgrammingServer_Option);
 });//create
-router.get('/ProgrammingServer/:id',function(req,res){
+router.get('/ProgrammingServer/:id',util.isLoggedin,function(req,res){
 	lib.show(req,res,Info.Info_ProgrammingServer,ProgrammingServer_Option);
 });//show
-router.get('/ProgrammingServer/:id/edit',util.isLoggedin,function(req,res){
+router.get('/ProgrammingServer/:id/edit',util.isadminThree,function(req,res){
 	lib.edit(req,res,Info.Info_ProgrammingServer,ProgrammingServer_Option);
 });//edit
-router.put('/ProgrammingServer/:id',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.put('/ProgrammingServer/:id',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.update(req,res,Info.Info_ProgrammingServer,ProgrammingServer_Option);
 });//update
-router.delete('/ProgrammingServer/:id',util.isLoggedin,function(req,res){
+router.delete('/ProgrammingServer/:id',util.isPossibleDelete,function(req,res){
 	lib.destroy(req,res,Info.Info_ProgrammingServer,ProgrammingServer_Option);
 });//destroy
 
 ////comment
-router.post('/ProgrammingServer/:id/comments',function(req,res){
+router.post('/ProgrammingServer/:id/comments',util.isadminThree,function(req,res){
 	lib.comment_push(req,res,Info.Info_ProgrammingServer,ProgrammingServer_Option);
 });
 
-router.delete('/ProgrammingServer/:id/comments/:commentId',function(req,res){
+router.delete('/ProgrammingServer/:id/comments/:commentId',util.isadminThree,function(req,res){
 	lib.comment_pull(req,res,Info.Info_ProgrammingServer,ProgrammingServer_Option);
 });//destroy
 
@@ -152,31 +152,31 @@ router.delete('/ProgrammingServer/:id/comments/:commentId',function(req,res){
 router.get('/ProgrammingLanguage',function(req,res){
 	lib.index(req,res,Info.Info_ProgrammingLanguage,ProgrammingLanguage_Option);
 });//index
-router.get('/ProgrammingLanguage/new',util.isLoggedin,function(req,res){
+router.get('/ProgrammingLanguage/new',util.isadminThree,function(req,res){
 	lib.new(req,res,Info.Info_ProgrammingLanguage,ProgrammingLanguage_Option);
 });//new
-router.post('/ProgrammingLanguage',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.post('/ProgrammingLanguage',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.create(req,res,Info.Info_ProgrammingLanguage,ProgrammingLanguage_Option);
 });//create
-router.get('/ProgrammingLanguage/:id',function(req,res){
+router.get('/ProgrammingLanguage/:id',util.isLoggedin,function(req,res){
 	lib.show(req,res,Info.Info_ProgrammingLanguage,ProgrammingLanguage_Option);
 });//show
-router.get('/ProgrammingLanguage/:id/edit',util.isLoggedin,function(req,res){
+router.get('/ProgrammingLanguage/:id/edit',util.isadminThree,function(req,res){
 	lib.edit(req,res,Info.Info_ProgrammingLanguage,ProgrammingLanguage_Option);
 });//edit
-router.put('/ProgrammingLanguage/:id',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.put('/ProgrammingLanguage/:id',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.update(req,res,Info.Info_ProgrammingLanguage,ProgrammingLanguage_Option);
 });//update
-router.delete('/ProgrammingLanguage/:id',util.isLoggedin,function(req,res){
+router.delete('/ProgrammingLanguage/:id',util.isPossibleDelete,function(req,res){
 	lib.destroy(req,res,Info.Info_ProgrammingLanguage,ProgrammingLanguage_Option);
 });//destroy
 
 ////comment
-router.post('/ProgrammingLanguage/:id/comments',function(req,res){
+router.post('/ProgrammingLanguage/:id/comments',util.isadminThree,function(req,res){
 	lib.comment_push(req,res,Info.Info_ProgrammingLanguage,ProgrammingLanguage_Option);
 });
 
-router.delete('/ProgrammingServer/:id/comments/:commentId',function(req,res){
+router.delete('/ProgrammingServer/:id/comments/:commentId',util.isadminThree,function(req,res){
 	lib.comment_pull(req,res,Info.Info_ProgrammingLanguage,ProgrammingLanguage_Option);
 });//destroy
 
@@ -190,31 +190,31 @@ router.delete('/ProgrammingServer/:id/comments/:commentId',function(req,res){
 router.get('/ProgrammingWeb',function(req,res){
 	lib.index(req,res,Info.Info_ProgrammingWeb,ProgrammingWeb_Option);
 });//index
-router.get('/ProgrammingWeb/new',util.isLoggedin,function(req,res){
+router.get('/ProgrammingWeb/new',util.isadminThree,function(req,res){
 	lib.new(req,res,Info.Info_ProgrammingWeb,ProgrammingWeb_Option);
 });//new
-router.post('/ProgrammingWeb',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.post('/ProgrammingWeb',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.create(req,res,Info.Info_ProgrammingWeb,ProgrammingWeb_Option);
 });//create
-router.get('/ProgrammingWeb/:id',function(req,res){
+router.get('/ProgrammingWeb/:id',util.isLoggedin,function(req,res){
 	lib.show(req,res,Info.Info_ProgrammingWeb,ProgrammingWeb_Option);
 });//show
-router.get('/ProgrammingWeb/:id/edit',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.get('/ProgrammingWeb/:id/edit',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.edit(req,res,Info.Info_ProgrammingWeb,ProgrammingWeb_Option);
 });//edit
-router.put('/ProgrammingWeb/:id',util.isLoggedin,function(req,res){
+router.put('/ProgrammingWeb/:id',util.isadminThree,function(req,res){
 	lib.update(req,res,Info.Info_ProgrammingWeb,ProgrammingWeb_Option);
 });//update
-router.delete('/ProgrammingWeb/:id',util.isLoggedin,function(req,res){
+router.delete('/ProgrammingWeb/:id',util.isPossibleDelete,function(req,res){
 	lib.destroy(req,res,Info.Info_ProgrammingWeb,ProgrammingWeb_Option);
 });//destroy
 
 ////comment
-router.post('/ProgrammingWeb/:id/comments',function(req,res){
+router.post('/ProgrammingWeb/:id/comments',util.isadminThree,function(req,res){
 	lib.comment_push(req,res,Info.Info_ProgrammingWeb,ProgrammingSWeb_Option);
 });
 
-router.delete('/ProgrammingWeb/:id/comments/:commentId',function(req,res){
+router.delete('/ProgrammingWeb/:id/comments/:commentId',util.isadminThree,function(req,res){
 	lib.comment_pull(req,res,Info.Info_ProgrammingWeb,ProgrammingWeb_Option);
 });//destroy
 
@@ -226,31 +226,31 @@ router.delete('/ProgrammingWeb/:id/comments/:commentId',function(req,res){
 router.get('/ProgrammingMobile',function(req,res){
 	lib.index(req,res,Info.Info_ProgrammingMobile,ProgrammingMobile_Option);
 });//index
-router.get('/ProgrammingMobile/new',util.isLoggedin,function(req,res){
+router.get('/ProgrammingMobile/new',util.isadminThree,function(req,res){
 	lib.new(req,res,Info.Info_ProgrammingMobile,ProgrammingMobile_Option);
 });//new
-router.post('/ProgrammingMobile',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.post('/ProgrammingMobile',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.create(req,res,Info.Info_ProgrammingMobile,ProgrammingMobile_Option);
 });//create
-router.get('/ProgrammingMobile/:id',function(req,res){
+router.get('/ProgrammingMobile/:id',util.isLoggedin,function(req,res){
 	lib.show(req,res,Info.Info_ProgrammingMobile,ProgrammingMobile_Option);
 });//show
-router.get('/ProgrammingMobile/:id/edit',util.isLoggedin,function(req,res){
+router.get('/ProgrammingMobile/:id/edit',util.isadminThree,function(req,res){
 	lib.edit(req,res,Info.Info_ProgrammingMobile,ProgrammingMobile_Option);
 });//edit
-router.put('/ProgrammingMobile/:id',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.put('/ProgrammingMobile/:id',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.update(req,res,Info.Info_ProgrammingMobile,ProgrammingMobile_Option);
 });//update
-router.delete('/ProgrammingMobile/:id',util.isLoggedin,function(req,res){
+router.delete('/ProgrammingMobile/:id',util.isPossibleDelete,function(req,res){
 	lib.destroy(req,res,Info.Info_ProgrammingMobile,ProgrammingMobile_Option);
 });//destroy
 
 ////comment
-router.post('/ProgrammingMobile/:id/comments',function(req,res){
+router.post('/ProgrammingMobile/:id/comments',util.isadminThree,function(req,res){
 	lib.comment_push(req,res,Info.Info_ProgrammingMobile,ProgrammingMobile_Option);
 });
 
-router.delete('/ProgrammingMobile/:id/comments/:commentId',function(req,res){
+router.delete('/ProgrammingMobile/:id/comments/:commentId',util.isadminThree,function(req,res){
 	lib.comment_pull(req,res,Info.Info_ProgrammingMobile,ProgrammingMobile_Option);
 });//destroy
 
@@ -264,31 +264,31 @@ router.delete('/ProgrammingMobile/:id/comments/:commentId',function(req,res){
 router.get('/Exhibition',function(req,res){
 	lib.index(req,res,Info.Info_Exhibition,Exhibition_Option);
 });//index
-router.get('/Exhibition/new',util.isLoggedin,function(req,res){
+router.get('/Exhibition/new',util.isadminThree,function(req,res){
 	lib.new(req,res,Info.Info_Exhibition,Exhibition_Option);
 });//new
-router.post('/Exhibition',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.post('/Exhibition',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.create(req,res,Info.Info_Exhibition,Exhibition_Option);
 });//create
-router.get('/Exhibition/:id',function(req,res){
+router.get('/Exhibition/:id',util.isLoggedin,function(req,res){
 	lib.show(req,res,Info.Info_Exhibition,Exhibition_Option);
 });//show
-router.get('/Exhibition/:id/edit',util.isLoggedin,function(req,res){
+router.get('/Exhibition/:id/edit',util.isadminThree,function(req,res){
 	lib.edit(req,res,Info.Info_Exhibition,Exhibition_Option);
 });//edit
-router.put('/Exhibition/:id',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.put('/Exhibition/:id',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.update(req,res,Info.Info_Exhibition,Exhibition_Option);
 });//update
-router.delete('/Exhibition/:id',util.isLoggedin,function(req,res){
+router.delete('/Exhibition/:id',util.isPossibleDelete,function(req,res){
 	lib.destroy(req,res,Info.Info_Exhibition,Exhibition_Option);
 });//destroy
 
 ////comment
-router.post('/Exhibition/:id/comments',function(req,res){
+router.post('/Exhibition/:id/comments',util.isadminThree,function(req,res){
 	lib.comment_push(req,res,Info.Info_Exhibition,Exhibition_Option);
 });
 
-router.delete('/Exhibition/:id/comments/:commentId',function(req,res){
+router.delete('/Exhibition/:id/comments/:commentId',util.isadminThree,function(req,res){
 	lib.comment_pull(req,res,Info.Info_Exhibition,Exhibition_Option);
 });//destroy
 
@@ -298,31 +298,31 @@ router.delete('/Exhibition/:id/comments/:commentId',function(req,res){
 router.get('/IT',function(req,res){
 	lib.index(req,res,Info.Info_IT,IT_Option);
 });//index
-router.get('/IT/new',util.isLoggedin,function(req,res){
+router.get('/IT/new',util.isadminThree,function(req,res){
 	lib.new(req,res,Info.Info_IT,IT_Option);
 });//new
-router.post('/IT',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.post('/IT',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.create(req,res,Info.Info_IT,IT_Option);
 });//create
-router.get('/IT/:id',function(req,res){
+router.get('/IT/:id',util.isLoggedin,function(req,res){
 	lib.show(req,res,Info.Info_IT,IT_Option);
 });//show
-router.get('/IT/:id/edit',util.isLoggedin,function(req,res){
+router.get('/IT/:id/edit',util.isadminThree,function(req,res){
 	lib.edit(req,res,Info.Info_IT,IT_Option);
 });//edit
-router.put('/IT/:id',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.put('/IT/:id',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.update(req,res,Info.Info_IT,IT_Option);
 });//update
-router.delete('/IT/:id',util.isLoggedin,function(req,res){
+router.delete('/IT/:id',util.isPossibleDelete,function(req,res){
 	lib.destroy(req,res,Info.Info_IT,IT_Option);
 });//destroy
 
 ////comment
-router.post('/IT/:id/comments',function(req,res){
+router.post('/IT/:id/comments',util.isadminThree,function(req,res){
 	lib.comment_push(req,res,Info.Info_IT,IT_Option);
 });
 
-router.delete('/IT/:id/comments/:commentId',function(req,res){
+router.delete('/IT/:id/comments/:commentId',util.isadminThree,function(req,res){
 	lib.comment_pull(req,res,Info.Info_IT,IT_Option);
 });//destroy
 
@@ -331,31 +331,31 @@ router.delete('/IT/:id/comments/:commentId',function(req,res){
 router.get('/Job',function(req,res){
 	lib.index(req,res,Info.Info_Job,Job_Option);
 });//index
-router.get('/Job/new',util.isLoggedin,function(req,res){
+router.get('/Job/new',util.isadminThree,function(req,res){
 	lib.new(req,res,Info.Info_Job,Job_Option);
 });//new
-router.post('/Job',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.post('/Job',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.create(req,res,Info.Info_Job,Job_Option);
 });//create
-router.get('/Job/:id',function(req,res){
+router.get('/Job/:id',util.isLoggedin,function(req,res){
 	lib.show(req,res,Info.Info_Job,Job_Option);
 });//show
-router.get('/Job/:id/edit',util.isLoggedin,function(req,res){
+router.get('/Job/:id/edit',util.isadminThree,function(req,res){
 	lib.edit(req,res,Info.Info_Job,Job_Option);
 });//edit
-router.put('/Job/:id',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.put('/Job/:id',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
 	lib.update(req,res,Info.Info_Job,Job_Option);
 });//update
-router.delete('/Job/:id',util.isLoggedin,function(req,res){
+router.delete('/Job/:id',util.isPossibleDelete,function(req,res){
 	lib.destroy(req,res,Info.Info_Job,Job_Option);
 });//destroy
 
 ////comment
-router.post('/Job/:id/comments',function(req,res){
+router.post('/Job/:id/comments',util.isadminThree,function(req,res){
 	lib.comment_push(req,res,Info.Info_Job,Job_Option);
 });
 
-router.delete('/Job/:id/comments/:commentId',function(req,res){
+router.delete('/Job/:id/comments/:commentId',util.isadminThree,function(req,res){
 	lib.comment_pull(req,res,Info.Info_Job,Job_Option);
 });//destroy
 

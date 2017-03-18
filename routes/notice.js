@@ -14,31 +14,31 @@ var notice_Option = {
 router.get('/',function(req,res){
 	lib.index(req,res,notices.notice_Board,notice_Option);
 });//index
-router.get('/new',util.isLoggedin,function(req,res){
+router.get('/new',util.isadminTwo,function(req,res){
 	lib.new(req,res,notices.notice_Board,notice_Option);
 });//new
-router.post('/',util.isLoggedin,function(req,res){
+router.post('/',util.isadminTwo,function(req,res){
 	lib.create(req,res,notices.notice_Board,notice_Option);
 });//create
-router.get('/:id',function(req,res){
+router.get('/:id',util.isadminThree,function(req,res){
 	lib.show(req,res,notices.notice_Board,notice_Option);
 });//show
-router.get('/:id/edit',util.isLoggedin,function(req,res){
+router.get('/:id/edit',util.isadminTwo,function(req,res){
 	lib.edit(req,res,notices.notice_Board,notice_Option);
 });//edit
-router.put('/:id',util.isLoggedin,function(req,res){
+router.put('/:id',util.isadminTwo,function(req,res){
 	lib.update(req,res,notices.notice_Board,notice_Option);
 });//update
-router.delete('/:id',util.isLoggedin,function(req,res){
+router.delete('/:id',util.isadminTwo,function(req,res){
 	lib.destroy(req,res,notices.notice_Board,notice_Option);
 });//destroy
 
 ////comment
-router.post('/:id/comments',function(req,res){
+router.post('/:id/comments',util.isadminThree,function(req,res){
 	lib.comment_push(req,res,notices.notice_Board,notice_Option);
 });
 
-router.delete('/:id/comments/:commentId',function(req,res){
+router.delete('/:id/comments/:commentId',util.isadminThree,function(req,res){
 	lib.comment_pull(req,res,notices.notice_Board,notice_Option);
 });//destroy
 

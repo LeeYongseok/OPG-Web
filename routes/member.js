@@ -5,7 +5,7 @@ var User = require('../models/User');
 var util = require('../config/util.js');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/',util.isadminThree, function(req, res, next) {
   var limit = 15;
     var page = req.query.page;
     var search = util.createSearch(req.query);
@@ -39,9 +39,10 @@ router.get('/', function(req, res, next) {
   });
 
 // edit
-router.get("/edit",util.isadminOne, function(req, res){
+router.get("/edit",util.isadminTwo, function(req, res){
   var limit = 15;
     var page = req.query.page;
+    var search = util.createSearch(req.query);
     if(page === undefined) {page = 1;}
     page = parseInt(page);
   User.count({},function(err, count){
@@ -56,12 +57,13 @@ router.get("/edit",util.isadminOne, function(req, res){
       main_menu: '멤버',
       page:page,
 			maxPageNum:maxPageNum,
-      path: 'member/edit'});
+      path: 'member/edit',
+      search:search});
     });
   });
 });
 
-router.put("/:id",function(req, res, next){
+router.put("/:id",util.isadminTwo,function(req, res, next){
       var Admin=4;
       if(req.body.grade === '관리자'){
         Admin = 1;
@@ -81,7 +83,7 @@ router.put("/:id",function(req, res, next){
 
 
 // delete
-router.delete("/:id", function(req, res){
+router.delete("/:id",util.isadminTwo, function(req, res){
  User.remove({_id:req.params.id}, function(err){
   if(err) return res.json(err);
   res.redirect("/member/edit");
