@@ -46,13 +46,16 @@
                     <input type="hidden" name="images" id="images" value="">
                     <div class="col-xs-8">
                     <% if(data.filePath != undefined){ %>
-                      <input id="input" type="file" name="file" disabled> Attached file already exist.
+                      <input id="input" type="file" name="file" disabled> Attached file [<%=data.fileOriginalname%>] already exists.
                     <% } else { %>
                       <input id="input" type="file" name="file">
                     <%} %>
-                  </div>
-                  <br><br><br>
-                  <br>
+                    </div>
+                    <div class="col-xs-2">
+                      <div class="sp-loading"></div>
+                    </div>
+                    <br><br><br>
+                    <br>
                     <button type="submit" class="btn">Submit</button>
                   </form>
                   <a href="/<%=path%>/<%=data._id%>"><button class="btn">Back</button></a>

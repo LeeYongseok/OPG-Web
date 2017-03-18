@@ -87,7 +87,6 @@ exports.create = function(req,res,schema,option){
 				fs.unlink(req.files.files[i].path);
 			}
 			schema.create(req.body.post,function(err,post){
-				console.log(req.body.post);
 				if(err){
 					req.flash("user", req.body);
 					req.flash("errors", parseError(err));
@@ -205,11 +204,11 @@ exports.comment_pull = function(req,res,schema,option){
 };
 
 exports.latest_list = function(array,expire_date,schema,path,callback){
-	if(!schema) return callback(null,array);		
+	if(!schema) return callback(null,array);
 	schema.find({"createdAt":{"$gt":expire_date}}).populate('author').exec(function(err,posts){
-	  	if(err) return callback(null,array);		
+	  	if(err) return callback(null,array);
 		posts.forEach(function(post){
-				array.push({post:post,path:path});		
+				array.push({post:post,path:path});
 		});
 		callback(null,array);
 	}); // limit을 지정해 줌으로서 너무 많은 양의 포스트 들이 올라갔을 때 적절히 제한 해 주는 역활을 한다. query를 추가하는 것이 속도개선에 유리한듯하다.
@@ -218,7 +217,6 @@ exports.latest_list = function(array,expire_date,schema,path,callback){
 function cloudinaryfileupload(req, callback){
 	if(req.files.file !== undefined){
 		cloudinary.uploader.upload(req.files.file[0].path, function(result) {
-				 console.log(result);
 				if(result && req.files.file[0].path !== undefined){
 					req.body.post.filePath = result.secure_url;
 					req.body.post.fileOriginalname = req.files.file[0].originalname;
@@ -229,4 +227,3 @@ function cloudinaryfileupload(req, callback){
 			}, { resource_type: 'auto', use_filename: true, unique_filename: true});
 		} else callback();
 }
-
