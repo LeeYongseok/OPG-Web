@@ -26,9 +26,8 @@ $(document).ready(function(){
         $("#main>.side>.menu_tab>.menu>*").css("left",(side_width/2)-60);
         $("#main>#mid>.menu_tab>.menu>*").css("left",(mid_width/2)-60);
 
-
         if(full_height<=800){
-            $("#main").height(600).css("background-image", "url(images/oncean.png)");
+            $("#main").height(600).css("background-image", "url(" + randombgurl + ")");
             $("#main").css("background-size", main_width.toString()+"px 600px");
             $("#main>#mid>.menu_tab").height(200);
             $("#main>.side>.menu_tab").height(300);
@@ -38,7 +37,7 @@ $(document).ready(function(){
             $("#main>#mid>.menu_tab:last").css("top",200);
         }
         else{
-            $("#main").height(full_height-200).css("background-image", "url(images/oncean.png)");
+            $("#main").height(full_height-200).css("background-image", "url(" + randombgurl + ")");
             main_height = $("#main").height();
             $("#main>.side>.menu_tab").height(main_height/2);
             $("#main>#mid>.menu_tab").height((main_height/2)-100);
@@ -66,6 +65,7 @@ $(document).ready(function(){
         $('#exit').css('left', ((full_width+500)/2));
     }
 
+    var randombgurl = randombg();
     screen_setting();
 
     $( window ).resize(function() {
@@ -129,11 +129,16 @@ $(document).ready(function(){
 
     $('#login').click(function (){
         $('#loginPage').css('visibility','visible');
-    })
+    });
 
     $('#close').click(function (){
         $('#loginPage').css('visibility','hidden');
-    })
+    });
 
+    function randombg(){
+      var bgarray = ['https://res.cloudinary.com/hl5vfksox/image/upload/v1489815286/BG/bg1.jpg', 'https://res.cloudinary.com/hl5vfksox/image/upload/v1489817652/BG/bg2.jpg', 'https://res.cloudinary.com/hl5vfksox/image/upload/v1489815286/BG/bg3.jpg','https://res.cloudinary.com/hl5vfksox/image/upload/v1489815295/BG/bg4.jpg', 'https://res.cloudinary.com/hl5vfksox/image/upload/v1489815290/BG/bg5.jpg', 'https://res.cloudinary.com/hl5vfksox/image/upload/v1489815297/BG/bg6.jpg', 'https://res.cloudinary.com/hl5vfksox/image/upload/v1489815298/BG/bg7.jpg', 'https://res.cloudinary.com/hl5vfksox/image/upload/v1489815288/BG/bg8.jpg', 'https://res.cloudinary.com/hl5vfksox/image/upload/v1489815295/BG/bg9.jpg', 'https://res.cloudinary.com/hl5vfksox/image/upload/v1489818126/BG/bg10.jpg'];
+      var bgnumber = Math.floor((Math.random() * bgarray.length));
+      return bgarray[bgnumber];
+    }
 
-})
+});

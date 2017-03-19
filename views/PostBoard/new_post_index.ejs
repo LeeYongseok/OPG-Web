@@ -43,7 +43,7 @@
                        <% for(var i=0;i<data.length;i++){ %>
                        <tr>
                            <th class="number"><%= post_num %></th>
-                           <th class="title"><a href="/<%=data[i].path%>/<%= data[i].post._id %>" ><span style="color:#bbb">[<%=data[i].path %>]</span><%= data[i].post.title %></a><span style="color:skyblue">(<%= data[i].post.comments.length %>)</span></th>
+                           <th class="title"><a href="/<%=data[i].path%>/<%= data[i].post._id %>" ><span style="color:#bbb">[<%=data[i].title %>]</span><%= data[i].post.title %></a><span style="color:skyblue">(<%= data[i].post.comments.length %>)</span></th>
                            <th class="author"><%= data[i].post.author ? data[i].post.author.name : "" %></th>
                            <th class="date"><small><%= data[i].post.createdAt.toLocaleDateString() %></small></th>
                            <th class="views"><%= data[i].post.views %></th>

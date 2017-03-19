@@ -7,7 +7,7 @@ util.isLoggedin = function(req,res,next){
 		req.flash("errors", {login:"Please login first"});
   		res.redirect("/");
 	}
-};
+};//Only login test
 
 util.isadminThree = function(req,res,next){
 	if(req.isAuthenticated() && req.user.admin <= 3){
@@ -16,7 +16,7 @@ util.isadminThree = function(req,res,next){
 		req.flash("errors", {login:"Not admin"});
   		res.redirect("/");
 	}
-};
+};//all member&login test
 
 util.isadminTwo = function(req,res,next){
 	if(req.isAuthenticated() && req.user.admin <= 2){
@@ -25,7 +25,7 @@ util.isadminTwo = function(req,res,next){
 		req.flash("errors", {login:"Not admin"});
   		res.redirect("/");
 	}
-};
+};//club president&admin & login test
 
 util.isadminOne = function(req,res,next){
 	if(req.isAuthenticated() && req.user.admin===1){
@@ -34,7 +34,16 @@ util.isadminOne = function(req,res,next){
 		req.flash("errors", {login:"Not admin"});
   		res.redirect("/");
 	}
-};
+};//Only admin possible & login test
+
+util.isPossibleDelete = function(req,res,next){
+	if((req.isAuthenticated() && req.user.admin <= 3) || req.user.admin ==1){
+		next();
+	}else{
+		req.flash("errors", {login:"Not admin"});
+  		res.redirect("/");
+	}
+};//administer && post_author(just first confirm... look route.delete's function!)
 
 util.createSearch = function(queries){
 	var searchType=queries.searchType;

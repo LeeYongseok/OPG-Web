@@ -56,37 +56,37 @@ router.get('/Activity',function(req,res){
   imglib.index(req,res,iPostMod.iPostMod_Activity,Activity_Option);
  });
 
- router.get('/Activity/new',util.isLoggedin,function(req,res){
+ router.get('/Activity/new',util.isadminThree,function(req,res){
   lib.new(req,res,iPostMod.iPostMod_Activity,Activity_Option);
  });
 
-router.post('/Activity',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.post('/Activity',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
   lib.create(req,res,iPostMod.iPostMod_Activity,Activity_Option);
 });
 
-router.get('/Activity/:id', function(req, res){
+router.get('/Activity/:id',util.isLoggedin, function(req, res){
   lib.show(req,res,iPostMod.iPostMod_Activity,Activity_Option);
 });
 
-router.get('/Activity/:id/edit', util.isLoggedin, function(req,res){
+router.get('/Activity/:id/edit', util.isadminThree, function(req,res){
   lib.edit(req,res,iPostMod.iPostMod_Activity,Activity_Option);
 });
 
 
-router.put('/Activity/:id', util.isLoggedin, upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.put('/Activity/:id', util.isadminThree, upload.fields([{name:'file'},{name:'files'}]),function(req,res){
   lib.update(req,res,iPostMod.iPostMod_Activity,Activity_Option);
 });
 
-router.delete('/Activity/:id', util.isLoggedin, function(req,res){
+router.delete('/Activity/:id', util.isPossibleDelete, function(req,res){
   lib.destroy(req,res,iPostMod.iPostMod_Activity,Activity_Option);
 });
 
 ////comment
-router.post('/Activity/:id/comments',function(req,res){
+router.post('/Activity/:id/comments',util.isadminThree,function(req,res){
   lib.comment_push(req,res,iPostMod.iPostMod_Activity,Activity_Option);
 });
 
-router.delete('/Activity/:id/comments/:commentId',function(req,res){
+router.delete('/Activity/:id/comments/:commentId',util.isadminThree,function(req,res){
   lib.comment_pull(req,res,iPostMod.iPostMod_Activity,Activity_Option);
 });//destroy
 
@@ -97,37 +97,37 @@ router.get('/Study',function(req,res){
   imglib.index(req,res,iPostMod.iPostMod_Study,Study_Option);
  });
 
- router.get('/Study/new',util.isLoggedin,function(req,res){
+ router.get('/Study/new',util.isadminThree,function(req,res){
   lib.new(req,res,iPostMod.iPostMod_Study,Study_Option);
  });
 
-router.post('/Study',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.post('/Study',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
   lib.create(req,res,iPostMod.iPostMod_Study,Study_Option);
 });
 
-router.get('/Study/:id', function(req, res){
+router.get('/Study/:id',util.isLoggedin, function(req, res){
   lib.show(req,res,iPostMod.iPostMod_Study,Study_Option);
 });
 
-router.get('/Study/:id/edit', util.isLoggedin, function(req,res){
+router.get('/Study/:id/edit', util.isadminThree, function(req,res){
   lib.edit(req,res,iPostMod.iPostMod_Study,Study_Option);
 });
 
 
-router.put('/Study/:id', util.isLoggedin, upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.put('/Study/:id', util.isadminThree, upload.fields([{name:'file'},{name:'files'}]),function(req,res){
   lib.update(req,res,iPostMod.iPostMod_Study,Study_Option);
 });
 
-router.delete('/Study/:id', util.isLoggedin, function(req,res){
+router.delete('/Study/:id', util.isPossibleDelete, function(req,res){
   lib.destroy(req,res,iPostMod.iPostMod_Study,Study_Option);
 });
 
 ////comment
-router.post('/Study/:id/comments',function(req,res){
+router.post('/Study/:id/comments',util.isadminThree,function(req,res){
   lib.comment_push(req,res,iPostMod.iPostMod_Study,Study_Option);
 });
 
-router.delete('/Study/:id/comments/:commentId',function(req,res){
+router.delete('/Study/:id/comments/:commentId',util.isadminThree,function(req,res){
   lib.comment_pull(req,res,iPostMod.iPostMod_Study,Study_Option);
 });//destroy
 
@@ -138,37 +138,37 @@ router.get('/Seminar',function(req,res){
   imglib.index(req,res,iPostMod.iPostMod_Seminar,Seminar_Option);
  });
 
- router.get('/Seminar/new',util.isLoggedin,function(req,res){
+ router.get('/Seminar/new',util.isadminThree,function(req,res){
   lib.new(req,res,iPostMod.iPostMod_Seminar,Seminar_Option);
  });
 
-router.post('/Seminar',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.post('/Seminar',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
   lib.create(req,res,iPostMod.iPostMod_Seminar,Seminar_Option);
 });
 
-router.get('/Seminar/:id', function(req, res){
+router.get('/Seminar/:id',util.isLoggedin, function(req, res){
   lib.show(req,res,iPostMod.iPostMod_Seminar,Seminar_Option);
 });
 
-router.get('/Seminar/:id/edit', util.isLoggedin, function(req,res){
+router.get('/Seminar/:id/edit', util.isadminThree, function(req,res){
   lib.edit(req,res,iPostMod.iPostMod_Seminar,Seminar_Option);
 });
 
 
-router.put('/Seminar/:id', util.isLoggedin, upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.put('/Seminar/:id', util.isadminThree, upload.fields([{name:'file'},{name:'files'}]),function(req,res){
   lib.update(req,res,iPostMod.iPostMod_Seminar,Seminar_Option);
 });
 
-router.delete('/Seminar/:id', util.isLoggedin, function(req,res){
+router.delete('/Seminar/:id', util.isPossibleDelete, function(req,res){
   lib.destroy(req,res,iPostMod.iPostMod_Seminar,Seminar_Option);
 });
 
 ////comment
-router.post('/Seminar/:id/comments',function(req,res){
+router.post('/Seminar/:id/comments',util.isadminThree,function(req,res){
   lib.comment_push(req,res,iPostMod.iPostMod_Seminar,Seminar_Option);
 });
 
-router.delete('/Seminar/:id/comments/:commentId',function(req,res){
+router.delete('/Seminar/:id/comments/:commentId',util.isadminThree,function(req,res){
   lib.comment_pull(req,res,iPostMod.iPostMod_Seminar,Seminar_Option);
 });//destroy
 
@@ -179,37 +179,37 @@ router.get('/Work',function(req,res){
   imglib.index(req,res,iPostMod.iPostMod_Work,Work_Option);
  });
 
- router.get('/Work/new',util.isLoggedin,function(req,res){
+ router.get('/Work/new',util.isadminThree,function(req,res){
   lib.new(req,res,iPostMod.iPostMod_Work,Work_Option);
  });
 
-router.post('/Work',util.isLoggedin,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.post('/Work',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
   lib.create(req,res,iPostMod.iPostMod_Work,Work_Option);
 });
 
-router.get('/Work/:id', function(req, res){
+router.get('/Work/:id',util.isLoggedin, function(req, res){
   lib.show(req,res,iPostMod.iPostMod_Work,Work_Option);
 });
 
-router.get('/Work/:id/edit', util.isLoggedin, function(req,res){
+router.get('/Work/:id/edit', util.isadminThree, function(req,res){
   lib.edit(req,res,iPostMod.iPostMod_Work,Work_Option);
 });
 
 
-router.put('/Work/:id', util.isLoggedin, upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+router.put('/Work/:id', util.isadminThree, upload.fields([{name:'file'},{name:'files'}]),function(req,res){
   lib.update(req,res,iPostMod.iPostMod_Work,Work_Option);
 });
 
-router.delete('/Work/:id', util.isLoggedin, function(req,res){
+router.delete('/Work/:id', util.isPossibleDelete, function(req,res){
   lib.destroy(req,res,iPostMod.iPostMod_Work,Work_Option);
 });
 
 ////comment
-router.post('/Work/:id/comments',function(req,res){
+router.post('/Work/:id/comments',util.isadminThree,function(req,res){
   lib.comment_push(req,res,iPostMod.iPostMod_Work,Work_Option);
 });
 
-router.delete('/Work/:id/comments/:commentId',function(req,res){
+router.delete('/Work/:id/comments/:commentId',util.isadminThree,function(req,res){
   lib.comment_pull(req,res,iPostMod.iPostMod_Work,Work_Option);
 });//destroy
 

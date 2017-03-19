@@ -23,12 +23,11 @@ router.post('/login', function(req,res,next){
      console.log(errors);
      res.redirect("/");
     }
-   },
-   passport.authenticate("local-login", {
-    successRedirect : "/",
-    failureRedirect : "/signUp"
-   }
- ));
+   },passport.authenticate("local-login", {
+        successRedirect : '/back',
+        failureRedirect : "/signUp"
+    })
+   );
 
  router.get("/logout", function(req, res) {
   req.logout();
