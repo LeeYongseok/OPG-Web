@@ -25,6 +25,7 @@ router.post('/login', function(req,res,next){
     }
    },passport.authenticate("local-login", {
         successRedirect : '/back',
+        failureRedirect : '/back'
     })
    );
 
