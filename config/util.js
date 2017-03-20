@@ -6,7 +6,7 @@ util.isLoggedin = function(req,res,next){
 		next();
 	}else{
 		req.flash("errors", {login:"lease login first"});
-  		res.redirect("/back");
+  		res.redirect("/");
 	}
 };//Only login test
 
@@ -15,7 +15,7 @@ util.isadminThree = function(req,res,next){
 		next();
 	}else{
 		req.flash("errors", {admin3:"Not admin"});
-  		res.redirect("/back");
+  		res.redirect("/");
 	}
 };//all member&login test
 
@@ -24,7 +24,7 @@ util.isadminTwo = function(req,res,next){
 		next();
 	}else{
 		req.flash("errors", {admin2:"Not admin"});
-  		res.redirect("/back");
+  		res.redirect("/");
 	}
 };//club president&admin & login test
 
@@ -33,7 +33,7 @@ util.isadminOne = function(req,res,next){
 		next();
 	}else{
 		req.flash("errors", {admin1:"Not admin"});
-  		res.redirect("/back");
+  		res.redirect("/");
 	}
 };//Only admin possible & login test
 
