@@ -46,7 +46,7 @@ util.isPossibleDelete = function(req,res,next){
 	}
 };//administer && post_author(just first confirm... look route.delete's function!)
 
-util.isPossibleAccesse = function(res, error){
+util.isPossibleAccesse = function(res, errors){
 	 if(errors.login){
 		 res.send('<script>alert("로그인이 필요합니다."); location.href="/back"</script>');
 	 }
