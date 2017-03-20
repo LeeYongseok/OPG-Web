@@ -4,6 +4,7 @@ var multer  = require('multer');
 var path = require('path');
 var mkdirp = require('mkdirp');
 var cloudinary = require('cloudinary');
+var util = require('../config/util.js');
 
 var router = express.Router();
 
@@ -29,7 +30,10 @@ var upload = multer({storage : storage});
 //
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'OPG' });
+  var user = req.flash("user")[0];
+	var errors = req.flash("errors")[0] || {};
+  util.isPossibleAccesse(res, error);
+  res.render('index', { title: 'OPG', errors : errors, user:user});
 });
 
 //<---Image Upload---

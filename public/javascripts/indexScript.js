@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+    
     function screen_setting(){
         var full_width = $(window).width();
         var full_height = $(window).height();

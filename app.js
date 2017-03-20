@@ -68,7 +68,6 @@ app.use(function(req, res, next){
 }); // custom middleware 설정, res.locals의 변수는 ejs에 사용가능
 
 
-
 // 메인페이지
 app.use('/', index);
 // 회원가입 페이지

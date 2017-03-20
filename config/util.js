@@ -1,11 +1,12 @@
+var express = require('express');
 var util = {};
 
 util.isLoggedin = function(req,res,next){
 	if(req.isAuthenticated() && req.user.admin <= 4){
 		next();
 	}else{
-		req.flash("errors", {login:"Please login first"});
-  		res.redirect("/");
+		req.flash("errors", {login:"lease login first"});
+  		res.redirect("/back");
 	}
 };//Only login test
 
@@ -13,8 +14,8 @@ util.isadminThree = function(req,res,next){
 	if(req.isAuthenticated() && req.user.admin <= 3){
 		next();
 	}else{
-		req.flash("errors", {login:"Not admin"});
-  		res.redirect("/");
+		req.flash("errors", {admin3:"Not admin"});
+  		res.redirect("/back");
 	}
 };//all member&login test
 
@@ -22,8 +23,8 @@ util.isadminTwo = function(req,res,next){
 	if(req.isAuthenticated() && req.user.admin <= 2){
 		next();
 	}else{
-		req.flash("errors", {login:"Not admin"});
-  		res.redirect("/");
+		req.flash("errors", {admin2:"Not admin"});
+  		res.redirect("/back");
 	}
 };//club president&admin & login test
 
@@ -31,8 +32,8 @@ util.isadminOne = function(req,res,next){
 	if(req.isAuthenticated() && req.user.admin===1){
 		next();
 	}else{
-		req.flash("errors", {login:"Not admin"});
-  		res.redirect("/");
+		req.flash("errors", {admin1:"Not admin"});
+  		res.redirect("/back");
 	}
 };//Only admin possible & login test
 
@@ -44,6 +45,21 @@ util.isPossibleDelete = function(req,res,next){
   		res.redirect("/");
 	}
 };//administer && post_author(just first confirm... look route.delete's function!)
+
+util.isPossibleAccesse = function(res, error){
+	 if(errors.login){
+		 res.send('<script>alert("로그인이 필요합니다."); location.href="/back"</script>');
+	 }
+	 if(errors.admin3){
+		 res.send('<script>alert("OPG회원이상부터 접근가능합니다."); location.href="/back"</script>');
+	 }
+	 if(errors.admin2){
+		 res.send('<script>alert("임원이상부터 접근가능합니다."); location.href="/back"</script>');
+	 }
+	 if(errors.admin1){
+		 res.send('<script>alert("관리자만 접근가능합니다."); location.href="/back"</script>');
+	 }
+};
 
 util.createSearch = function(queries){
 	var searchType=queries.searchType;
