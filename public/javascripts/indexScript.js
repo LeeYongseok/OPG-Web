@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    
+
     function screen_setting(){
         var full_width = $(window).width();
         var full_height = $(window).height();
@@ -129,11 +129,11 @@ $(document).ready(function(){
     });
 
     $('#login').click(function (){
-        $('#loginPage').css('visibility','visible');
+        $('.hidden').addClass('visible');
     });
 
     $('#close').click(function (){
-        $('#loginPage').css('visibility','hidden');
+        $('.hidden').removeClass('visible');
     });
 
     function randombg(){

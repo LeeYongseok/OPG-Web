@@ -27,12 +27,10 @@ passport.use("local-login",
     if (err) return done(err);
 
     if (user && user.authenticate(password)){ // 3-3
-      console.log('login success!');
      return done(null, user);   // 성공시 user를 done에 담가 리턴
     } else {
      req.flash("id", id );
-     req.flash("errors", {login:"Incorrect ID or password"});
-     console.log("아이디와 비밀번호를 입력하세요.");
+     req.flash("errors", {login:"아이디, 비밀번호 틀립니다."});
      return done(null, false);  // user가 전달되지 않으면 local-strategy는 실패로 간주
     }
    });

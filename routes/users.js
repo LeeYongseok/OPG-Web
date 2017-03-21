@@ -9,11 +9,11 @@ router.post('/login', function(req,res,next){
     var isValid = true;
     if(!req.body.id){
      isValid = false;
-     errors.id = "ID is required!";
+     errors.id = "아이디를 입력해주세요";
     }
     if(!req.body.password){
      isValid = false;
-     errors.password = "Password is required!";
+     errors.password = "비밀번호를 입력해주세요";
     }
 
     if(isValid){
@@ -21,11 +21,11 @@ router.post('/login', function(req,res,next){
     } else {
      req.flash("errors",errors);
      console.log(errors);
-     res.redirect("/");
+     res.redirect("/back");
     }
    },passport.authenticate("local-login", {
         successRedirect : '/back',
-        failureRedirect : '/back'
+        failureRedirect : '/'
     })
    );
 

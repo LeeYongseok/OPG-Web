@@ -12,15 +12,30 @@
 </head>
 <body>
    <div id="page">
-   <div id="loginPage">
+   <div class="hidden <%= (errors.id || errors.password || errors.login)?'visible':'' %>">
         <div id="loginBg"></div>
         <div id="loginContainer">
             <img src="images/OPG_logo_black.png" alt="">
             <form method="post" id="loginInput" action="user/login">
                 <label for="id">ID</label>
-                <input id="id" type="text" name="id">
+                <div class="form">
+                  <input id="id" type="text" name="id">
+                  <% if(errors.id){ %>
+                    <span class="help-block">아이디를 입력해주세요</span>
+                  <% } %>
+                </div>
                 <label for="password">Password</label>
-                <input id="password" type="password" name="password">
+                <div class="form">
+                  <input id="password" type="password" name="password">
+                  <% if(errors.password){ %>
+                    <span class="help-block">비밀번호를 입력해주세요</span>
+                  <% } %>
+                </div>
+                <div>
+                  <% if(errors.login){ %>
+                    <span class="help-block">아이디와 비밀번호를 확인해주세요</span>
+                  <% } %>
+                </div>
                 <div class="btnSet">
                     <input type="submit" name="login" value="Login" class="btn">
                     <a href="/signUp"><input type="button" name="signUp" value="Sign Up" class="btn"></a>
@@ -113,5 +128,6 @@
     </section>
     <footer><h1>인천대학교 컴퓨터공학부 학술소모임</h1></footer>
     </div>
+
 </body>
 </html>

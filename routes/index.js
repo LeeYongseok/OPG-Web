@@ -31,9 +31,8 @@ var upload = multer({storage : storage});
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var user = req.flash("user")[0];
-	var errors = req.flash("errors")[0] || {};
-  util.isPossibleAccesse(res, errors);
-  res.render('index', { title: 'OPG', errors : errors, user:user});
+  var errors = req.flash("errors")[0] || {};
+  res.render('index', { title: 'OPG', errors: errors, user : user});
 });
 
 //<---Image Upload---

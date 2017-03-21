@@ -5,8 +5,7 @@ util.isLoggedin = function(req,res,next){
 	if(req.isAuthenticated() && req.user.admin <= 4){
 		next();
 	}else{
-		req.flash("errors", {login:"lease login first"});
-  		res.redirect("/");
+		 		 res.send('<script>alert("로그인이 필요합니다."); location.href="/back"</script>');
 	}
 };//Only login test
 
@@ -14,8 +13,7 @@ util.isadminThree = function(req,res,next){
 	if(req.isAuthenticated() && req.user.admin <= 3){
 		next();
 	}else{
-		req.flash("errors", {admin3:"Not admin"});
-  		res.redirect("/");
+		 res.send('<script>alert("OPG회원이상부터 접근가능합니다."); location.href="/back"</script>');
 	}
 };//all member&login test
 
@@ -23,8 +21,7 @@ util.isadminTwo = function(req,res,next){
 	if(req.isAuthenticated() && req.user.admin <= 2){
 		next();
 	}else{
-		req.flash("errors", {admin2:"Not admin"});
-  		res.redirect("/");
+		res.send('<script>alert("임원이상부터 접근가능합니다."); location.href="/back"</script>');
 	}
 };//club president&admin & login test
 
@@ -32,8 +29,7 @@ util.isadminOne = function(req,res,next){
 	if(req.isAuthenticated() && req.user.admin===1){
 		next();
 	}else{
-		req.flash("errors", {admin1:"Not admin"});
-  		res.redirect("/");
+		 res.send('<script>alert("관리자만 접근가능합니다."); location.href="/back"</script>');
 	}
 };//Only admin possible & login test
 
@@ -41,25 +37,9 @@ util.isPossibleDelete = function(req,res,next){
 	if((req.isAuthenticated() && req.user.admin <= 3) || req.user.admin ==1){
 		next();
 	}else{
-		req.flash("errors", {login:"Not admin"});
-  		res.redirect("/");
+		 res.send('<script>alert("관리자, 작성자만 삭제할 수 있습니다."); location.href="/back"</script>');
 	}
 };//administer && post_author(just first confirm... look route.delete's function!)
-
-util.isPossibleAccesse = function(res, errors){
-	 if(errors.login){
-		 res.send('<script>alert("로그인이 필요합니다."); location.href="/back"</script>');
-	 }
-	 if(errors.admin3){
-		 res.send('<script>alert("OPG회원이상부터 접근가능합니다."); location.href="/back"</script>');
-	 }
-	 if(errors.admin2){
-		 res.send('<script>alert("임원이상부터 접근가능합니다."); location.href="/back"</script>');
-	 }
-	 if(errors.admin1){
-		 res.send('<script>alert("관리자만 접근가능합니다."); location.href="/back"</script>');
-	 }
-};
 
 util.createSearch = function(queries){
 	var searchType=queries.searchType;

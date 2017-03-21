@@ -1,6 +1,12 @@
 @import url('//fonts.googleapis.com/css?family=Orbitron');
 
-#loginPage {position: absolute; visibility: hidden; z-index: 10;}
+#head_tab>a,#main a  {text-decoration: none;}
+
+.hidden {position: absolute; visibility: hidden; z-index: -10;}
+
+.visible{visibility: visible;  z-index: 10;}
+
+.help-block {color: red; font-size: 100%; margin-left: 75px;}
 
 #loginBg { position:relative; background-color: darkgray; opacity: 0.8; z-index: 10;}
 
@@ -12,11 +18,11 @@
 
 #loginContainer>#loginInput {margin-top: 50px;}
 
-#loginContainer>#loginInput>label {margin-left: 75px; font-style: italic; font-size:120%;}
+#loginContainer>#loginInput>label {margin-left: 75px;font-style: italic; font-size:120%;}
 
-#loginContainer>#loginInput>input {width: 330px; height: 40px; margin: 15px 75px; font-size: 150%; padding: 0 8px;}
+#loginContainer>#loginInput>.form>input {width: 330px; height: 40px; margin: 10px 75px; font-size: 150%; padding: 0 8px;}
 
-#loginContainer>#loginInput>.btnSet { width: 350px; height: 50px; margin: 15px 75px;}
+#loginContainer>#loginInput>.btnSet { width: 350px; height: 50px; margin: 10px 75px;}
 
 #loginContainer>#loginInput>.btnSet>a>.btn{margin: 0 11px;}
 
