@@ -37,6 +37,9 @@
                 <li><a href="/info/Exhibition">공모전/전시회</a></li>
                 <li><a href="/info/IT">IT정보</a></li>
                 <li><a href="/info/Job">취업정보</a></li>
+                <% if(isAuthenticated && currentUser.admin<=3){ %>
+                <li><a href="/info/Hint">족보</a></li>
+                 <% } %>
             </ul></li>
             <li><a href="#" class="noactive"><span>사진게시판</span></a><ul>
                 <li><a href="/photo/Activity">MT 및 활동</a></li>
