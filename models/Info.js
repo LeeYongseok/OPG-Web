@@ -31,6 +31,7 @@ var Info_ProgrammingMobile = mongoose.model('Info_ProgrammingMobile',infoSchema)
 var Info_Exhibition = mongoose.model('Info_Exhibition',infoSchema);
 var Info_IT = mongoose.model('Info_IT',infoSchema);
 var Info_Job = mongoose.model('Info_Job',infoSchema);
+var Info_Hint = mongoose.model('Info_Hint',infoSchema);
 
 
 module.exports={
@@ -41,5 +42,6 @@ module.exports={
     Info_ProgrammingMobile:Info_ProgrammingMobile,
 	Info_Exhibition:Info_Exhibition,
 	Info_IT:Info_IT,
-	Info_Job:Info_Job
+	Info_Job:Info_Job,
+	Info_Hint:Info_Hint
 };

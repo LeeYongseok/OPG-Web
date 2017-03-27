@@ -35,17 +35,20 @@
 }
 
 .sp-loading {
-  float : right;
+  position: fixed;
+  left:45%;
+  top:45%;
   border: 4px rgba(0, 0, 0, 0.25) solid;
   border-top: 4px DeepSkyBlue solid;
   border-radius: 50%;
   animation: spCircRot .6s infinite linear;
-  width: 32px;
-  height: 32px;
+  width: 100px;
+  height: 100px;
   clear: both;
   margin-top: 4px;
   display: none;
 }
+
 @keyframes spCircRot {
   from {
     transform: rotate(0deg);

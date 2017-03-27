@@ -92,6 +92,13 @@ app.use('/info', info);
 app.use('/notice',notice);
 app.use('/new_post',new_post);
 
+app.get('/back',function(req,res){
+	console.log(req.session);
+	var redirectTo=req.session.redirectTo ?req.session.redirectTo:'/';
+    delete req.session.redirectTo;
+    res.redirect(redirectTo);
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -109,5 +116,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;

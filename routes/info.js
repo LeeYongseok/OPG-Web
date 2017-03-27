@@ -42,6 +42,10 @@ var Job_Option = {
 	title:'취업 정보',
 	path:'info/Job'
 };
+var Hint_Option = {
+	title:'족보 게시판',
+	path:'info/Hint'
+}
 
 //Create Directory for file save
 var UploadPath = path.join(__dirname,'..','public','uploadedfiles');
@@ -70,6 +74,9 @@ router.get('/', function(req, res, next) {
 
 //Programming
 router.get('/Programming', function(req, res, next) {
+	if(!req.user){
+		req.session.redirectTo= '/info/Programming';
+	}
   res.render('programming',{
   	title:'프로그래밍',
   	main_menu:'PROGRAMMING'
@@ -359,5 +366,36 @@ router.delete('/Job/:id/comments/:commentId',util.isadminThree,function(req,res)
 	lib.comment_pull(req,res,Info.Info_Job,Job_Option);
 });//destroy
 
+
+router.get('/Hint',util.isadminThree,function(req,res){
+	lib.index(req,res,Info.Info_Hint,Hint_Option);
+});//index
+router.get('/Hint/new',util.isadminThree,function(req,res){
+	lib.new(req,res,Info.Info_Hint,Hint_Option);
+});//new
+router.post('/Hint',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+	lib.create(req,res,Info.Info_Hint,Hint_Option);
+});//create
+router.get('/Hint/:id',util.isadminThree,function(req,res){
+	lib.show(req,res,Info.Info_Hint,Hint_Option);
+});//show
+router.get('/Hint/:id/edit',util.isadminThree,function(req,res){
+	lib.edit(req,res,Info.Info_Hint,Hint_Option);
+});//edit
+router.put('/Hint/:id',util.isadminThree,upload.fields([{name:'file'},{name:'files'}]),function(req,res){
+	lib.update(req,res,Info.Info_Hint,Hint_Option);
+});//update
+router.delete('/Hint/:id',util.isPossibleDelete,function(req,res){
+	lib.destroy(req,res,Info.Info_Hint,Hint_Option);
+});//destroy
+
+////comment
+router.post('/Hint/:id/comments',util.isadminThree,function(req,res){
+	lib.comment_push(req,res,Info.Info_Hint,Hint_Option);
+});
+
+router.delete('/Hint/:id/comments/:commentId',util.isadminThree,function(req,res){
+	lib.comment_pull(req,res,Info.Info_Hint,Hint_Option);
+});//destroy
 
 module.exports = router;
