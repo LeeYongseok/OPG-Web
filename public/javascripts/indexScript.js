@@ -136,7 +136,7 @@ $(document).ready(function(){
     });
 
     function randombg(){
-      var bgarray = ['https://res.cloudinary.com/hl5vfksox/image/upload/v1489815286/BG/bg1.jpg', 'https://res.cloudinary.com/hl5vfksox/image/upload/v1489817652/BG/bg2.jpg', 'https://res.cloudinary.com/hl5vfksox/image/upload/v1489815286/BG/bg3.jpg','https://res.cloudinary.com/hl5vfksox/image/upload/v1489815295/BG/bg4.jpg', 'https://res.cloudinary.com/hl5vfksox/image/upload/v1489815290/BG/bg5.jpg', 'https://res.cloudinary.com/hl5vfksox/image/upload/v1489815297/BG/bg6.jpg', 'https://res.cloudinary.com/hl5vfksox/image/upload/v1489815298/BG/bg7.jpg', 'https://res.cloudinary.com/hl5vfksox/image/upload/v1489815288/BG/bg8.jpg', 'https://res.cloudinary.com/hl5vfksox/image/upload/v1489815295/BG/bg9.jpg', 'https://res.cloudinary.com/hl5vfksox/image/upload/v1489818126/BG/bg10.jpg'];
+      var bgarray = ['images/BGimages/bg1.jpg', 'images/BGimages/bg2.jpg', 'images/BGimages/bg3.jpg', 'images/BGimages/bg4.jpg', 'images/BGimages/bg5.jpg', 'images/BGimages/bg6.jpeg', 'images/BGimages/bg7.jpeg', 'images/BGimages/bg8.jpeg', 'images/BGimages/bg9.jpg', 'images/BGimages/bg10.jpeg', 'images/BGimages/bg11.jpeg', 'images/BGimages/bg12.jpeg', 'images/BGimages/bg13.jpeg', 'images/BGimages/bg14.jpeg', 'images/BGimages/bg15.jpeg', 'images/BGimages/bg16.jpeg', 'images/BGimages/bg17.jpeg'];
       var bgnumber = Math.floor((Math.random() * bgarray.length));
       return bgarray[bgnumber];
     }
