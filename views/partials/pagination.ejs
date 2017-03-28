@@ -1,6 +1,6 @@
 <div class="row" style="text-align:center">
       <ul class="pagination">
-          <% if(page==1){ %>
+          <% if(page==1||count==0){ %>
           <% var left_button = "disabled" %>
           <%}else{ %>
           <% left_button = "" %>
@@ -18,7 +18,7 @@
             <li><a>..</a></li>
           <% } %>
         <% } %>
-         <% if(page==maxPageNum){ %>
+         <% if(page==maxPageNum||count==0){ %>
               <% var right_button = "disabled" %>
               <%}else{ %>
                <% right_button = "" %>
