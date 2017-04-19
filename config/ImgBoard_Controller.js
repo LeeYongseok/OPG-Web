@@ -20,6 +20,7 @@ exports.index = function(req,res,schema,option){
         title: option.title,
         main_menu: option.title,
         path: option.path,
+        count:count,
         page: page,
         maxPageNum:maxPageNum,
         user:req.user
